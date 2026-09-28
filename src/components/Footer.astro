@@ -1,0 +1,21 @@
+---
+import Skull from './Skull.astro';
+import { site } from '../data/site.js';
+const year = new Date().getFullYear();
+---
+<footer>
+  <div class="wrap row">
+    <p class="maker">
+      <Skull size={18} />
+      <span>Made by <a href={site.maker.url}>{site.maker.name}</a> in Flagstaff, Arizona. &copy; {year}</span>
+    </p>
+    <p class="proof">This page loads no JavaScript, no web fonts, and no trackers.</p>
+  </div>
+</footer>
+
+<style>
+  footer { border-top: 1px solid var(--line); padding-block: var(--space-4); font-size: 0.92rem; color: var(--ink-soft); }
+  .row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-2) var(--space-4); }
+  .maker { display: flex; align-items: center; gap: 0.5rem; }
+  .maker :global(svg) { flex: none; }
+</style>

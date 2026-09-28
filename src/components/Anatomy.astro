@@ -1,0 +1,78 @@
+---
+import { features } from '../data/site.js';
+---
+<section class="section" aria-labelledby="anatomy-title">
+  <div class="wrap plate">
+    <div class="section-head">
+      <h2 id="anatomy-title">The whole skeleton</h2>
+      <p>Six parts. Each one handles something a plugin should control, and nothing here asks for your attention once it's set.</p>
+    </div>
+    <ul class="spine">
+      {features.map((f) => (
+        <li>
+          <h3>{f.name}</h3>
+          <p>{f.detail}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .plate { display: grid; gap: var(--space-4); }
+
+  @media (min-width: 56rem) {
+    .plate { grid-template-columns: 1fr 1.35fr; gap: var(--space-5); align-items: start; }
+    .section-head { position: sticky; top: var(--space-4); margin-bottom: 0; }
+  }
+
+  .spine {
+    --v-w: 2.6rem;
+    --v-h: 1.15rem;
+    --lead: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+
+  @media (max-width: 30rem) { .spine { --lead: 0.9rem; --v-w: 2.2rem; } }
+
+  .spine li {
+    position: relative;
+    padding-left: calc(var(--v-w) + var(--lead) + 0.75rem);
+    padding-bottom: var(--space-4);
+    /* Cord segment down to the next vertebra */
+    background: linear-gradient(var(--line), var(--line)) no-repeat;
+    background-size: 2px 100%;
+    background-position: calc(var(--v-w) / 2 - 1px) 0.9rem;
+  }
+  .spine li:last-child { padding-bottom: 0; background: none; }
+
+  /* Vertebra */
+  .spine li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.3rem;
+    width: var(--v-w);
+    height: var(--v-h);
+    border: 2px solid var(--plate);
+    border-radius: 45% / 60%;
+    z-index: 1;
+    background: var(--paper);
+  }
+
+  /* Leader line from vertebra to its label */
+  .spine li::after {
+    content: '';
+    position: absolute;
+    left: calc(var(--v-w) + 0.35rem);
+    top: calc(0.3rem + var(--v-h) / 2);
+    width: var(--lead);
+    border-top: 1px dashed var(--plate);
+  }
+
+  h3 { font-size: 1.4rem; line-height: 1.2; }
+  .spine p { margin-top: 0.35rem; color: var(--ink-soft); max-width: 34rem; }
+</style>

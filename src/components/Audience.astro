@@ -1,0 +1,24 @@
+---
+import { site } from '../data/site.js';
+---
+<section class="section" aria-labelledby="audience-title">
+  <div class="wrap narrow">
+    <h2 id="audience-title">Built for people who already know SEO</h2>
+    <p>
+      Developers and agencies managing sites where precision matters more than wizards. You get direct control over
+      the technical basics and a settings screen you can understand in one pass. The rest of your SEO work, the part
+      that actually moves rankings, stays where it belongs.
+    </p>
+    <p>
+      Free, GPL-licensed, and meant to be your only SEO plugin. <a href={site.github}>Read the code</a> before you
+      install it.
+    </p>
+  </div>
+</section>
+
+<style>
+  .narrow { max-width: var(--measure); margin-inline: auto; margin-left: max(1.25rem, calc((100% - var(--wide)) / 2)); }
+  h2 { font-size: clamp(1.75rem, 3.2vw, 2.4rem); }
+  p { margin-top: var(--space-2); color: var(--ink-soft); }
+  h2 + p { margin-top: var(--space-3); }
+</style>

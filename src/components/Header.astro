@@ -1,0 +1,19 @@
+---
+import Skull from './Skull.astro';
+import { site } from '../data/site.js';
+---
+<header class="wrap">
+  <a class="mark" href="/" aria-label={`${site.name} home`}>
+    <Skull size={26} />
+    <span>{site.name}</span>
+  </a>
+  <nav aria-label="Main">
+    <a href={site.github}>GitHub</a>
+  </nav>
+</header>
+
+<style>
+  header { display: flex; align-items: center; justify-content: space-between; padding-block: var(--space-3); }
+  .mark { display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; font-family: var(--serif); font-weight: 600; font-size: 1.15rem; }
+  nav a { font-size: 0.95rem; }
+</style>

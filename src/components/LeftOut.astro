@@ -1,0 +1,36 @@
+---
+import { left_out } from '../data/site.js';
+---
+<section class="section" aria-labelledby="leftout-title">
+  <div class="wrap cols">
+    <div class="section-head">
+      <h2 id="leftout-title">What we left out, on purpose</h2>
+      <p>
+        "Bare bones" is the philosophy, not a phase. Features that belong outside a plugin won't be added, no matter
+        how common they are elsewhere.
+      </p>
+    </div>
+    <ul class="struck" aria-label="Features Bare Bones SEO does not include">
+      {left_out.map((item) => <li><s>{item}</s></li>)}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .cols { display: grid; gap: var(--space-4); }
+  @media (min-width: 56rem) {
+    .cols { grid-template-columns: 1fr 1.35fr; gap: var(--space-5); }
+    .section-head { margin-bottom: 0; }
+  }
+  .struck { list-style: none; margin: 0; padding: 0; }
+  .struck li {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+    line-height: 1.3;
+    padding-block: 0.55rem;
+    border-bottom: 1px solid var(--line);
+    color: var(--struck);
+  }
+  .struck li:first-child { padding-top: 0; }
+  s { text-decoration-thickness: 2px; text-decoration-color: var(--ink-soft); }
+</style>
