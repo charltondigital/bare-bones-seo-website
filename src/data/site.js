@@ -5,7 +5,7 @@ export const site = {
   description:
     'A minimal WordPress SEO plugin for developers and agencies: indexing, sitemaps, titles, descriptions, schema, and redirects, without the overhead.',
   github: 'https://github.com/charltondigital/bare-bones-seo',
-  wporg: null, // Set to the WordPress.org URL once approved.
+  wporg: 'https://wordpress.org/plugins/bare-bones-seo/',
   maker: { name: 'Charlton Digital', url: 'https://charltondigital.com' },
 };
 
