@@ -2,12 +2,12 @@
 import Base from '../layouts/Base.astro';
 import { site } from '../data/site.js';
 ---
-<Base title="SEO Controls for AI-Built Websites | Bare Bones SEO" description="Free, open-source SEO standards for AI-built static websites. Keep metadata, indexation, sitemaps, and redirects under your control across platforms.">
+<Base title="SEO Controls for AI-Built Websites | Bare Bones SEO" description="Open the SEO black box on AI-built websites. Get visibility, control, and consistency across metadata, indexation, canonical URLs, sitemaps, and redirects.">
   <section class="product-hero wrap">
     <a class="back-link" href="/">← Bare Bones SEO</a>
     <h1>SEO controls for AI-built websites</h1>
-    <p class="lede">Open-source standards for static sites.</p>
-    <p class="intro">Give Bare Bones SEO to your AI coding agent. It implements the essential SEO controls using your website's existing framework and hosting platform.</p>
+    <p class="lede">Open the black box. See what your AI built, control how search engines see it, and keep those settings consistent as your site changes.</p>
+    <p class="intro">AI coding agents can generate entire websites without giving you a clear picture of the SEO settings underneath. Bare Bones SEO provides open-source standards that your agent implements using your site’s existing framework and host.</p>
     <div class="product-actions">
       <a class="product-button" href={site.staticGithub}>Get the standards on GitHub ↗</a>
     </div>
@@ -16,22 +16,22 @@ import { site } from '../data/site.js';
   <section class="section">
     <div class="wrap detail-grid">
       <div>
-        <h2>Keep the settings under your control</h2>
-        <p>AI can write and rebuild a website quickly. SEO decisions still need to survive those changes.</p>
+        <h2>Visibility, control, and consistency</h2>
+        <p>Know what is actually being published, make deliberate SEO decisions, and have those decisions survive the next AI rebuild.</p>
       </div>
       <ul class="standard-list">
-        <li><h3>Indexation and sitemaps</h3><p>One authoritative file for noindex and sitemap exclusions, including section-wide rules.</p></li>
-        <li><h3>Titles and metadata</h3><p>One owner per setting. Titles default to the page's H1 unless you specify an override.</p></li>
-        <li><h3>Redirects and URL history</h3><p>Protect published URLs, preserve established redirects, and flag unexpected changes.</p></li>
-        <li><h3>Advisory checks</h3><p>Surface issues involving crawlers, links, and generated output without blocking deployment by default.</p></li>
+        <li><h3>See the actual SEO output</h3><p>Inspect the titles, descriptions, canonical URLs, schema, indexation directives, and sitemap entries the site really generates—not just what the AI says it configured.</p></li>
+        <li><h3>Control settings from one place</h3><p>Keep intentional metadata overrides and indexation exclusions in clear, authoritative settings instead of hunting through page templates and duplicate files.</p></li>
+        <li><h3>Avoid conflicting signals and duplicate URLs</h3><p>Check for duplicate or conflicting titles and canonicals, unintended alternate hostnames, sitemap inconsistencies, and redirects that lead through chains or loops. Verify one intended canonical address per page.</p></li>
+        <li><h3>Keep decisions consistent through rebuilds</h3><p>Protect published URLs and existing redirects, flag unexpected changes, and make sure the generated pages still follow your settings after an AI agent edits the site.</p></li>
       </ul>
     </div>
   </section>
   <section class="section">
     <div class="wrap detail-grid">
       <div>
-        <h2>Built for AI coding agents</h2>
-        <p>Standards describe what should work. The agent chooses how to implement them for your site.</p>
+        <h2>Give your AI agent a clear specification</h2>
+        <p>Bare Bones defines what must work and what to verify. Your agent works out how to implement it with the tools your site already uses.</p>
       </div>
       <div class="steps">
         <p><strong>1.</strong> Share the <a href={site.staticGithub}>standards repository</a> with your coding agent.</p>
@@ -44,8 +44,8 @@ import { site } from '../data/site.js';
   </section>
   <section class="section">
     <div class="wrap ending">
-      <h2>Standards, not another SEO dashboard.</h2>
-      <p>No required SEO scores, keyword recommendations, extra runtime, or hosting migration. The goal is predictable controls that an AI agent can maintain without taking over SEO strategy.</p>
+      <h2>SEO you can inspect and trust.</h2>
+      <p>No keyword scores, prescribed content optimizations, special runtime, or required hosting migration. Bare Bones helps you see and maintain technical SEO controls; it does not replace your SEO judgment.</p>
       <a href={site.staticGithub}>Read Bare Bones SEO for Static Sites ↗</a>
     </div>
   </section>
