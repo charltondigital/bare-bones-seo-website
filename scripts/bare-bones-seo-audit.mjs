@@ -24,7 +24,7 @@ const list = async dir => {
 const config = JSON.parse((await read('seo/search-exclusions.json')) || '{"defaults":{"index":true,"sitemap":true},"sections":{},"pages":{}}');
 const policy = path => {
   let effective = {...config.defaults};
-  for (const [pattern,settings] of Object.entries(config.sections||{}).filter(([p])=>p.endsWith('/*') && path.startsWith(normalize(p.slice(0,-1)))).sort((a,b)=>a[0].length-b[0].length)) effective={...effective,...settings};
+  for (const [pattern,settings] of Object.entries(config.sections||{}).filter(([p])=>p.endsWith('/*') && path.startsWith(normalize(p.slice(0,-1))) && path !== normalize(p.slice(0,-1))).sort((a,b)=>a[0].length-b[0].length)) effective={...effective,...settings};
   return {...effective,...(config.pages?.[path]||{})};
 };
 const files = (await list(outputRoot)).filter(p=>p.endsWith('.html'));
