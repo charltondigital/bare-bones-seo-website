@@ -18,8 +18,9 @@ import { site } from '../data/site.js';
         </div>
       </article>
       <article id="static-sites" class="option">
-        <h3>Static-site standards</h3>
-        <p>AI-readable standards for maintaining SEO controls on static websites. Give the repository to an AI coding agent; it adapts the standards to your site's existing framework and host.</p>
+        <h3>SEO controls for AI-built websites</h3>
+        <p class="option-subtitle">Open-source standards for static sites</p>
+        <p>Give the standards to your AI coding agent. It implements titles, indexation, redirects, and other SEO controls using your site's existing framework and hosting platform.</p>
         <p class="option-note">Not a plugin or one-click installer. Includes platform-independent standards and practical GitHub and Cloudflare playbooks.</p>
         <div class="option-links">
           <a class="primary-link" href={site.staticGithub}>Read the standards on GitHub <span aria-hidden="true">↗</span></a>
@@ -34,6 +35,7 @@ import { site } from '../data/site.js';
   .option { scroll-margin-top: 2rem; border: 1px solid var(--line); padding: clamp(1.5rem, 3vw, 2.5rem); display: flex; flex-direction: column; align-items: start; gap: 1rem; }
   .option h3 { font-size: clamp(1.55rem,3vw,2.25rem); }
   .option p { color: var(--ink-soft); }
+  .option .option-subtitle { color: var(--ink); font-size: 1.02rem; font-weight: 600; margin-top: -.4rem; }
   .option .option-note { font-size: .94rem; }
   .option-links { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: auto; padding-top: .75rem; font-size: .95rem; font-weight: 600; }
   .primary-link { text-decoration-thickness: 2px; }
