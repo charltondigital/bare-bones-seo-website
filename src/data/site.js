@@ -1,10 +1,11 @@
-// Single source for copy that appears in more than one place.
+// Shared site identity and links for the two Bare Bones SEO offerings.
 export const site = {
   name: 'Bare Bones SEO',
-  tagline: 'SEO settings. Nothing else.',
+  tagline: 'SEO controls. Nothing extra.',
   description:
-    'A minimal WordPress SEO plugin for developers and agencies: indexing, sitemaps, titles, descriptions, schema, and redirects, without the overhead.',
+    'Bare Bones SEO offers a free WordPress SEO plugin and open-source SEO standards for AI-built static websites. Two implementations, one minimal philosophy.',
   github: 'https://github.com/charltondigital/bare-bones-seo',
+  staticGithub: 'https://github.com/charltondigital/bare-bones-seo-static-sites',
   wporg: 'https://wordpress.org/plugins/bare-bones-seo/',
   maker: { name: 'Charlton Digital', url: 'https://charltondigital.com' },
 };
