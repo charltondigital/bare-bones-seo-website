@@ -14,7 +14,7 @@ const attr = (html,name) => html.match(new RegExp('\\b'+name+'\\s*=\\s*["\\\']([
 const normalize = value => {
   let p = String(value || '/').split(/[?#]/)[0].replace(/\\/g,'/');
   p = ('/'+p.replace(/^\/+/, '')).replace(/\/index\.html$/,'/').replace(/\/+/g,'/');
-  return p==='/' || /\.[a-z0-9]+$/i.test(p) ? p : p+'/';
+  return p==='/' || p.endsWith('/') || /\.[a-z0-9]+$/i.test(p) ? p : p+'/';
 };
 const list = async dir => {
   const items = await readdir(dir,{withFileTypes:true}).catch(()=>[]);
