@@ -27,6 +27,7 @@ jobs:
         with:
           name: bare-bones-seo-inventory
           path: .seo-reports/
+          include-hidden-files: true
           if-no-files-found: warn
   deploy:
     needs: build
