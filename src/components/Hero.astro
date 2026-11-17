@@ -4,30 +4,21 @@ import { site } from '../data/site.js';
 <section class="hero wrap">
   <h1>{site.tagline}</h1>
   <p class="lede">
-    Most of what moves search rankings happens outside your SEO software.
-    Bare Bones SEO gives you direct control over the technical essentials,
-    whether you're working in WordPress or building a static website with AI.
+    Essential SEO settings for WordPress and AI-built websites. Two free, open-source approaches that keep the technical controls in your hands without telling you how to do SEO.
   </p>
   <div class="actions" aria-label="Choose your Bare Bones SEO option">
-    <a class="button" href="#wordpress">WordPress plugin</a>
-    <a class="button secondary" href="#static-sites">Static-site standards</a>
+    <a class="button" href="/wordpress/">WordPress plugin</a>
+    <a class="button secondary" href="/ai-sites/">SEO for AI-built sites</a>
   </div>
-  <p class="status">Two free, open-source approaches. One philosophy: keep SEO settings simple and under your control.</p>
 </section>
 
 <style>
   .hero { padding-block: var(--space-5) var(--space-6); }
-  h1 {
-    font-size: clamp(2.9rem, 8.5vw, 6.25rem);
-    line-height: 0.98;
-    letter-spacing: -0.025em;
-    max-width: 12ch;
-  }
+  h1 { font-size: clamp(2.9rem, 8.5vw, 6.25rem); line-height: .98; letter-spacing: -.025em; max-width: 12ch; }
   .lede { margin-top: var(--space-4); max-width: 44rem; font-size: 1.2rem; color: var(--ink-soft); }
   .actions { margin-top: var(--space-4); display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
-  .button { display: inline-block; padding: 0.75rem 1.2rem; background: var(--ink); color: var(--paper); text-decoration: none; font-weight: 600; border: 1px solid var(--ink); border-radius: 3px; }
+  .button { display: inline-block; padding: .75rem 1.2rem; background: var(--ink); color: var(--paper); text-decoration: none; font-weight: 600; border: 1px solid var(--ink); border-radius: 3px; }
   .button:hover { background: var(--plate); border-color: var(--plate); }
   .button.secondary { background: transparent; color: var(--ink); }
   .button.secondary:hover { color: var(--paper); background: var(--ink); }
-  .status { margin-top: var(--space-2); font-size: 0.95rem; color: var(--ink-soft); }
 </style>
