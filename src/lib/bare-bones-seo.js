@@ -19,7 +19,8 @@ export function seoPolicy(path) {
     .sort((a, b) => a[0].length - b[0].length);
   for (const [, rule] of sections) resolved = { ...resolved, ...rule };
   resolved = { ...resolved, ...(exclusions.pages?.[key] || {}) };
-  return { ...resolved, ...metadata.pages?.[key] };
+  const override = metadata.pages?.[key] || {};
+  return { ...resolved, title: override.title, description: override.description };
 }
 
 export function sitemapAllows(path) {
