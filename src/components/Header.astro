@@ -8,15 +8,15 @@ import { site } from '../data/site.js';
     <span>{site.name}</span>
   </a>
   <nav aria-label="Main">
-    <a href="#wordpress">WordPress</a>
-    <a href="#static-sites">Static sites</a>
+    <a href="/wordpress/">WordPress</a>
+    <a href="/ai-sites/">AI sites</a>
   </nav>
 </header>
 
 <style>
   header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: var(--space-3); }
   .mark { display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; font-family: var(--serif); font-weight: 600; font-size: 1.15rem; }
-  nav { display: flex; flex-wrap: wrap; gap: 0.6rem 1.25rem; }
-  nav a { font-size: 0.95rem; white-space: nowrap; }
+  nav { display: flex; flex-wrap: wrap; gap: .6rem 1.25rem; }
+  nav a { font-size: .95rem; white-space: nowrap; }
   @media(max-width: 27rem) { .mark { font-size: 1rem; } nav { gap: .5rem; } nav a { font-size: .83rem; } }
 </style>
