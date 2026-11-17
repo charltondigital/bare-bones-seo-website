@@ -34,18 +34,42 @@ Create or update AGENTS.md so future AI coding agents know to follow these stand
       </div>
     </div>
   </section>
-  <section class="section">
-    <div class="wrap detail-grid">
-      <div>
-        <h2>Visibility, control, and consistency</h2>
-        <p>Know what is actually being published, make deliberate SEO decisions, and have those decisions survive the next AI rebuild.</p>
+  <section class="section comparison-section" aria-labelledby="comparison-title">
+    <div class="wrap">
+      <div class="comparison-heading">
+        <h2 id="comparison-title">AI-built SEO, with and without Bare Bones</h2>
+        <p>An AI coding agent can already implement SEO features. Bare Bones adds a consistent specification for how those settings are owned, inspected, and preserved as the website changes.</p>
       </div>
-      <ul class="standard-list">
-        <li><h3>See the actual SEO output</h3><p>Inspect the titles, descriptions, canonical URLs, schema, indexation directives, and sitemap entries the site really generates—not just what the AI says it configured.</p></li>
-        <li><h3>Control settings from one place</h3><p>Keep intentional metadata overrides and indexation exclusions in clear, authoritative settings instead of hunting through page templates and duplicate files.</p></li>
-        <li><h3>Avoid conflicting signals and duplicate URLs</h3><p>Check for duplicate or conflicting titles and canonicals, unintended alternate hostnames, sitemap inconsistencies, and redirects that lead through chains or loops. Verify one intended canonical address per page.</p></li>
-        <li><h3>Keep decisions consistent through rebuilds</h3><p>Protect published URLs and existing redirects, flag unexpected changes, and make sure the generated pages still follow your settings after an AI agent edits the site.</p></li>
-      </ul>
+      <div class="table-scroll" role="region" aria-label="Comparison of bare AI and AI using Bare Bones SEO standards" tabindex="0">
+        <table class="compare-table">
+          <thead>
+            <tr><th scope="col">SEO capability</th><th scope="col">AI agent alone</th><th scope="col" class="barebones">AI agent with Bare Bones</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Titles &amp; descriptions</th><td>Can generate and edit them</td><td class="barebones">One source for intentional overrides; verify actual output</td></tr>
+            <tr><th scope="row">SEO settings visibility</th><td>Can inspect pages when asked</td><td class="barebones">Generated SEO inventory and conversational views</td></tr>
+            <tr><th scope="row">Indexation &amp; sitemaps</th><td>Can configure them; structure varies</td><td class="barebones">One exclusion file drives both page directives and sitemaps</td></tr>
+            <tr><th scope="row">Canonical URLs &amp; duplicate signals</th><td>Can set and check them when asked</td><td class="barebones">Single canonical owner and advisory conflict checks</td></tr>
+            <tr><th scope="row">Schema markup</th><td>Can generate JSON-LD</td><td class="barebones">Shared generation from page facts; avoid conflicting output</td></tr>
+            <tr><th scope="row">301 redirects &amp; URL history</th><td>Can add redirects when requested</td><td class="barebones">Preserve approved mappings; flag unexpected URL changes</td></tr>
+            <tr><th scope="row">Link &amp; technical checks</th><td>Can audit on request</td><td class="barebones">Lightweight, non-blocking inventories and warnings</td></tr>
+            <tr><th scope="row">Continuity across AI sessions</th><td>Depends on project instructions</td><td class="barebones">Maintain standards reference in AGENTS.md or equivalent</td></tr>
+            <tr><th scope="row">Framework or host required</th><td>No fixed requirement</td><td class="barebones">No fixed requirement</td></tr>
+            <tr><th scope="row">Additional software footprint</th><td>Depends on implementation</td><td class="barebones">No mandatory plugin or runtime; site-native checks may add code</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="comparison-note">This compares <strong>working without a shared SEO specification</strong> against implementing the <a href={site.staticGithub}>Bare Bones SEO standards</a>. It is not a measured benchmark of AI coding tools. Neither approach guarantees search indexing, eliminates every duplicate URL, or prevents future mistakes. Bare Bones requires an agent to implement and verify the standards on the actual site.</p>
+      <details class="other-capabilities">
+        <summary>What an AI agent can do without Bare Bones SEO</summary>
+        <div class="other-grid">
+          <p><strong>Content and keyword work</strong><span>Research topics, draft pages, revise copy, and propose optimization ideas.</span></p>
+          <p><strong>Website design and development</strong><span>Build layouts, navigation, components, and site features.</span></p>
+          <p><strong>SEO changes on demand</strong><span>Generate metadata, implement redirects, or inspect HTML when explicitly asked.</span></p>
+          <p><strong>Specialized integrations</strong><span>Connect analytics, search performance tools, or services supported by the project.</span></p>
+        </div>
+        <p class="other-note">Bare Bones does not replace these capabilities or judge the quality of an optimization strategy. It standardizes technical SEO ownership and visibility.</p>
+      </details>
     </div>
   </section>
   <section class="section">
@@ -95,18 +119,29 @@ Create or update AGENTS.md so future AI coding agents know to follow these stand
   .copy-prompt:focus-visible{outline:2px solid var(--plate);outline-offset:3px}
   #install-prompt{display:block;width:100%;min-height:19rem;padding:1rem;background:transparent;color:var(--ink);border:0;resize:vertical;font: .91rem/1.55 var(--sans)}
   .copy-feedback{min-height:1.6rem;padding:.2rem 1rem .5rem;font-size:.86rem;color:var(--ink-soft)}
-  .detail-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:clamp(2rem,6vw,6rem)}
   h2{font-size:clamp(1.8rem,3.5vw,2.5rem)}
-  .detail-grid>div>p{margin-top:var(--space-2);color:var(--ink-soft);max-width:32rem}
-  .standard-list{list-style:none;margin:0;padding:0}
-  .standard-list li{padding:0 0 1.3rem;margin-bottom:1.3rem;border-bottom:1px solid var(--line)}
-  .standard-list li:last-child{border:0;margin-bottom:0;padding-bottom:0}
-  h3{font-size:1.3rem}
-  .standard-list p{margin-top:.4rem;color:var(--ink-soft)}
-  .steps p{margin-top:0;margin-bottom:1.2rem;color:var(--ink-soft)}
-  .steps strong{color:var(--ink)}
+  .comparison-heading{max-width:46rem;margin-bottom:var(--space-3)}
+  .comparison-heading p{margin-top:var(--space-2);color:var(--ink-soft)}
+  .table-scroll{overflow-x:auto;border:1px solid var(--line);overscroll-behavior-inline:contain}
+  .table-scroll:focus-visible{outline:2px solid var(--plate);outline-offset:3px}
+  .compare-table{border-collapse:separate;border-spacing:0;width:100%;min-width:620px;font-size:.94rem;line-height:1.45}
+  .compare-table th,.compare-table td{text-align:left;vertical-align:top;padding:1rem;border-bottom:1px solid var(--line);width:33.333%}
+  .compare-table thead th{font-weight:700;background:var(--paper)}
+  .compare-table tbody th{font-weight:600}
+  .compare-table td{color:var(--ink-soft)}
+  .compare-table .barebones{background:rgba(80,117,153,.095);color:var(--ink);font-weight:600}
+  .compare-table thead .barebones{background:rgba(80,117,153,.16)}
+  .compare-table tbody tr:last-child th,.compare-table tbody tr:last-child td{border-bottom:0}
+  .comparison-note{font-size:.86rem;color:var(--ink-soft);margin-top:var(--space-2);max-width:52rem}
+  .other-capabilities{margin-top:var(--space-4);padding:1rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .other-capabilities summary{cursor:pointer;font-size:1.1rem;font-weight:650}
+  .other-capabilities[open] summary{margin-bottom:var(--space-3)}
+  .other-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-3)}
+  .other-grid p{display:grid;gap:.35rem}
+  .other-grid span,.other-note{color:var(--ink-soft);font-size:.94rem}
+  .other-note{margin-top:var(--space-3)}
   .ending{display:grid;gap:1rem}
   .ending p{max-width:39rem;color:var(--ink-soft)}
   .ending a{font-weight:600}
-  @media(max-width:44rem){.detail-grid{grid-template-columns:1fr;gap:var(--space-3)}}
+  @media(max-width:44rem){.other-grid{grid-template-columns:1fr}}
 </style>
