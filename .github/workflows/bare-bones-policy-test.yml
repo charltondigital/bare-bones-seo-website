@@ -1,0 +1,64 @@
+name: Bare Bones SEO — policy integration test
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'seo/**'
+      - 'src/lib/bare-bones-seo.js'
+      - 'src/layouts/**'
+      - 'astro.config.mjs'
+      - 'src/pages/index.astro'
+      - '.github/workflows/bare-bones-policy-test.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: bare-bones-policy-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    env:
+      TEST_ROUTE: '/ai-sites/'
+      TEST_TITLE: 'Bare Bones SEO Integration Test'
+      TEST_DESCRIPTION: 'Temporary metadata override for verification only.'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-audit --no-fund
+      - name: Inject test-only SEO settings into CI checkout
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs';
+          const file = 'seo/search-exclusions.json';
+          const exclusions = JSON.parse(readFileSync(file, 'utf8'));
+          exclusions.pages[process.env.TEST_ROUTE] = { index: false, sitemap: false };
+          writeFileSync(file, JSON.stringify(exclusions, null, 2));
+          const metaFile = 'seo/metadata.json';
+          const metadata = JSON.parse(readFileSync(metaFile, 'utf8'));
+          metadata.pages[process.env.TEST_ROUTE] = { title: process.env.TEST_TITLE, description: process.env.TEST_DESCRIPTION };
+          writeFileSync(metaFile, JSON.stringify(metadata, null, 2));
+          NODE
+      - run: npm run build
+      - name: Verify output obeys exclusion and metadata controls
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const route = process.env.TEST_ROUTE;
+          const file = route === '/' ? 'dist/index.html' : 'dist' + route + 'index.html';
+          const html = readFileSync(file, 'utf8');
+          const sitemap = readFileSync('dist/sitemap.xml', 'utf8');
+          if (!html.includes('<title>' + process.env.TEST_TITLE + '</title>')) throw Error('Title override not rendered');
+          if (!html.includes(process.env.TEST_DESCRIPTION)) throw Error('Description override not rendered');
+          if (!/<meta\s+name=["']robots["'][^>]+content=["'][^"']*noindex/i.test(html)) throw Error('noindex not rendered');
+          if (sitemap.includes(route === '/' ? '<loc>https://' : route + '</loc>')) {
+            // For home, look for its exact canonical XML URL; for descendants the path suffix is sufficient.
+            if (route !== '/') throw Error('Excluded URL still in sitemap');
+          }
+          const canonical = html.match(/<link\s+rel=["']canonical["'][^>]+href=["']([^"']+)/i)?.[1];
+          if (!canonical) throw Error('Canonical tag missing');
+          if (sitemap.includes('<loc>' + canonical + '</loc>')) throw Error('Excluded canonical still in sitemap');
+          console.log('PASS: title, description, noindex, canonical and sitemap exclusion for ' + route);
+          NODE
