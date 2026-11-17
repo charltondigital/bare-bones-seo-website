@@ -102,23 +102,24 @@ Create or update AGENTS.md so future AI coding agents know to follow these stand
   .lede{margin-top:var(--space-3);font-size:1.25rem;font-weight:600}
   .intro{margin-top:var(--space-2);max-width:38rem;color:var(--ink-soft)}
   .product-actions{margin-top:var(--space-4)}
-  .product-button{display:inline-block;padding:.8rem 1.15rem;background:var(--ink);color:var(--paper);text-decoration:none;border-radius:3px;font-weight:600}
+  .product-button{display:inline-block;padding:.85rem 1.2rem;background:var(--plate);color:#fff;text-decoration:none;border-radius:7px;font-weight:700;font-size:.95rem}
+  .product-button:hover{color:#fff;background:#1949b7}
   .note{font-size:.92rem;color:var(--ink-soft);margin-top:var(--space-2)}
   .install-intro{color:var(--ink-soft);max-width:42rem;margin-top:var(--space-2);margin-bottom:var(--space-3)}
-  .prompt-box{border:1px solid var(--line);max-width:52rem}
-  .prompt-toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.75rem 1rem;border-bottom:1px solid var(--line);font-size:.9rem;font-weight:600}
-  .copy-prompt{background:var(--ink);color:var(--paper);border:0;border-radius:3px;padding:.65rem 1rem;font:inherit;cursor:pointer;white-space:nowrap}
-  .copy-prompt:hover{background:var(--plate)}
+  .prompt-box{border:1px solid var(--line);max-width:52rem;border-radius:10px;overflow:hidden;background:#fff}
+  .prompt-toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.75rem 1rem;border-bottom:1px solid var(--line);background:var(--surface);font-size:.83rem;font-weight:700}
+  .copy-prompt{background:var(--plate);color:#fff;border:0;border-radius:6px;padding:.65rem 1rem;font:inherit;cursor:pointer;white-space:nowrap}
+  .copy-prompt:hover{background:#1949b7}
   .copy-prompt:focus-visible{outline:2px solid var(--plate);outline-offset:3px}
-  #install-prompt{display:block;width:100%;min-height:19rem;padding:1rem;background:transparent;color:var(--ink);border:0;resize:vertical;font: .91rem/1.55 var(--sans)}
+  #install-prompt{display:block;width:100%;min-height:19rem;padding:1.1rem;background:#fff;color:var(--ink);border:0;resize:vertical;font:.82rem/1.7 var(--mono)}
   .copy-feedback{min-height:1.6rem;padding:.2rem 1rem .5rem;font-size:.86rem;color:var(--ink-soft)}
   h2{font-size:clamp(1.8rem,3.5vw,2.5rem)}
   .comparison-heading{max-width:47rem;margin-bottom:var(--space-3)}
   .comparison-heading p{margin-top:var(--space-2);color:var(--ink-soft)}
   .risk-benefit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
-  .risk-col,.benefit-col{padding:clamp(1.25rem,3vw,2rem);border:1px solid var(--line)}
-  .risk-col{background:var(--paper)}
-  .benefit-col{background:rgba(80,117,153,.095);border-color:rgba(80,117,153,.25)}
+  .risk-col,.benefit-col{padding:clamp(1.25rem,3vw,2rem);border:1px solid var(--line);border-radius:9px}
+  .risk-col{background:#fff}
+  .benefit-col{background:#eef4ff;border-color:#cadcfb}
   .risk-benefit h3{font-size:1.35rem;margin-bottom:1.25rem}
   .risk-benefit ul{list-style:none;margin:0;padding:0;display:grid;gap:1.3rem}
   .risk-benefit li{line-height:1.55;color:var(--ink-soft)}
