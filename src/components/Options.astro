@@ -1,0 +1,41 @@
+---
+import { site } from '../data/site.js';
+---
+<section class="section" aria-labelledby="options-heading">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="options-heading">Two ways to use Bare Bones SEO</h2>
+      <p>Choose the approach that fits how your website is built.</p>
+    </div>
+    <div class="options">
+      <article id="wordpress" class="option">
+        <h3>WordPress plugin</h3>
+        <p>A lightweight plugin for managing indexation, titles, descriptions, schema, redirects, and other essential SEO settings from WordPress.</p>
+        <p class="option-note">Install it like any other WordPress plugin. Free and open source.</p>
+        <div class="option-links">
+          <a class="primary-link" href={site.wporg}>Get the WordPress plugin <span aria-hidden="true">↗</span></a>
+          <a href={site.github}>View source code <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+      <article id="static-sites" class="option">
+        <h3>Static-site standards</h3>
+        <p>AI-readable standards for maintaining SEO controls on static websites. Give the repository to an AI coding agent; it adapts the standards to your site's existing framework and host.</p>
+        <p class="option-note">Not a plugin or one-click installer. Includes platform-independent standards and practical GitHub and Cloudflare playbooks.</p>
+        <div class="option-links">
+          <a class="primary-link" href={site.staticGithub}>Read the standards on GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .options { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1.5rem; }
+  .option { scroll-margin-top: 2rem; border: 1px solid var(--line); padding: clamp(1.5rem, 3vw, 2.5rem); display: flex; flex-direction: column; align-items: start; gap: 1rem; }
+  .option h3 { font-size: clamp(1.55rem,3vw,2.25rem); }
+  .option p { color: var(--ink-soft); }
+  .option .option-note { font-size: .94rem; }
+  .option-links { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: auto; padding-top: .75rem; font-size: .95rem; font-weight: 600; }
+  .primary-link { text-decoration-thickness: 2px; }
+  @media(max-width: 44rem) { .options { grid-template-columns: 1fr; } }
+</style>
