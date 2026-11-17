@@ -22,6 +22,12 @@ jobs:
       - uses: withastro/action@v3
         with:
           node-version: 24
+      - name: Upload Bare Bones SEO advisory reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: bare-bones-seo-inventory
+          path: .seo-reports/
+          if-no-files-found: warn
   deploy:
     needs: build
     runs-on: ubuntu-latest
