@@ -15,7 +15,7 @@ export function seoPolicy(path) {
   const defaults = exclusions.defaults || { index: true, sitemap: true };
   let resolved = { ...defaults };
   const sections = Object.entries(exclusions.sections || {})
-    .filter(([pattern]) => pattern.endsWith('/*') && key.startsWith(normalizeSeoPath(pattern.slice(0, -1))))
+    .filter(([pattern]) => pattern.endsWith('/*') && key.startsWith(normalizeSeoPath(pattern.slice(0, -1))) && key !== normalizeSeoPath(pattern.slice(0, -1)))
     .sort((a, b) => a[0].length - b[0].length);
   for (const [, rule] of sections) resolved = { ...resolved, ...rule };
   resolved = { ...resolved, ...(exclusions.pages?.[key] || {}) };
