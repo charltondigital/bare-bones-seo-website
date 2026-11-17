@@ -62,11 +62,11 @@ const seen = new Set(),targets = new Map();
 for(const line of redirects.split(/\r?\n/)){
   const match=line.trim().match(/^(\/\S+)\s+(\S+)\s+301(?:\s|$)/);
   if(!match)continue;
-  const source=normalize(match[1]), target=match[2];
+  const source=match[1], target=match[2];
   if(seen.has(source))warnings.push('Duplicate 301 source: '+source);
   seen.add(source);targets.set(source,target);
 }
-for(const [src,dest] of targets){if(dest.startsWith('/')){const norm=normalize(dest);if(src===norm||targets.get(norm)===src)warnings.push('Redirect loop: '+src);else if(targets.has(norm))warnings.push('Redirect chain: '+src+' → '+norm)}}
+for(const [src,dest] of targets){if(dest.startsWith('/')){const norm=dest.split(/[?#]/)[0];if(src===norm||targets.get(norm)===src)warnings.push('Redirect loop: '+src);else if(targets.has(norm))warnings.push('Redirect chain: '+src+' → '+norm)}}
 let known = [];
 try{known=JSON.parse(await read('seo/known-urls.json'))}catch{}
 if(Array.isArray(known)&&known.length){const now=new Set(pages.map(p=>p.url));for(const old of known.map(normalize)){if(!now.has(old))warnings.push('Previously published URL missing: '+old)}}
