@@ -38,39 +38,28 @@ Create or update AGENTS.md so future AI coding agents know to follow these stand
   <section class="section comparison-section" aria-labelledby="comparison-title">
     <div class="wrap">
       <div class="comparison-heading">
-        <h2 id="comparison-title">AI-built SEO, with and without Bare Bones</h2>
-        <p>An AI coding agent can already implement SEO features. Bare Bones adds a consistent specification for how those settings are owned, inspected, and preserved as the website changes.</p>
+        <h2 id="comparison-title">Your AI can build a website. But who’s watching the SEO?</h2>
+        <p>AI coding agents aren't necessarily looking out for technical SEO. They may overlook it, scatter settings across files, or unintentionally undo decisions during later edits.</p>
       </div>
-      <div class="table-scroll" role="region" aria-label="Comparison of bare AI and AI using Bare Bones SEO standards" tabindex="0">
-        <table class="compare-table">
-          <thead>
-            <tr><th scope="col">SEO capability</th><th scope="col">AI agent alone</th><th scope="col" class="barebones">AI agent with Bare Bones</th></tr>
-          </thead>
-          <tbody>
-            <tr><th scope="row">Titles &amp; descriptions</th><td>Can generate and edit them</td><td class="barebones">One source for intentional overrides; verify actual output</td></tr>
-            <tr><th scope="row">SEO settings visibility</th><td>Can inspect pages when asked</td><td class="barebones">Generated SEO inventory and conversational views</td></tr>
-            <tr><th scope="row">Indexation &amp; sitemaps</th><td>Can configure them; structure varies</td><td class="barebones">One exclusion file drives both page directives and sitemaps</td></tr>
-            <tr><th scope="row">Canonical URLs &amp; duplicate signals</th><td>Can set and check them when asked</td><td class="barebones">Single canonical owner and advisory conflict checks</td></tr>
-            <tr><th scope="row">Schema markup</th><td>Can generate JSON-LD</td><td class="barebones">Shared generation from page facts; avoid conflicting output</td></tr>
-            <tr><th scope="row">301 redirects &amp; URL history</th><td>Can add redirects when requested</td><td class="barebones">Preserve approved mappings; flag unexpected URL changes</td></tr>
-            <tr><th scope="row">Link &amp; technical checks</th><td>Can audit on request</td><td class="barebones">Lightweight, non-blocking inventories and warnings</td></tr>
-            <tr><th scope="row">Continuity across AI sessions</th><td>Depends on project instructions</td><td class="barebones">Maintain standards reference in AGENTS.md or equivalent</td></tr>
-            <tr><th scope="row">Framework or host required</th><td>No fixed requirement</td><td class="barebones">No fixed requirement</td></tr>
-            <tr><th scope="row">Additional software footprint</th><td>Depends on implementation</td><td class="barebones">No mandatory plugin or runtime; site-native checks may add code</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="comparison-note">This compares <strong>working without a shared SEO specification</strong> against implementing the <a href={site.staticGithub}>Bare Bones SEO standards</a>. It is not a measured benchmark of AI coding tools. Neither approach guarantees search indexing, eliminates every duplicate URL, or prevents future mistakes. Bare Bones requires an agent to implement and verify the standards on the actual site.</p>
-      <details class="other-capabilities">
-        <summary>What an AI agent can do without Bare Bones SEO</summary>
-        <div class="other-grid">
-          <p><strong>Content and keyword work</strong><span>Research topics, draft pages, revise copy, and propose optimization ideas.</span></p>
-          <p><strong>Website design and development</strong><span>Build layouts, navigation, components, and site features.</span></p>
-          <p><strong>SEO changes on demand</strong><span>Generate metadata, implement redirects, or inspect HTML when explicitly asked.</span></p>
-          <p><strong>Specialized integrations</strong><span>Connect analytics, search performance tools, or services supported by the project.</span></p>
+      <div class="risk-benefit">
+        <div class="risk-col">
+          <h3>Without clear SEO standards</h3>
+          <ul>
+            <li><strong>SEO may be overlooked.</strong> An AI agent focused on design or functionality may never check the indexation, metadata, or sitemap.</li>
+            <li><strong>Settings can be hard to find.</strong> Titles, canonicals, and indexing rules may be scattered or duplicated.</li>
+            <li><strong>Future edits can break things.</strong> A redesign or refactor may change URLs, overwrite settings, or drop redirects without warning.</li>
+          </ul>
         </div>
-        <p class="other-note">Bare Bones does not replace these capabilities or judge the quality of an optimization strategy. It standardizes technical SEO ownership and visibility.</p>
-      </details>
+        <div class="benefit-col">
+          <h3>With Bare Bones SEO</h3>
+          <ul>
+            <li><strong>Transparency.</strong> Ask your agent to show what your site actually outputs, including titles, canonicals, indexation, and sitemaps.</li>
+            <li><strong>Control.</strong> Keep technical SEO decisions in authoritative settings that you can inspect and change through conversation.</li>
+            <li><strong>Consistency.</strong> Persistent instructions and advisory checks help preserve decisions and flag unexpected changes.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="comparison-note">Bare Bones doesn't make SEO decisions for you or guarantee that AI never makes mistakes. It gives your AI agent a shared specification to follow and checks to help you spot problems.</p>
     </div>
   </section>
   <section class="section">
@@ -124,28 +113,19 @@ Create or update AGENTS.md so future AI coding agents know to follow these stand
   #install-prompt{display:block;width:100%;min-height:19rem;padding:1rem;background:transparent;color:var(--ink);border:0;resize:vertical;font: .91rem/1.55 var(--sans)}
   .copy-feedback{min-height:1.6rem;padding:.2rem 1rem .5rem;font-size:.86rem;color:var(--ink-soft)}
   h2{font-size:clamp(1.8rem,3.5vw,2.5rem)}
-  .comparison-heading{max-width:46rem;margin-bottom:var(--space-3)}
+  .comparison-heading{max-width:47rem;margin-bottom:var(--space-3)}
   .comparison-heading p{margin-top:var(--space-2);color:var(--ink-soft)}
-  .table-scroll{overflow-x:auto;border:1px solid var(--line);overscroll-behavior-inline:contain}
-  .table-scroll:focus-visible{outline:2px solid var(--plate);outline-offset:3px}
-  .compare-table{border-collapse:separate;border-spacing:0;width:100%;min-width:620px;font-size:.94rem;line-height:1.45}
-  .compare-table th,.compare-table td{text-align:left;vertical-align:top;padding:1rem;border-bottom:1px solid var(--line);width:33.333%}
-  .compare-table thead th{font-weight:700;background:var(--paper)}
-  .compare-table tbody th{font-weight:600}
-  .compare-table td{color:var(--ink-soft)}
-  .compare-table .barebones{background:rgba(80,117,153,.095);color:var(--ink);font-weight:600}
-  .compare-table thead .barebones{background:rgba(80,117,153,.16)}
-  .compare-table tbody tr:last-child th,.compare-table tbody tr:last-child td{border-bottom:0}
-  .comparison-note{font-size:.86rem;color:var(--ink-soft);margin-top:var(--space-2);max-width:52rem}
-  .other-capabilities{margin-top:var(--space-4);padding:1rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .other-capabilities summary{cursor:pointer;font-size:1.1rem;font-weight:650}
-  .other-capabilities[open] summary{margin-bottom:var(--space-3)}
-  .other-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-3)}
-  .other-grid p{display:grid;gap:.35rem}
-  .other-grid span,.other-note{color:var(--ink-soft);font-size:.94rem}
-  .other-note{margin-top:var(--space-3)}
+  .risk-benefit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+  .risk-col,.benefit-col{padding:clamp(1.25rem,3vw,2rem);border:1px solid var(--line)}
+  .risk-col{background:var(--paper)}
+  .benefit-col{background:rgba(80,117,153,.095);border-color:rgba(80,117,153,.25)}
+  .risk-benefit h3{font-size:1.35rem;margin-bottom:1.25rem}
+  .risk-benefit ul{list-style:none;margin:0;padding:0;display:grid;gap:1.3rem}
+  .risk-benefit li{line-height:1.55;color:var(--ink-soft)}
+  .risk-benefit strong{display:block;color:var(--ink);margin-bottom:.25rem}
+  .comparison-note{font-size:.9rem;color:var(--ink-soft);margin-top:var(--space-3);max-width:49rem}
   .ending{display:grid;gap:1rem}
   .ending p{max-width:39rem;color:var(--ink-soft)}
   .ending a{font-weight:600}
-  @media(max-width:44rem){.other-grid{grid-template-columns:1fr}}
+  @media(max-width:44rem){.risk-benefit{grid-template-columns:1fr}}
 </style>
