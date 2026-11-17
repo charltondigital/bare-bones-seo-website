@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import Anatomy from '../components/Anatomy.astro';
+import LeftOut from '../components/LeftOut.astro';
+import { site } from '../data/site.js';
+---
+<Base title="Bare Bones SEO WordPress Plugin | Free, Lightweight SEO Controls" description="A free, open-source WordPress SEO plugin with indexation, metadata, schema, redirects, 404 monitoring, and bulk editing.">
+  <section class="product-hero wrap">
+    <a class="back-link" href="/">← Bare Bones SEO</a>
+    <h1>WordPress SEO plugin</h1>
+    <p class="lede">The essential SEO settings for WordPress, without content scores, distractions, or upsells.</p>
+    <div class="product-actions">
+      <a class="product-button" href={site.wporg}>Get the free plugin ↗</a>
+      <a href={site.github}>View the source on GitHub ↗</a>
+    </div>
+  </section>
+  <Anatomy />
+  <LeftOut />
+  <section class="section">
+    <div class="wrap product-bottom">
+      <h2>Free and open source.</h2>
+      <p>Install Bare Bones SEO through WordPress.org, or inspect the code before adding it to your site.</p>
+      <a href={site.wporg}>Get Bare Bones SEO for WordPress ↗</a>
+    </div>
+  </section>
+</Base>
+<style>
+  .product-hero{padding-block:var(--space-5) var(--space-6)}
+  .back-link{display:inline-block;margin-bottom:var(--space-3);font-size:.92rem;color:var(--ink-soft)}
+  h1{font-size:clamp(2.8rem,7vw,5rem);max-width:14ch}
+  .lede{margin-top:var(--space-3);max-width:39rem;font-size:1.2rem;color:var(--ink-soft)}
+  .product-actions{display:flex;flex-wrap:wrap;gap:1.25rem;align-items:center;margin-top:var(--space-4);font-weight:600}
+  .product-button{display:inline-block;padding:.8rem 1.15rem;background:var(--ink);color:var(--paper);text-decoration:none;border-radius:3px}
+  .product-bottom{display:grid;gap:1rem;max-width:var(--wide)}
+  .product-bottom h2{font-size:clamp(1.8rem,3vw,2.6rem)}
+  .product-bottom p{max-width:36rem;color:var(--ink-soft)}
+  .product-bottom a{font-weight:600}
+</style>
