@@ -4,17 +4,15 @@ import { site } from '../data/site.js';
 <section class="hero wrap">
   <h1>{site.tagline}</h1>
   <p class="lede">
-    Most of what moves rankings happens outside a plugin. Bare Bones SEO handles the handful of settings that
-    belong inside one, then stays out of your way.
+    Most of what moves search rankings happens outside your SEO software.
+    Bare Bones SEO gives you direct control over the technical essentials,
+    whether you're working in WordPress or building a static website with AI.
   </p>
-  <div class="actions">
-    {site.wporg
-      ? <a class="button" href={site.wporg}>Get it on WordPress.org</a>
-      : <a class="button" href={site.github}>View the source on GitHub</a>}
-    <p class="status">
-      {site.wporg ? 'Free and open source.' : 'Version 1.0 is in review for the WordPress.org plugin directory.'}
-    </p>
+  <div class="actions" aria-label="Choose your Bare Bones SEO option">
+    <a class="button" href="#wordpress">WordPress plugin</a>
+    <a class="button secondary" href="#static-sites">Static-site standards</a>
   </div>
+  <p class="status">Two free, open-source approaches. One philosophy: keep SEO settings simple and under your control.</p>
 </section>
 
 <style>
@@ -23,14 +21,13 @@ import { site } from '../data/site.js';
     font-size: clamp(2.9rem, 8.5vw, 6.25rem);
     line-height: 0.98;
     letter-spacing: -0.025em;
-    max-width: 11ch;
+    max-width: 12ch;
   }
-  .lede { margin-top: var(--space-4); max-width: var(--measure); font-size: 1.2rem; color: var(--ink-soft); }
-  .actions { margin-top: var(--space-4); display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); }
-  .button {
-    display: inline-block; padding: 0.75rem 1.2rem; background: var(--ink); color: var(--paper);
-    text-decoration: none; font-weight: 600; border-radius: 3px;
-  }
-  .button:hover { background: var(--plate); }
-  .status { font-size: 0.95rem; color: var(--ink-soft); }
+  .lede { margin-top: var(--space-4); max-width: 44rem; font-size: 1.2rem; color: var(--ink-soft); }
+  .actions { margin-top: var(--space-4); display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+  .button { display: inline-block; padding: 0.75rem 1.2rem; background: var(--ink); color: var(--paper); text-decoration: none; font-weight: 600; border: 1px solid var(--ink); border-radius: 3px; }
+  .button:hover { background: var(--plate); border-color: var(--plate); }
+  .button.secondary { background: transparent; color: var(--ink); }
+  .button.secondary:hover { color: var(--paper); background: var(--ink); }
+  .status { margin-top: var(--space-2); font-size: 0.95rem; color: var(--ink-soft); }
 </style>
