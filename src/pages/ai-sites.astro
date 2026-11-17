@@ -1,0 +1,75 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site.js';
+---
+<Base title="SEO Controls for AI-Built Websites | Bare Bones SEO" description="Free, open-source SEO standards for AI-built static websites. Keep metadata, indexation, sitemaps, and redirects under your control across platforms.">
+  <section class="product-hero wrap">
+    <a class="back-link" href="/">← Bare Bones SEO</a>
+    <h1>SEO controls for AI-built websites</h1>
+    <p class="lede">Open-source standards for static sites.</p>
+    <p class="intro">Give Bare Bones SEO to your AI coding agent. It implements the essential SEO controls using your website's existing framework and hosting platform.</p>
+    <div class="product-actions">
+      <a class="product-button" href={site.staticGithub}>Get the standards on GitHub ↗</a>
+    </div>
+    <p class="note">Free and open source. Not a plugin or a one-click installer.</p>
+  </section>
+  <section class="section">
+    <div class="wrap detail-grid">
+      <div>
+        <h2>Keep the settings under your control</h2>
+        <p>AI can write and rebuild a website quickly. SEO decisions still need to survive those changes.</p>
+      </div>
+      <ul class="standard-list">
+        <li><h3>Indexation and sitemaps</h3><p>One authoritative file for `noindex` and sitemap exclusions, including section-wide rules.</p></li>
+        <li><h3>Titles and metadata</h3><p>One owner per setting. Titles default to the page's H1 unless you specify an override.</p></li>
+        <li><h3>Redirects and URL history</h3><p>Protect published URLs, preserve established redirects, and flag unexpected changes.</p></li>
+        <li><h3>Advisory checks</h3><p>Surface issues involving crawlers, links, and generated output without blocking deployment by default.</p></li>
+      </ul>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap detail-grid">
+      <div>
+        <h2>Built for AI coding agents</h2>
+        <p>Standards describe what should work. The agent chooses how to implement them for your site.</p>
+      </div>
+      <div class="steps">
+        <p><strong>1.</strong> Share the <a href={site.staticGithub}>standards repository</a> with your coding agent.</p>
+        <p><strong>2.</strong> Ask it to follow the README and applicable standards, using your site's existing tooling.</p>
+        <p><strong>3.</strong> Have it verify the generated HTML, sitemap, redirects, and reports—not just the configuration files.</p>
+        <p>GitHub and Cloudflare playbooks document proven procedures, but neither platform is required.</p>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap ending">
+      <h2>Standards, not another SEO dashboard.</h2>
+      <p>No required SEO scores, keyword recommendations, extra runtime, or hosting migration. The goal is predictable controls that an AI agent can maintain without taking over SEO strategy.</p>
+      <a href={site.staticGithub}>Read Bare Bones SEO for Static Sites ↗</a>
+    </div>
+  </section>
+</Base>
+<style>
+  .product-hero{padding-block:var(--space-5) var(--space-6)}
+  .back-link{display:inline-block;margin-bottom:var(--space-3);font-size:.92rem;color:var(--ink-soft)}
+  h1{font-size:clamp(2.8rem,7vw,5rem);max-width:16ch}
+  .lede{margin-top:var(--space-3);font-size:1.25rem;font-weight:600}
+  .intro{margin-top:var(--space-2);max-width:38rem;color:var(--ink-soft)}
+  .product-actions{margin-top:var(--space-4)}
+  .product-button{display:inline-block;padding:.8rem 1.15rem;background:var(--ink);color:var(--paper);text-decoration:none;border-radius:3px;font-weight:600}
+  .note{font-size:.92rem;color:var(--ink-soft);margin-top:var(--space-2)}
+  .detail-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:clamp(2rem,6vw,6rem)}
+  h2{font-size:clamp(1.8rem,3.5vw,2.5rem)}
+  .detail-grid>div>p{margin-top:var(--space-2);color:var(--ink-soft);max-width:32rem}
+  .standard-list{list-style:none;margin:0;padding:0}
+  .standard-list li{padding:0 0 1.3rem;margin-bottom:1.3rem;border-bottom:1px solid var(--line)}
+  .standard-list li:last-child{border:0;margin-bottom:0;padding-bottom:0}
+  h3{font-size:1.3rem}
+  .standard-list p{margin-top:.4rem;color:var(--ink-soft)}
+  .steps p{margin-top:0;margin-bottom:1.2rem;color:var(--ink-soft)}
+  .steps strong{color:var(--ink)}
+  .ending{display:grid;gap:1rem}
+  .ending p{max-width:39rem;color:var(--ink-soft)}
+  .ending a{font-weight:600}
+  @media(max-width:44rem){.detail-grid{grid-template-columns:1fr;gap:var(--space-3)}}
+</style>
