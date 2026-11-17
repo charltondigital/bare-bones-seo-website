@@ -13,6 +13,27 @@ import { site } from '../data/site.js';
     </div>
     <p class="note">Free and open source. Not a plugin or a one-click installer.</p>
   </section>
+  <section class="section install-section" aria-labelledby="install-title">
+    <div class="wrap">
+      <h2 id="install-title">Copy this into your AI website builder</h2>
+      <p class="install-intro">Use this when building a new static website or adding Bare Bones to an existing one. Your AI agent needs access to the public GitHub repository.</p>
+      <div class="prompt-box">
+        <div class="prompt-toolbar">
+          <span>Installation instructions</span>
+          <button type="button" class="copy-prompt" data-copy-prompt aria-label="Copy Bare Bones SEO installation instructions">Copy prompt</button>
+        </div>
+        <textarea id="install-prompt" readonly rows="9" spellcheck="false" aria-label="Bare Bones SEO installation prompt">Follow the Bare Bones SEO for Static Sites standards:
+https://github.com/charltondigital/bare-bones-seo-static-sites
+
+Read the README and all applicable standards before building or changing this website. Use the existing framework, host, and build tools. Consult the relevant platform playbooks for guidance, but do not install GitHub Actions, Cloudflare, Node.js, or any other tool merely to comply.
+
+Implement the required SEO controls for metadata, indexation, sitemaps, canonical URLs, redirects, and advisory checks. Preserve existing URLs and intentional SEO settings. Verify the actual generated HTML, sitemap, and redirect behavior—not just configuration files.
+
+Create or update AGENTS.md so future AI coding agents know to follow these standards. Be my conversational SEO dashboard: tell me what settings and reports you can show, and offer relevant views during SEO work. Leave optimization strategy and content decisions to me unless I ask for help.</textarea>
+        <p class="copy-feedback" data-copy-feedback role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
   <section class="section">
     <div class="wrap detail-grid">
       <div>
@@ -50,6 +71,28 @@ import { site } from '../data/site.js';
     </div>
   </section>
 </Base>
+<script>
+  const button = document.querySelector<HTMLButtonElement>('[data-copy-prompt]');
+  const prompt = document.querySelector<HTMLTextAreaElement>('#install-prompt');
+  const feedback = document.querySelector<HTMLElement>('[data-copy-feedback]');
+  button?.addEventListener('click', async () => {
+    if (!prompt) return;
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(prompt.value);
+      } else {
+        prompt.focus();
+        prompt.select();
+        if (!document.execCommand('copy')) throw new Error('Copy not supported');
+      }
+      if (feedback) feedback.textContent = 'Copied. Paste this into your AI coding agent.';
+    } catch {
+      prompt.focus();
+      prompt.select();
+      if (feedback) feedback.textContent = 'Select and copy the highlighted instructions.';
+    }
+  });
+</script>
 <style>
   .product-hero{padding-block:var(--space-5) var(--space-6)}
   .back-link{display:inline-block;margin-bottom:var(--space-3);font-size:.92rem;color:var(--ink-soft)}
@@ -59,6 +102,14 @@ import { site } from '../data/site.js';
   .product-actions{margin-top:var(--space-4)}
   .product-button{display:inline-block;padding:.8rem 1.15rem;background:var(--ink);color:var(--paper);text-decoration:none;border-radius:3px;font-weight:600}
   .note{font-size:.92rem;color:var(--ink-soft);margin-top:var(--space-2)}
+  .install-intro{color:var(--ink-soft);max-width:42rem;margin-top:var(--space-2);margin-bottom:var(--space-3)}
+  .prompt-box{border:1px solid var(--line);max-width:52rem}
+  .prompt-toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.75rem 1rem;border-bottom:1px solid var(--line);font-size:.9rem;font-weight:600}
+  .copy-prompt{background:var(--ink);color:var(--paper);border:0;border-radius:3px;padding:.65rem 1rem;font:inherit;cursor:pointer;white-space:nowrap}
+  .copy-prompt:hover{background:var(--plate)}
+  .copy-prompt:focus-visible{outline:2px solid var(--plate);outline-offset:3px}
+  #install-prompt{display:block;width:100%;min-height:19rem;padding:1rem;background:transparent;color:var(--ink);border:0;resize:vertical;font: .91rem/1.55 var(--sans)}
+  .copy-feedback{min-height:1.6rem;padding:.2rem 1rem .5rem;font-size:.86rem;color:var(--ink-soft)}
   .detail-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:clamp(2rem,6vw,6rem)}
   h2{font-size:clamp(1.8rem,3.5vw,2.5rem)}
   .detail-grid>div>p{margin-top:var(--space-2);color:var(--ink-soft);max-width:32rem}
