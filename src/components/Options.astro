@@ -21,12 +21,13 @@
 </section>
 
 <style>
-  .options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
-  .option { border: 1px solid var(--line); padding: clamp(1.5rem, 3vw, 2.5rem); display: flex; flex-direction: column; align-items: start; gap: 1rem; }
-  .option h2 { font-size: clamp(1.8rem, 3vw, 2.35rem); }
+  .options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .option { border: 1px solid var(--line); border-radius: 10px; background: #fff; padding: clamp(1.5rem, 3vw, 2.4rem); display: flex; flex-direction: column; align-items: start; gap: 1rem; }
+  .option h2 { font-size: clamp(1.65rem, 2.65vw, 2.1rem); }
   .option p { color: var(--ink-soft); }
   .option .option-subtitle { color: var(--ink); font-weight: 600; margin-top: -.4rem; }
   .option .option-note { font-size: .94rem; }
-  .primary-link { margin-top: auto; padding-top: .8rem; font-weight: 600; text-decoration-thickness: 2px; }
+  .primary-link { margin-top: auto; padding-top: .8rem; font-weight: 700; text-decoration: none; color: var(--plate); font-size: .95rem; }
+  .primary-link:hover { text-decoration: underline; }
   @media(max-width: 44rem) { .options { grid-template-columns: 1fr; } }
 </style>
