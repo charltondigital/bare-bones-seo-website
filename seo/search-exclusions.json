@@ -1,0 +1,8 @@
+{
+  "defaults": {
+    "index": true,
+    "sitemap": true
+  },
+  "sections": {},
+  "pages": {}
+}
