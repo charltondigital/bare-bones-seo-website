@@ -1,7 +1,5 @@
 ---
 import Base from '../layouts/Base.astro';
-import Anatomy from '../components/Anatomy.astro';
-import LeftOut from '../components/LeftOut.astro';
 import { site } from '../data/site.js';
 ---
 <Base title="Bare Bones SEO WordPress Plugin | Free, Lightweight SEO Controls" description="A free, open-source WordPress SEO plugin with indexation, metadata, schema, redirects, 404 monitoring, and bulk editing.">
@@ -14,8 +12,57 @@ import { site } from '../data/site.js';
       <a href={site.github}>View the source on GitHub ↗</a>
     </div>
   </section>
-  <Anatomy />
-  <LeftOut />
+  <section class="section" aria-labelledby="comparison-title">
+    <div class="wrap comparison">
+      <div class="comparison-heading">
+        <h2 id="comparison-title">The essential features, side by side</h2>
+        <p>Bare Bones focuses on technical controls. Other SEO plugins cover many of the same basics and often offer additional tools. “Paid” means a paid version is required; features and editions can change.</p>
+      </div>
+      <div class="table-scroll" role="region" aria-label="Comparison of WordPress SEO plugins" tabindex="0">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th scope="col">Feature</th>
+              <th scope="col">WordPress core</th>
+              <th scope="col" class="barebones">Bare Bones SEO</th>
+              <th scope="col">Rank Math</th>
+              <th scope="col">Yoast SEO</th>
+              <th scope="col">AIOSEO</th>
+              <th scope="col">SEOPress</th>
+              <th scope="col">The SEO Framework</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">SEO titles &amp; descriptions</th><td>Theme-generated titles; limited editing</td><td class="barebones">Yes</td><td>Free</td><td>Free</td><td>Free</td><td>Free</td><td>Free</td></tr>
+            <tr><th scope="row">Page-level indexation</th><td>Sitewide search visibility setting</td><td class="barebones">Yes</td><td>Free</td><td>Free</td><td>Free</td><td>Free</td><td>Free</td></tr>
+            <tr><th scope="row">XML sitemaps &amp; exclusions</th><td>Basic XML sitemap; developer filters</td><td class="barebones">Post-type and page controls</td><td>Free</td><td>Free</td><td>Free</td><td>Free</td><td>Free</td></tr>
+            <tr><th scope="row">Structured data</th><td>Theme / other code</td><td class="barebones">Custom JSON-LD field</td><td>Schema tools, free / paid</td><td>Automatic schema, free</td><td>Schema features, free / paid</td><td>Schema features, free / paid</td><td>Automatic schema, free</td></tr>
+            <tr><th scope="row">Bulk metadata editing</th><td>No dedicated SEO editor</td><td class="barebones">Built-in grid</td><td>Free basics; advanced paid</td><td>Free bulk editor</td><td>Bulk tools; plan-dependent</td><td>Bulk actions; plan-dependent</td><td>Quick edit controls</td></tr>
+            <tr><th scope="row">301 redirect manager</th><td>Not built in</td><td class="barebones">Yes</td><td>Free</td><td>Paid</td><td>Paid</td><td>Paid</td><td>No general manager in core plugin</td></tr>
+            <tr><th scope="row">404 request log</th><td>Server / host logs</td><td class="barebones">Yes</td><td>Free</td><td>No dedicated log</td><td>Paid</td><td>Paid</td><td>No dedicated log in core plugin</td></tr>
+            <tr><th scope="row">Configuration notices</th><td>Basic site setting</td><td class="barebones">Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+            <tr class="footprint"><th scope="row">Approx. installed plugin size</th><td>Not applicable</td><td class="barebones">122 KB*</td><td>~16 MB</td><td>~22 MB</td><td>~25 MB</td><td>~13 MB</td><td>~3 MB</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">*122 KB is the size recorded in Bare Bones SEO 1.0.0 source. Competitor sizes are rounded third-party measurements of free-plugin folders from a 2026 test; versions and measurement methods can differ. These figures are indicative, <strong>not an independently normalized benchmark</strong>, and file size does not establish site speed or memory usage. Capabilities vary by version and paid plan.</p>
+      <details class="extra-features">
+        <summary>What larger SEO plugins offer that Bare Bones doesn't</summary>
+        <div class="extra-grid">
+          <p><strong>Content assistance</strong><span>Keyword and readability analysis, optimization scores, AI writing and metadata suggestions.</span></p>
+          <p><strong>Performance reporting</strong><span>Search analytics, ranking data, dashboards, and integrations with reporting services.</span></p>
+          <p><strong>Specialized SEO</strong><span>Local business, ecommerce, video, news, and more specialized schema or sitemap tools.</span></p>
+          <p><strong>Advanced workflows</strong><span>Internal-link suggestions, social previews, extensive imports, automated suggestions, and extra site audits.</span></p>
+        </div>
+        <p class="extra-note">These are capabilities found across larger plugins, not features provided by every competitor or included in every free plan.</p>
+      </details>
+      <div class="comparison-conclusion">
+        <h2>The essential controls in a smaller package.</h2>
+        <p>Optimize with your own expertise, your agency, or other tools. Bare Bones manages the technical settings without bundling a broader content and marketing suite.</p>
+      </div>
+      <p class="sources">Sources: <a href="https://github.com/charltondigital/bare-bones-seo">Bare Bones SEO source</a>, <a href="https://make.wordpress.org/core/2020/07/22/new-xml-sitemaps-functionality-in-wordpress-5-5/">WordPress core sitemap documentation</a>, <a href="https://rankmath.com/free-vs-pro/">Rank Math feature comparison</a>, <a href="https://yoast.com/help/yoast-seo-tools-bulk-editor/">Yoast bulk editor</a>, <a href="https://www.seopress.org/features/">SEOPress features</a>, <a href="https://aioseo.com/">AIOSEO</a>, <a href="https://theseoframework.com/">The SEO Framework</a>, and <a href="https://puregpl.com/blog/best-seo-plugins-for-wordpress/">2026 footprint comparison</a>.</p>
+    </div>
+  </section>
   <section class="section">
     <div class="wrap product-bottom">
       <h2>Free and open source.</h2>
@@ -31,6 +78,33 @@ import { site } from '../data/site.js';
   .lede{margin-top:var(--space-3);max-width:39rem;font-size:1.2rem;color:var(--ink-soft)}
   .product-actions{display:flex;flex-wrap:wrap;gap:1.25rem;align-items:center;margin-top:var(--space-4);font-weight:600}
   .product-button{display:inline-block;padding:.8rem 1.15rem;background:var(--ink);color:var(--paper);text-decoration:none;border-radius:3px}
+  .comparison-heading{max-width:44rem;margin-bottom:var(--space-3)}
+  .comparison-heading h2,.comparison-conclusion h2{font-size:clamp(1.8rem,3.2vw,2.55rem)}
+  .comparison-heading p,.comparison-conclusion p{margin-top:var(--space-2);color:var(--ink-soft)}
+  .table-scroll{overflow-x:auto;overscroll-behavior-inline:contain;border:1px solid var(--line)}
+  .table-scroll:focus-visible{outline:2px solid var(--plate);outline-offset:3px}
+  .compare-table{border-collapse:separate;border-spacing:0;width:100%;min-width:1040px;font-size:.86rem;line-height:1.45}
+  .compare-table th,.compare-table td{text-align:left;vertical-align:top;padding:.85rem .9rem;border-bottom:1px solid var(--line);min-width:120px}
+  .compare-table th:first-child{min-width:170px;max-width:210px;position:sticky;left:0;z-index:1;background:var(--paper)}
+  .compare-table thead th{font-weight:700;vertical-align:bottom;background:var(--paper);position:sticky;top:0}
+  .compare-table thead th:first-child{z-index:3}
+  .compare-table tbody th{font-weight:600}
+  .compare-table td{color:var(--ink-soft)}
+  .compare-table .barebones{background:rgba(80,117,153,.095);color:var(--ink);font-weight:650}
+  .compare-table thead .barebones{background:rgba(80,117,153,.16)}
+  .compare-table tr:last-child th,.compare-table tr:last-child td{border-bottom:0}
+  .compare-table .footprint th,.compare-table .footprint td{font-weight:700}
+  .table-note{font-size:.82rem;color:var(--ink-soft);margin-top:var(--space-2);max-width:57rem}
+  .extra-features{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:var(--space-4);padding:1rem 0}
+  .extra-features summary{cursor:pointer;font-size:1.13rem;font-weight:650}
+  .extra-features[open] summary{margin-bottom:var(--space-3)}
+  .extra-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-3)}
+  .extra-grid p{display:grid;gap:.35rem}
+  .extra-grid span,.extra-note{color:var(--ink-soft);font-size:.94rem}
+  .extra-note{margin-top:var(--space-3)}
+  .comparison-conclusion{max-width:39rem;margin-top:var(--space-4)}
+  .sources{font-size:.8rem;color:var(--ink-soft);margin-top:var(--space-4);line-height:1.7}
+  @media(max-width:40rem){.extra-grid{grid-template-columns:1fr}}
   .product-bottom{display:grid;gap:1rem;max-width:var(--wide)}
   .product-bottom h2{font-size:clamp(1.8rem,3vw,2.6rem)}
   .product-bottom p{max-width:36rem;color:var(--ink-soft)}
