@@ -20,7 +20,7 @@ import { site } from '../data/site.js';
         <p>AI can write and rebuild a website quickly. SEO decisions still need to survive those changes.</p>
       </div>
       <ul class="standard-list">
-        <li><h3>Indexation and sitemaps</h3><p>One authoritative file for `noindex` and sitemap exclusions, including section-wide rules.</p></li>
+        <li><h3>Indexation and sitemaps</h3><p>One authoritative file for noindex and sitemap exclusions, including section-wide rules.</p></li>
         <li><h3>Titles and metadata</h3><p>One owner per setting. Titles default to the page's H1 unless you specify an override.</p></li>
         <li><h3>Redirects and URL history</h3><p>Protect published URLs, preserve established redirects, and flag unexpected changes.</p></li>
         <li><h3>Advisory checks</h3><p>Surface issues involving crawlers, links, and generated output without blocking deployment by default.</p></li>
@@ -37,6 +37,7 @@ import { site } from '../data/site.js';
         <p><strong>1.</strong> Share the <a href={site.staticGithub}>standards repository</a> with your coding agent.</p>
         <p><strong>2.</strong> Ask it to follow the README and applicable standards, using your site's existing tooling.</p>
         <p><strong>3.</strong> Have it verify the generated HTML, sitemap, redirects, and reports—not just the configuration files.</p>
+        <p><strong>4.</strong> For ongoing maintenance, ask it to add an <code>AGENTS.md</code> instruction in your website repository pointing future coding agents to these standards.</p>
         <p>GitHub and Cloudflare playbooks document proven procedures, but neither platform is required.</p>
       </div>
     </div>
