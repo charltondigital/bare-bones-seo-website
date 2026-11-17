@@ -1,8 +1,9 @@
 ---
 import { site } from '../data/site.js';
+import Skull from './Skull.astro';
 ---
 <section class="hero wrap">
-  <h1>{site.tagline}</h1>
+  <h1><span class="heading-mark"><Skull size={48} /></span>{site.tagline}</h1>
   <p class="lede">
     Just the essentials to manage titles, indexation, redirects, and other technical SEO settings. A free WordPress plugin and open-source standards for AI-generated static sites.
   </p>
@@ -13,6 +14,9 @@ import { site } from '../data/site.js';
 </section>
 
 <style>
+  .heading-mark{display:inline-flex;vertical-align:-.035em;margin-right:.2em;line-height:1}
+  .heading-mark :global(svg){display:block;width:.82em;height:.82em}
+
   .hero { padding-block: var(--space-5) var(--space-6); }
   h1 { font-size: clamp(2.5rem, 6.5vw, 5.2rem); line-height: .98; letter-spacing: -.025em; max-width: 18ch; }
   .lede { margin-top: var(--space-4); max-width: 44rem; font-size: 1.2rem; color: var(--ink-soft); }
