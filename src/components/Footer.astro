@@ -6,7 +6,7 @@ const year = new Date().getFullYear();
 <footer>
   <div class="wrap row">
     <p class="maker">
-      <Skull size={18} />
+      <span class="footer-skull"><Skull size={18} /></span>
       <span>Made by <a href={site.maker.url}>{site.maker.name}</a> in Flagstaff, Arizona. &copy; {year}</span>
     </p>
     <nav class="footer-links" aria-label="Legal information"><a href="/license/">License</a><a href="/privacy/">Privacy</a></nav>
@@ -17,6 +17,7 @@ const year = new Date().getFullYear();
   footer { border-top: 1px solid var(--line); padding-block: var(--space-4); font-size: 0.82rem; color: var(--ink-soft); }
   .row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-2) var(--space-4); }
   .maker { display: flex; align-items: center; gap: 0.5rem; }
-  .maker :global(svg) { flex: none; }
+  .footer-skull{display:inline-grid;place-items:center;width:1.65rem;height:1.65rem;border-radius:50%;background:#e8edf3;color:#172233;flex:none}
+  .footer-skull :global(svg){width:.78rem;height:1rem;flex:none}
   .footer-links { display: flex; flex-wrap: wrap; gap: 1.25rem; }
 </style>
