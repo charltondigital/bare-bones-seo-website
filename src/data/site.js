@@ -1,9 +1,9 @@
-// Shared site identity and links for the two Bare Bones SEO offerings.
+// Shared identity and links for the Bare Bones SEO standards project and implementations.
 export const site = {
   name: 'Bare Bones SEO',
-  tagline: 'Bare Bones SEO Settings Tools',
+  tagline: 'A Better Standard for SEO Settings',
   description:
-    'Essential SEO settings for WordPress and AI-generated static websites. A free WordPress plugin and open-source standards for consistent, visible SEO controls.',
+    'An open-source effort to make technical SEO settings transparent, consistent, controllable, and lightweight across website platforms.',
   github: 'https://github.com/charltondigital/bare-bones-seo',
   staticGithub: 'https://github.com/charltondigital/bare-bones-seo-static-sites',
   wporg: 'https://wordpress.org/plugins/bare-bones-seo/',
