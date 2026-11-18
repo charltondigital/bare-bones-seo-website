@@ -2,17 +2,27 @@
 import Base from '../layouts/Base.astro';
 import { site } from '../data/site.js';
 import Skull from '../components/Skull.astro';
+import WordPressGallery from '../components/WordPressGallery.astro';
+import { existsSync } from 'node:fs';
+const screenshotPaths = ['wp-overview.png', 'wp-indexation.png', 'wp-page-meta.png', 'wp-redirects.png', 'wp-editor.png'];
+const hasScreenshots = screenshotPaths.every(name => existsSync(new URL(`../../public/screenshots/${name}`, import.meta.url)));
+
 ---
 <Base title="Bare Bones SEO for WordPress | Lightweight SEO Settings" description="A free, open-source WordPress SEO plugin with indexation, metadata, schema, redirects, 404 monitoring, and bulk editing.">
   <section class="product-hero wrap">
     <a class="back-link" href="/">← Bare Bones SEO</a>
-    <h1><span class="heading-mark"><Skull size={48} /></span>Bare Bones SEO for WordPress</h1>
-    <p class="lede">Save time managing technical SEO with a free, lightweight plugin. Find and control essential settings without content scores, distractions, or upsells.</p>
-    <div class="product-actions">
-      <a class="product-button" href={site.wporg}>Get the free plugin ↗</a>
-      <a href={site.github}>View the source on GitHub ↗</a>
+    <div class:list={['product-hero-layout', { 'has-gallery': hasScreenshots }]}>
+      <div class="product-hero-copy">
+        <h1><span class="heading-mark"><Skull size={48} /></span>Bare Bones SEO for WordPress</h1>
+        <p class="lede">Save time managing technical SEO with a free, lightweight plugin. Find and control essential settings without content scores, distractions, or upsells.</p>
+        <div class="product-actions">
+          <a class="product-button" href={site.wporg}>Get the free plugin ↗</a>
+          <a href={site.github}>View the source on GitHub ↗</a>
+        </div>
+        <p class="hero-proof">122 KB installed <span aria-hidden="true">·</span> No front-end scripts or styles <span aria-hidden="true">·</span> No subscriptions</p>
+      </div>
+      {hasScreenshots && <WordPressGallery />}
     </div>
-    <p class="hero-proof">122 KB installed <span aria-hidden="true">·</span> No front-end scripts or styles <span aria-hidden="true">·</span> No subscriptions</p>
   </section>
   <section class="section lean-section" aria-labelledby="lean-title">
     <div class="wrap">
@@ -100,6 +110,9 @@ import Skull from '../components/Skull.astro';
   .heading-mark :global(svg){display:block;width:.82em;height:.82em}
 
   .product-hero{padding-block:var(--space-5) var(--space-6)}
+  .product-hero-layout.has-gallery{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center;gap:clamp(1.75rem,4vw,3.5rem)}
+  .product-hero-copy{min-width:0}
+  @media(max-width:52rem){.product-hero-layout.has-gallery{grid-template-columns:1fr}.product-hero-layout.has-gallery :global(.wp-gallery){max-width:42rem}}
   .back-link{display:inline-block;margin-bottom:var(--space-3);font-size:.92rem;color:var(--ink-soft)}
   h1{font-size:clamp(2.15rem,4.4vw,3.6rem);max-width:24ch;font-weight:650;line-height:1.13;letter-spacing:-.035em}
   .lede{margin-top:var(--space-3);max-width:39rem;font-size:1.2rem;color:var(--ink-soft)}
