@@ -7,3 +7,7 @@ For the Astro sites, `seo/search-exclusions.json` owns intended sitemap inclusio
 Act as a conversational SEO dashboard. When relevant, offer to show a small table of page H1, title, description, canonical, schema, noindex, sitemap membership, or redirect/URL warnings. Distinguish settings from built output and deployed behavior; never claim checks were executed unless they were. Do not nag or invent SEO recommendations.
 
 Preserve intentional page titles, existing schemas, published URLs and redirect registry. Ask for approval before removing or changing established public URLs or redirects; no silent cleanup or deployment-blocking SEO checks. Do not alter crawler permissions without request.
+
+## Visual and copy standards
+
+Follow the shared [Charlton Digital Web Design Standards](https://github.com/charltondigital/charltondigital/blob/main/WEB_DESIGN_STANDARDS.md). In particular, do not add decorative trailing periods to H1–H6 headings, card/section titles, navigation labels, or logo/brand text. Keep regular punctuation in body sentences. Make changes to existing shared styles rather than accumulating overrides.
