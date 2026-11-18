@@ -1,7 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
 import { site } from '../data/site.js';
-import Skull from '../components/Skull.astro';
 import AiSeoDemo from '../components/AiSeoDemo.astro';
 import ToolHelp from '../components/ToolHelp.astro';
 ---
@@ -9,7 +8,7 @@ import ToolHelp from '../components/ToolHelp.astro';
   <section class="product-hero wrap">
     <div class="product-hero-layout">
       <div class="product-hero-copy">
-      <h1><span class="heading-mark"><Skull size={48} /></span>Bare Bones SEO for AI-built websites</h1>
+      <h1>Bare Bones SEO for AI-built websites</h1>
       <p class="lede">Your AI builds the website. You control its SEO.</p>
       <p class="intro">View and change SEO settings through your existing AI coding agent. No extra tools or dashboards.</p>
       <div class="product-actions">
@@ -125,8 +124,6 @@ Create or update AGENTS.md so future AI coding agents know to follow these stand
   });
 </script>
 <style>
-  .heading-mark{display:inline-flex;vertical-align:-.035em;margin-right:.2em;line-height:1}
-  .heading-mark :global(svg){display:block;width:.82em;height:.82em}
 
   .product-hero{padding-block:var(--space-5) var(--space-6)}
   .product-hero-layout{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);gap:clamp(2.5rem,6vw,5rem);align-items:center}
