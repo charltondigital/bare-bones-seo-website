@@ -3,22 +3,47 @@ import Base from '../layouts/Base.astro';
 import { site } from '../data/site.js';
 import Skull from '../components/Skull.astro';
 ---
-<Base title="Free SEO Controls for AI-Built Websites | Bare Bones SEO" description="Free copy-and-paste SEO setup instructions for AI-built websites. Save time with more visible, controllable, and consistent SEO settings.">
+<Base title="Take Control of SEO on AI-Built Websites | Bare Bones SEO" description="Free, open-source SEO standards for AI-built static websites. Use your AI agent as a conversational SEO dashboard with visible settings, consistent output, and owner control.">
   <section class="product-hero wrap">
     <a class="back-link" href="/">← Bare Bones SEO</a>
     <h1><span class="heading-mark"><Skull size={48} /></span>Bare Bones SEO for AI-built websites</h1>
-    <p class="lede">A free, faster way to get control of your website’s SEO settings.</p>
-    <p class="intro">Copy the prompt into your AI website builder. It guides your agent to organize SEO settings, show you what your site publishes, preserve your choices, and check for inconsistencies—without adding a heavyweight tool or changing your stack.</p>
+    <p class="lede">Your AI builds the website. You stay in control of its SEO.</p>
+    <p class="intro">Give your AI coding agent a practical SEO framework: see what your site publishes, manage technical settings through conversation, and keep decisions consistent as the site evolves. Free, open source, and designed to work with your existing setup.</p>
     <div class="product-actions">
       <a class="product-button" href="#install-title">Get the copy-and-paste instructions ↓</a>
       <a class="product-button product-button-secondary" href={site.staticGithub} target="_blank" rel="noopener noreferrer">View on GitHub ↗</a>
     </div>
-    <p class="note">Free and open source. Not a plugin or a one-click installer.</p>
+    <p class="note">Free and open source · No required plugin or dashboard · Works with your existing stack</p>
+  </section>
+  <section class="section benefits-section" aria-labelledby="benefits-title">
+    <div class="wrap">
+      <h2 id="benefits-title">A real SEO control center—right in your AI conversation.</h2>
+      <p class="benefits-intro">Not another dashboard to learn. Make your site's existing SEO settings easier to see, manage, and verify.</p>
+      <ul class="benefits-grid">
+        <li><strong>See your SEO settings</strong><span>Ask for titles, descriptions, canonicals, indexation directives, and sitemap entries.</span></li>
+        <li><strong>Make changes by asking</strong><span>Work through your AI agent instead of hunting across files for every technical SEO decision.</span></li>
+        <li><strong>One source of truth</strong><span>Keep ownership of settings clear, with fewer scattered or conflicting declarations.</span></li>
+        <li><strong>Verify real output</strong><span>Check generated HTML, sitemap entries, and redirect behavior—not just configuration files.</span></li>
+        <li><strong>Preserve decisions</strong><span>Persistent agent instructions help protect intentional settings through later edits.</span></li>
+        <li><strong>No extra platform required</strong><span>Use your existing generator, hosting, and build tools. No mandatory service or plugin.</span></li>
+      </ul>
+    </div>
+  </section>
+  <section class="section examples-section" aria-labelledby="examples-title">
+    <div class="wrap">
+      <h2 id="examples-title">Ask your AI. Get answers about your site.</h2>
+      <div class="examples-grid">
+        <div><span class="example-label">VISIBILITY</span><p>“Show me the titles, descriptions, and canonical URLs for every service page.”</p></div>
+        <div><span class="example-label">CONTROL</span><p>“Which pages are excluded from search, and where are those rules defined?”</p></div>
+        <div><span class="example-label">CONSISTENCY</span><p>“Check that our sitemap and page-level robots directives agree.”</p></div>
+      </div>
+      <p class="examples-note">Example requests after your agent implements the standards and has access to your website.</p>
+    </div>
   </section>
   <section class="section install-section" aria-labelledby="install-title">
     <div class="wrap">
-      <h2 id="install-title">Copy this into your AI website builder</h2>
-      <p class="install-intro">Use this when building a new static website or adding Bare Bones to an existing one. Your AI agent needs access to the public GitHub repository.</p>
+      <h2 id="install-title">Get started with one prompt</h2>
+      <p class="install-intro">Copy these instructions into an AI coding agent with access to your website and the public GitHub repository. The agent implements the standards in your existing architecture; this is not a one-click installation.</p>
       <div class="prompt-box">
         <div class="prompt-toolbar">
           <span>Installation instructions</span>
@@ -39,8 +64,8 @@ Create or update AGENTS.md so future AI coding agents know to follow these stand
   <section class="section comparison-section" aria-labelledby="comparison-title">
     <div class="wrap">
       <div class="comparison-heading">
-        <h2 id="comparison-title">Your AI can build a website. But who’s watching the SEO?</h2>
-        <p>AI coding agents aren't necessarily looking out for technical SEO. They may overlook it, scatter settings across files, or unintentionally undo decisions during later edits.</p>
+        <h2 id="comparison-title">Building the site is only half the job.</h2>
+        <p>Without shared rules, even a capable AI agent can scatter technical SEO settings, overlook indexation, or unintentionally change decisions during a redesign. Bare Bones gives it standards to follow and output to verify.</p>
       </div>
       <div class="risk-benefit">
         <div class="risk-col">
@@ -65,8 +90,8 @@ Create or update AGENTS.md so future AI coding agents know to follow these stand
   </section>
   <section class="section">
     <div class="wrap ending">
-      <h2>Standards for settings, not SEO strategy.</h2>
-      <p>You, your AI agent, or other SEO tools handle optimization—choosing keywords, improving content, and deciding what should rank. Bare Bones handles the transparency and control: showing what your site actually outputs, making technical settings manageable, and keeping those decisions consistent. No keyword scores, prescribed optimizations, extra dashboard, or required hosting migration.</p>
+      <h2>Professional SEO control, available to everyone.</h2>
+      <p>You shouldn't need a proprietary agency platform to understand or control your website's technical SEO. Bare Bones makes these practices openly available while leaving keywords, content, and optimization strategy to you. It helps you manage and verify settings—it doesn't promise an AI agent will never make mistakes.</p>
       <a href={site.staticGithub}>Read Bare Bones SEO for Static Sites ↗</a>
     </div>
   </section>
@@ -108,6 +133,21 @@ Create or update AGENTS.md so future AI coding agents know to follow these stand
   .product-button-secondary{background:transparent;color:var(--ink);border:1px solid var(--line)}
   .product-button-secondary:hover{background:var(--surface-strong);color:var(--ink)}
   .note{font-size:.92rem;color:var(--ink-soft);margin-top:var(--space-2)}
+  .benefits-section{background:var(--surface);border-block:1px solid var(--line)}
+  .benefits-section h2,.examples-section h2{font-size:clamp(1.8rem,3.2vw,2.45rem)}
+  .benefits-intro{margin-top:var(--space-2);max-width:43rem;color:var(--ink-soft)}
+  .benefits-grid{list-style:none;padding:0;margin:var(--space-4) 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.75rem 2rem}
+  .benefits-grid li{display:grid;align-content:start;gap:.45rem;border-left:3px solid var(--plate);padding-left:1rem}
+  .benefits-grid strong{font-size:1.04rem;line-height:1.35}
+  .benefits-grid span{font-size:.92rem;line-height:1.55;color:var(--ink-soft)}
+  .examples-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:var(--space-3)}
+  .examples-grid>div{padding:1.5rem;border:1px solid var(--line);border-radius:9px;background:var(--surface)}
+  .example-label{font-size:.73rem;letter-spacing:.07em;font-weight:750;color:var(--plate)}
+  .examples-grid p{font-size:1.03rem;font-weight:580;line-height:1.5;margin-top:.7rem}
+  .examples-note{font-size:.85rem;color:var(--ink-soft);margin-top:var(--space-2)}
+  @media(max-width:54rem){.benefits-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:44rem){.examples-grid{grid-template-columns:1fr}}
+  @media(max-width:36rem){.benefits-grid{grid-template-columns:1fr}}
   .install-intro{color:var(--ink-soft);max-width:42rem;margin-top:var(--space-2);margin-bottom:var(--space-3)}
   .prompt-box{border:1px solid var(--line);max-width:52rem;border-radius:10px;overflow:hidden;background:var(--surface)}
   .prompt-toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.75rem 1rem;border-bottom:1px solid var(--line);background:var(--surface);font-size:.83rem;font-weight:700}
