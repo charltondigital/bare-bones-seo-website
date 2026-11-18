@@ -1,7 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
 import { site } from '../data/site.js';
-import Skull from '../components/Skull.astro';
 import WordPressGallery from '../components/WordPressGallery.astro';
 import ToolHelp from '../components/ToolHelp.astro';
 import { existsSync } from 'node:fs';
@@ -13,7 +12,7 @@ const hasScreenshots = screenshotPaths.every(name => existsSync(new URL(`../../p
   <section class="product-hero wrap">
     <div class="product-hero-layout">
       <div class="product-hero-copy">
-        <h1><span class="heading-mark"><Skull size={48} /></span>Bare Bones SEO for WordPress</h1>
+        <h1>Bare Bones SEO for WordPress</h1>
         <p class="lede">Save time managing technical SEO with a free, lightweight plugin. Find and control essential settings without content scores, distractions, or upsells.</p>
         <div class="product-actions">
           <a class="product-button" href={site.wporg}>Get the free plugin ↗</a>
@@ -107,8 +106,6 @@ const hasScreenshots = screenshotPaths.every(name => existsSync(new URL(`../../p
   <ToolHelp tool="wordpress" />
 </Base>
 <style>
-  .heading-mark{display:inline-flex;vertical-align:-.035em;margin-right:.2em;line-height:1}
-  .heading-mark :global(svg){display:block;width:.82em;height:.82em}
 
   .product-hero{padding-block:var(--space-5) var(--space-6)}
   .product-hero-layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center;gap:clamp(1.75rem,4vw,3.5rem)}
