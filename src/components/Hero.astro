@@ -6,6 +6,9 @@ const settings = [
   { label: 'Search indexing', value: 'Allowed', good: true },
   { label: 'Sitemap', value: 'Included', good: true },
   { label: 'Canonical URL', value: '/sleep-medicine/' },
+  { label: 'Schema markup', value: 'Organization JSON-LD' },
+  { label: '301 redirects', value: '/old-page/ → /new-page/' },
+  { label: '404 logging', value: 'Broken URLs tracked' },
 ];
 ---
 <section class="hero wrap">
@@ -20,8 +23,8 @@ const settings = [
         <a class="button" href="/wordpress/">For WordPress</a>
       </div>
     </div>
-    <div class="settings-example" aria-label="Illustration of the SEO settings your website sends to search engines">
-      <p class="example-heading">What your website tells search engines</p>
+    <div class="settings-example" aria-label="Illustration of technical SEO settings and tools">
+      <p class="example-heading">What Bare Bones SEO helps you manage</p>
       <dl class="settings-list">
         {settings.map(({label,value,good}) => (
           <div class="setting">
@@ -47,9 +50,9 @@ const settings = [
   .button{display:inline-block;padding:.85rem 1.25rem;background:var(--plate);color:var(--action-ink);text-decoration:none;font-weight:680;font-size:.92rem;border:1px solid var(--plate);border-radius:7px}
   .button:hover{color:var(--action-ink);background:#ffe29b;border-color:#ffe29b}
   .settings-example{min-width:0;border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:clamp(1.2rem,2.6vw,2rem)}
-  .example-heading{font-size:.92rem;font-weight:700;color:var(--ink);line-height:1.45;margin-bottom:1.2rem}
+  .example-heading{font-size:.92rem;font-weight:700;color:var(--ink);line-height:1.45;margin-bottom:.85rem}
   .settings-list{margin:0;padding:0}
-  .setting{display:grid;grid-template-columns:minmax(7.5rem,.85fr) minmax(0,1.15fr);gap:1rem;align-items:baseline;padding:.75rem 0;border-bottom:1px solid var(--line)}
+  .setting{display:grid;grid-template-columns:minmax(7.5rem,.85fr) minmax(0,1.15fr);gap:1rem;align-items:baseline;padding:.55rem 0;border-bottom:1px solid var(--line)}
   .setting:last-child{border-bottom:0}
   .setting dt{color:var(--ink-soft);font-size:.82rem}
   .setting dd{margin:0;color:var(--ink);font-size:.85rem;font-weight:600;overflow-wrap:anywhere}
