@@ -81,8 +81,8 @@ import Skull from '../components/Skull.astro';
   h1{font-size:clamp(2.15rem,4.4vw,3.6rem);max-width:24ch;font-weight:650;line-height:1.13;letter-spacing:-.035em}
   .lede{margin-top:var(--space-3);max-width:39rem;font-size:1.2rem;color:var(--ink-soft)}
   .product-actions{display:flex;flex-wrap:wrap;gap:1.25rem;align-items:center;margin-top:var(--space-4);font-weight:600}
-  .product-button{display:inline-block;padding:.85rem 1.2rem;background:var(--plate);color:#fff;text-decoration:none;border-radius:7px;font-size:.95rem}
-  .product-button:hover{background:#1949b7;color:#fff}
+  .product-button{display:inline-block;padding:.85rem 1.2rem;background:var(--plate);color:var(--action-ink);text-decoration:none;border-radius:7px;font-size:.95rem}
+  .product-button:hover{background:#ffe29b;color:var(--action-ink)}
   .comparison-heading{max-width:44rem;margin-bottom:var(--space-3)}
   .comparison-heading h2,.comparison-conclusion h2{font-size:clamp(1.8rem,3.2vw,2.55rem)}
   .comparison-heading p,.comparison-conclusion p{margin-top:var(--space-2);color:var(--ink-soft)}
@@ -90,13 +90,13 @@ import Skull from '../components/Skull.astro';
   .table-scroll:focus-visible{outline:2px solid var(--plate);outline-offset:3px}
   .compare-table{border-collapse:separate;border-spacing:0;width:100%;min-width:1040px;font-size:.86rem;line-height:1.45}
   .compare-table th,.compare-table td{text-align:left;vertical-align:top;padding:.85rem .9rem;border-bottom:1px solid var(--line);min-width:120px}
-  .compare-table th:first-child{min-width:170px;max-width:210px;position:sticky;left:0;z-index:1;background:#fff}
+  .compare-table th:first-child{min-width:170px;max-width:210px;position:sticky;left:0;z-index:1;background:var(--surface)}
   .compare-table thead th{font-weight:750;vertical-align:bottom;background:var(--surface);position:sticky;top:0}
   .compare-table thead th:first-child{z-index:3;background:var(--surface)}
   .compare-table tbody th{font-weight:600}
   .compare-table td{color:var(--ink-soft)}
-  .compare-table .barebones{background:#eef4ff;color:var(--ink);font-weight:650}
-  .compare-table thead .barebones{background:#e1ecff}
+  .compare-table .barebones{background:#304760;color:var(--ink);font-weight:650}
+  .compare-table thead .barebones{background:#3b5674}
   .compare-table tr:last-child th,.compare-table tr:last-child td{border-bottom:0}
   .compare-table .footprint th,.compare-table .footprint td{font-weight:700}
   .table-note{font-size:.82rem;color:var(--ink-soft);margin-top:var(--space-2);max-width:57rem}
