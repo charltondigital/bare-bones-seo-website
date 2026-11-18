@@ -1,0 +1,155 @@
+---
+const examples = [
+  {
+    prompt: 'Show me all the page metas for the services pages.',
+    answer: 'Here are the titles and descriptions for your service pages.',
+    rows: [
+      ['Cardiology', 'Cardiology Services | Example Clinic'],
+      ['Neurology', 'Neurology Services | Example Clinic'],
+      ['Sleep Medicine', 'Sleep Medicine | Example Clinic']
+    ]
+  },
+  {
+    prompt: 'Which pages are noindexed or excluded from the sitemap?',
+    answer: 'I checked your indexation policy against the sitemap.',
+    rows: [
+      ['/thank-you/', 'Noindex · not in sitemap'],
+      ['/services/', 'Indexable · in sitemap'],
+      ['/draft-preview/', 'Noindex · not in sitemap']
+    ]
+  },
+  {
+    prompt: 'Change the dermatology meta description and verify it.',
+    answer: 'I updated the setting and checked the generated page output.',
+    rows: [
+      ['Page', '/services/dermatology/'],
+      ['Description', 'Dermatology care, appointments, and resources.'],
+      ['Output', 'Description matches generated HTML']
+    ]
+  },
+  {
+    prompt: 'Check the site for conflicting canonical URLs.',
+    answer: 'I compared canonical settings with the generated pages.',
+    rows: [
+      ['/services/', 'Self-referencing canonical'],
+      ['/about/', 'Self-referencing canonical'],
+      ['/contact/', 'Self-referencing canonical']
+    ]
+  }
+];
+---
+<div class="ai-demo" data-ai-demo aria-label="Illustrative AI SEO conversation">
+  <div class="demo-top"><span class="status-dot" aria-hidden="true"></span><strong>SEO conversation</strong><span class="example-tag">Example</span></div>
+  <div class="demo-content">
+    <p class="speaker">You ask</p>
+    <p class="prompt"><span data-prompt>{examples[0].prompt}</span><span class="cursor" aria-hidden="true"></span></p>
+    <div class="answer" data-answer>
+      <p class="speaker">AI coding agent</p>
+      <p class="summary" data-summary>{examples[0].answer}</p>
+      <div class="result-list" data-results>
+        {examples[0].rows.map(([label, value]) => <div class="result"><span>{label}</span><strong>{value}</strong></div>)}
+      </div>
+    </div>
+  </div>
+  <div class="demo-controls">
+    <span data-counter>1 / 4</span>
+    <button type="button" data-pause>Pause</button>
+    <button type="button" data-next>Next <span aria-hidden="true">→</span></button>
+  </div>
+  <p class="demo-note">Illustrative examples, not a live site audit.</p>
+</div>
+<script define:vars={{ examples }}>
+  const demo = document.querySelector('[data-ai-demo]');
+  if (demo) {
+    const prompt = demo.querySelector('[data-prompt]');
+    const answer = demo.querySelector('[data-answer]');
+    const summary = demo.querySelector('[data-summary]');
+    const results = demo.querySelector('[data-results]');
+    const counter = demo.querySelector('[data-counter]');
+    const pauseButton = demo.querySelector('[data-pause]');
+    const nextButton = demo.querySelector('[data-next]');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let index = 0;
+    let paused = reduceMotion;
+    let cycleTimer;
+    let typeTimer;
+    let responseTimer;
+    function stopTyping() { clearInterval(typeTimer); clearTimeout(responseTimer); }
+    function display(i) {
+      stopTyping();
+      index = (i + examples.length) % examples.length;
+      const example = examples[index];
+      counter.textContent = `${index + 1} / ${examples.length}`;
+      summary.textContent = example.answer;
+      results.replaceChildren();
+      for (const [label, value] of example.rows) {
+        const line = document.createElement('div');
+        line.className = 'result';
+        const key = document.createElement('span');
+        const val = document.createElement('strong');
+        key.textContent = label;
+        val.textContent = value;
+        line.append(key, val);
+        results.append(line);
+      }
+      if (reduceMotion) {
+        prompt.textContent = example.prompt;
+        answer.hidden = false;
+      } else {
+        prompt.textContent = '';
+        answer.hidden = true;
+        let count = 0;
+        typeTimer = setInterval(() => {
+          count = Math.min(count + 2, example.prompt.length);
+          prompt.textContent = example.prompt.slice(0, count);
+          if (count === example.prompt.length) {
+            clearInterval(typeTimer);
+            responseTimer = setTimeout(() => { answer.hidden = false; }, 350);
+          }
+        }, 35);
+      }
+    }
+    function schedule() {
+      clearInterval(cycleTimer);
+      if (!paused && !document.hidden) cycleTimer = setInterval(() => display(index + 1), 7600);
+    }
+    pauseButton.addEventListener('click', () => {
+      paused = !paused;
+      pauseButton.textContent = paused ? 'Play' : 'Pause';
+      schedule();
+    });
+    nextButton.addEventListener('click', () => { display(index + 1); schedule(); });
+    document.addEventListener('visibilitychange', schedule);
+    demo.addEventListener('mouseenter', () => clearInterval(cycleTimer));
+    demo.addEventListener('mouseleave', schedule);
+    demo.addEventListener('focusin', () => clearInterval(cycleTimer));
+    demo.addEventListener('focusout', e => { if (!demo.contains(e.relatedTarget)) schedule(); });
+    display(0);
+    if (reduceMotion) pauseButton.textContent = 'Play';
+    else schedule();
+  }
+</script>
+<style>
+  .ai-demo{min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .demo-top{display:flex;align-items:center;gap:.6rem;padding:.7rem .9rem;background:var(--surface-strong);border-bottom:1px solid var(--line);font-size:.84rem}
+  .status-dot{width:.55rem;height:.55rem;flex:none;border-radius:50%;background:var(--plate)}
+  .example-tag{margin-left:auto;color:var(--ink-soft);font-size:.75rem;font-weight:400}
+  .demo-content{padding:1rem;min-height:20rem}
+  .speaker{font-size:.7rem;letter-spacing:.03em;color:var(--ink-soft);font-weight:650;margin-bottom:.35rem}
+  .prompt{padding:.75rem .85rem;border:1px solid var(--line);border-radius:7px;background:#111a27;font-size:.94rem;line-height:1.5;font-weight:600;min-height:4.65rem}
+  .cursor{display:inline-block;height:1em;width:2px;background:var(--plate);margin-left:2px;vertical-align:-.16em;animation:blink 1s steps(1) infinite}
+  .answer{margin-top:1rem}.answer[hidden]{display:none}
+  .summary{font-size:.87rem;line-height:1.5;margin-bottom:.65rem}
+  .result-list{border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .result{display:grid;gap:.1rem;padding:.35rem .55rem;border-bottom:1px solid var(--line);font-size:.75rem;line-height:1.4}
+  .result:last-child{border-bottom:0}
+  .result span{color:var(--plate);font-family:var(--mono);overflow-wrap:anywhere}
+  .result strong{font-weight:500;color:var(--ink-soft);overflow-wrap:anywhere}
+  .demo-controls{display:flex;align-items:center;gap:.75rem;padding:.7rem 1rem;border-top:1px solid var(--line);font-size:.78rem}
+  .demo-controls span:first-child{margin-right:auto;color:var(--ink-soft)}
+  .demo-controls button{background:var(--surface-strong);border:1px solid var(--line);border-radius:5px;color:var(--ink);padding:.3rem .65rem;cursor:pointer;font-size:.8rem}
+  .demo-controls button:hover{border-color:var(--plate)}
+  .demo-note{font-size:.72rem;color:var(--ink-soft);padding:0 1rem .8rem}
+  @keyframes blink{50%{opacity:0}}
+  @media(prefers-reduced-motion:reduce){.cursor{animation:none;display:none}}
+</style>
