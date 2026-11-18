@@ -41,7 +41,6 @@ button, input, textarea { font-family: inherit; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 /* Dark product identity with contrasting skull medallions. */
-.heading-mark{display:inline-flex!important;align-items:center;justify-content:center;vertical-align:middle!important;width:1.14em;height:1.14em;padding:.14em;background:#e8edf3;color:#182233;border-radius:50%;margin-right:.26em!important;flex:none}
 .heading-mark svg{display:block}
 body .option,body .risk-col,body .prompt-box,body #install-prompt{background:var(--surface);color:var(--ink)}
 body .benefit-col{background:var(--surface-strong);border-color:var(--line)}
