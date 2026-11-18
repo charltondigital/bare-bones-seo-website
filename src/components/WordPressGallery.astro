@@ -1,0 +1,95 @@
+---
+const shots = [
+  { src: '/screenshots/wp-overview.png', label: 'Overview', alt: 'Bare Bones SEO dashboard overview showing its 122 KB footprint and tools' },
+  { src: '/screenshots/wp-indexation.png', label: 'Indexation', alt: 'Global indexation rules and WordPress XML sitemap controls' },
+  { src: '/screenshots/wp-page-meta.png', label: 'Page Meta', alt: 'Bulk SEO titles, descriptions, indexation, and schema management' },
+  { src: '/screenshots/wp-redirects.png', label: '301 Redirects', alt: '301 redirect manager with custom and automatic redirect listings' },
+  { src: '/screenshots/wp-editor.png', label: 'Page Editor', alt: 'WordPress page editor with SEO snippet preview, indexing settings, and JSON-LD schema' },
+];
+---
+<div class="wp-gallery" data-wp-gallery aria-label="Bare Bones SEO WordPress plugin screenshots">
+  <button class="gallery-image" type="button" data-gallery-expand aria-label="Enlarge current screenshot">
+    <img src={shots[0].src} alt={shots[0].alt} width="1280" height="817" decoding="async" fetchpriority="high" data-gallery-image />
+    <span class="zoom-hint" aria-hidden="true">↗ View full size</span>
+  </button>
+  <div class="gallery-toolbar">
+    <button type="button" class="gallery-arrow" data-gallery-prev aria-label="Previous screenshot">←</button>
+    <p class="gallery-label" aria-live="polite"><span data-gallery-label>{shots[0].label}</span> <span data-gallery-count>1 / 5</span></p>
+    <button type="button" class="gallery-arrow" data-gallery-next aria-label="Next screenshot">→</button>
+  </div>
+  <div class="gallery-dots" aria-label="Choose a screenshot">
+    {shots.map((shot, index) => <button type="button" data-gallery-dot={index} aria-label={`Show ${shot.label}`} aria-current={index === 0 ? 'true' : undefined} title={shot.label}></button>)}
+  </div>
+  <dialog class="gallery-dialog" data-gallery-dialog aria-label="Enlarged Bare Bones SEO screenshot">
+    <div class="dialog-header">
+      <strong data-gallery-dialog-label>{shots[0].label}</strong>
+      <button type="button" data-gallery-close aria-label="Close full-size screenshot">Close ×</button>
+    </div>
+    <img src={shots[0].src} alt={shots[0].alt} width="1280" height="817" data-gallery-dialog-image />
+    <div class="dialog-controls">
+      <button type="button" data-gallery-prev aria-label="Previous enlarged screenshot">← Previous</button>
+      <span data-gallery-dialog-count>1 / 5</span>
+      <button type="button" data-gallery-next aria-label="Next enlarged screenshot">Next →</button>
+    </div>
+  </dialog>
+</div>
+<script define:vars={{ shots }}>
+  const gallery = document.querySelector('[data-wp-gallery]');
+  if (gallery) {
+    let current = 0;
+    const image = gallery.querySelector('[data-gallery-image]');
+    const dialogImage = gallery.querySelector('[data-gallery-dialog-image]');
+    const dialog = gallery.querySelector('[data-gallery-dialog]');
+    const dots = [...gallery.querySelectorAll('[data-gallery-dot]')];
+    function show(index) {
+      current = (index + shots.length) % shots.length;
+      const shot = shots[current];
+      image.src = shot.src;
+      image.alt = shot.alt;
+      dialogImage.src = shot.src;
+      dialogImage.alt = shot.alt;
+      gallery.querySelector('[data-gallery-label]').textContent = shot.label;
+      gallery.querySelector('[data-gallery-count]').textContent = `${current + 1} / ${shots.length}`;
+      gallery.querySelector('[data-gallery-dialog-label]').textContent = shot.label;
+      gallery.querySelector('[data-gallery-dialog-count]').textContent = `${current + 1} / ${shots.length}`;
+      dots.forEach((dot, i) => {
+        if (i === current) dot.setAttribute('aria-current', 'true');
+        else dot.removeAttribute('aria-current');
+      });
+    }
+    gallery.querySelectorAll('[data-gallery-prev]').forEach(button => button.addEventListener('click', () => show(current - 1)));
+    gallery.querySelectorAll('[data-gallery-next]').forEach(button => button.addEventListener('click', () => show(current + 1)));
+    dots.forEach((dot, i) => dot.addEventListener('click', () => show(i)));
+    gallery.querySelector('[data-gallery-expand]').addEventListener('click', () => dialog.showModal());
+    gallery.querySelector('[data-gallery-close]').addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
+    dialog.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        show(current + (e.key === 'ArrowRight' ? 1 : -1));
+      }
+    });
+  }
+</script>
+<style>
+  .wp-gallery{width:100%;min-width:0;background:var(--surface);padding:.55rem;border:1px solid var(--line);border-radius:10px}
+  .gallery-image{display:block;position:relative;width:100%;padding:0;border:0;background:#f1f1f1;border-radius:5px;overflow:hidden;cursor:zoom-in;text-align:left}
+  .gallery-image img{display:block;width:100%;height:auto;aspect-ratio:1280 / 817;object-fit:contain}
+  .zoom-hint{position:absolute;right:.6rem;bottom:.6rem;background:rgba(15,23,42,.9);color:#fff;padding:.35rem .6rem;border-radius:4px;font-size:.72rem;font-weight:600}
+  .gallery-toolbar{display:flex;align-items:center;justify-content:space-between;gap:.65rem;padding:.65rem .25rem .2rem}
+  .gallery-label{display:flex;justify-content:space-between;align-items:center;gap:.6rem;flex:1;font-size:.84rem;font-weight:650}
+  .gallery-label span:last-child{color:var(--ink-soft);font-weight:400}
+  .gallery-arrow{width:2rem;height:2rem;border-radius:5px;background:var(--surface-strong);border:1px solid var(--line);color:var(--ink);cursor:pointer;font-size:1.1rem}
+  .gallery-arrow:hover{border-color:var(--plate);color:var(--plate)}
+  .gallery-dots{display:flex;justify-content:center;gap:.55rem;padding:.25rem 0 .5rem}
+  .gallery-dots button{width:1.2rem;height:.5rem;border:0;border-radius:9px;background:var(--line);cursor:pointer}
+  .gallery-dots button[aria-current="true"]{background:var(--plate)}
+  .gallery-dialog{background:var(--surface);color:var(--ink);padding:1rem;border:1px solid var(--line);border-radius:10px;width:min(98vw,1500px);max-height:96dvh;box-shadow:0 15px 70px #0009}
+  .gallery-dialog::backdrop{background:rgba(0,0,0,.85)}
+  .gallery-dialog img{display:block;max-width:100%;max-height:calc(96dvh - 9rem);width:auto;height:auto;margin:auto;object-fit:contain;background:#f1f1f1}
+  .dialog-header,.dialog-controls{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.3rem 0 .8rem}
+  .dialog-controls{padding:.8rem 0 0}
+  .dialog-header button,.dialog-controls button{border:1px solid var(--line);border-radius:5px;padding:.4rem .75rem;color:var(--ink);background:var(--surface-strong);cursor:pointer}
+  .dialog-header button:hover,.dialog-controls button:hover{border-color:var(--plate);color:var(--plate)}
+  @media(max-width:48rem){.zoom-hint{font-size:.68rem}.gallery-dialog{padding:.5rem}}
+</style>
