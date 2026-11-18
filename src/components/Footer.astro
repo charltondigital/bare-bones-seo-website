@@ -4,31 +4,57 @@ import { site } from '../data/site.js';
 const year = new Date().getFullYear();
 ---
 <footer>
-  <div class="wrap row">
-    <p class="maker">
-      <span class="footer-skull"><Skull size={18} /></span>
-      <span>Made by <a href={site.maker.url}>{site.maker.name}</a> in Flagstaff, Arizona. &copy; {year}</span>
-    </p>
-    <nav class="footer-links" aria-label="Contact, about and legal information"><a data-email-contact href="#" aria-label="Email Bare Bones SEO">Email</a><a href="/about/">About the developer</a><a href="/philosophy/">Our philosophy</a><a href="/license/">License</a><a href="/privacy/">Privacy</a></nav>
+  <div class="wrap footer-inner">
+    <div class="footer-identity">
+      <a class="footer-brand" href="/" aria-label="Bare Bones SEO home">
+        <span class="footer-skull"><Skull size={24} /></span>
+        <strong>Bare Bones SEO</strong>
+      </a>
+      <p>Made by <a href={site.maker.url}>{site.maker.name}</a> in Flagstaff, Arizona.</p>
+      <p class="copyright">© {year} Charlton Digital LLC</p>
+    </div>
+    <div class="footer-nav">
+      <nav aria-label="Products">
+        <span class="group-heading">Tools</span>
+        <a href="/wordpress/">WordPress</a>
+        <a href="/ai-sites/">AI-built websites</a>
+      </nav>
+      <nav aria-label="Project information">
+        <span class="group-heading">Project</span>
+        <a href="/about/">About the developer</a>
+        <a href="/philosophy/">Philosophy</a>
+        <a href="/license/">License</a>
+        <a href="/privacy/">Privacy</a>
+      </nav>
+      <div class="footer-contact">
+        <span class="group-heading">Contact</span>
+        <a data-email-contact href="mailto:hello@barebonesseo.com">Email</a>
+      </div>
+    </div>
   </div>
 </footer>
 <script>
-  // Assemble the address in the browser rather than storing a plain mailto link in HTML.
+  // Keep the address easy to change while avoiding a plain email in the initial HTML.
   const contact = document.querySelector<HTMLAnchorElement>('[data-email-contact]');
   if (contact) {
-    const mailbox = ['he', 'llo'].join('');
-    const domain = ['barebonesseo', 'com'].join('.');
-    const address = `${mailbox}@${domain}`;
+    const address = ['hello', 'barebonesseo.com'].join('@');
     contact.textContent = address;
     contact.href = `mailto:${address}`;
   }
 </script>
-
 <style>
-  footer { border-top: 1px solid var(--line); padding-block: var(--space-4); font-size: 0.82rem; color: var(--ink-soft); }
-  .row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-2) var(--space-4); }
-  .maker { display: flex; align-items: center; gap: 0.5rem; }
-  .footer-skull{display:inline-grid;place-items:center;width:1.65rem;height:1.65rem;border-radius:50%;background:#e8edf3;color:#172233;flex:none}
-  .footer-skull :global(svg){width:.78rem;height:1rem;flex:none}
-  .footer-links { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+  footer{border-top:1px solid var(--line);padding-block:var(--space-4);font-size:.87rem;color:var(--ink-soft)}
+  .footer-inner{display:grid;grid-template-columns:minmax(15rem,1fr) minmax(0,1.35fr);gap:clamp(2rem,5vw,5rem)}
+  .footer-brand{display:inline-flex;align-items:center;gap:.85rem;color:var(--ink);text-decoration:none;font-size:1rem}
+  .footer-skull{display:grid;place-items:center;width:2.4rem;height:2.4rem;border-radius:50%;background:#e8edf3;color:#172233;flex:none}
+  .footer-skull :global(svg){width:1.35rem;height:1.6rem}
+  .footer-identity p{margin-top:.8rem;line-height:1.6}
+  .footer-identity .copyright{margin-top:.3rem;font-size:.79rem;opacity:.8}
+  .footer-nav{display:grid;grid-template-columns:1fr 1.15fr 1.1fr;gap:1.5rem}
+  .footer-nav nav,.footer-contact{display:flex;flex-direction:column;align-items:flex-start;gap:.55rem}
+  .group-heading{color:var(--ink);font-size:.79rem;font-weight:750;margin-bottom:.35rem}
+  .footer-nav a{text-decoration:none;line-height:1.45}
+  .footer-nav a:hover{text-decoration:underline}
+  @media(max-width:54rem){.footer-inner{grid-template-columns:1fr}.footer-nav{max-width:39rem}}
+  @media(max-width:31rem){.footer-nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem 1rem}.footer-contact{grid-column:1/-1}}
 </style>
