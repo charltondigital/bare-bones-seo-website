@@ -12,6 +12,7 @@ import Skull from '../components/Skull.astro';
       <a class="product-button" href={site.wporg}>Get the free plugin ↗</a>
       <a href={site.github}>View the source on GitHub ↗</a>
     </div>
+    <p class="hero-proof">122 KB installed <span aria-hidden="true">·</span> No front-end scripts or styles <span aria-hidden="true">·</span> No subscriptions</p>
   </section>
   <section class="section lean-section" aria-labelledby="lean-title">
     <div class="wrap">
@@ -25,6 +26,16 @@ import Skull from '../components/Skull.astro';
         <li><strong>Native WordPress SEO output</strong><span>Uses WordPress hooks, post metadata, and built-in sitemaps instead of a separate rendering system.</span></li>
         <li><strong>No tracking or upsells</strong><span>No telemetry, injected analytics scripts, paid tiers, or promotional dashboard widgets.</span></li>
       </ul>
+    </div>
+  </section>
+  <section class="section workflow-section" aria-labelledby="workflow-title">
+    <div class="wrap">
+      <h2 id="workflow-title">Less time in settings. More time doing SEO.</h2>
+      <div class="workflow-grid">
+        <div><h3>Edit metadata in bulk</h3><p>Review and update titles and descriptions in a single grid instead of opening pages one by one.</p></div>
+        <div><h3>Control indexation centrally</h3><p>See the rules for post types and archives, with page-level controls where you need them.</p></div>
+        <div><h3>Manage redirects and 404s</h3><p>Keep moved URLs working and review broken requests without adding separate tools.</p></div>
+      </div>
     </div>
   </section>
   <section class="section" aria-labelledby="comparison-title">
@@ -55,12 +66,9 @@ import Skull from '../components/Skull.astro';
             <tr><th scope="row">Bulk metadata editing</th><td>No dedicated SEO editor</td><td class="barebones">Built-in grid</td><td>Yes; advanced paid</td><td>Yes; bulk editor</td><td>Bulk tools; plan-dependent</td><td>Bulk actions; plan-dependent</td><td>Quick edit controls</td></tr>
             <tr><th scope="row">301 redirect manager</th><td>Not built in</td><td class="barebones">Yes</td><td>Yes</td><td>Paid</td><td>Paid</td><td>Paid</td><td>No general manager in core plugin</td></tr>
             <tr><th scope="row">404 request log</th><td>Server / host logs</td><td class="barebones">Yes</td><td>Yes</td><td>No dedicated log</td><td>Paid</td><td>Paid</td><td>No dedicated log in core plugin</td></tr>
-            <tr><th scope="row">Configuration notices</th><td>Basic site setting</td><td class="barebones">Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-            <tr class="footprint"><th scope="row">Approx. installed plugin size</th><td>Not applicable</td><td class="barebones">122 KB*</td><td>~16 MB</td><td>~22 MB</td><td>~25 MB</td><td>~13 MB</td><td>~3 MB</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="table-note">*122 KB is the size recorded in Bare Bones SEO 1.0.0 source. Competitor sizes are rounded third-party measurements of free-plugin folders from a 2026 test; versions and measurement methods can differ. These figures are indicative, <strong>not an independently normalized benchmark</strong>, and file size does not establish site speed or memory usage. Capabilities vary by version and paid plan.</p>
       <details class="extra-features">
         <summary>What we intentionally leave out—and why</summary>
         <p class="extra-note">Bare Bones is designed to handle technical SEO settings, not become an all-in-one marketing platform. These are deliberate choices, not a roadmap of missing features.</p>
@@ -76,7 +84,7 @@ import Skull from '../components/Skull.astro';
         <h2>Putting the principles into practice.</h2>
         <p>Bare Bones applies a simple philosophy to WordPress: make technical SEO settings easy to find, control, and maintain, with no injected front-end scripts or styles and no unnecessary processing on normal page views.</p>
       </div>
-      <p class="sources">Reference: <a href={site.github}>Bare Bones SEO source code</a>. Competitor comparisons are summarized for context and may change by version or plan; installed-size estimates are from a <a href="https://puregpl.com/blog/best-seo-plugins-for-wordpress/">third-party comparison</a>, not a standardized performance test.</p>
+      <p class="sources">Comparison features can vary by version and plan. Review the <a href={site.github}>Bare Bones source code</a> for its implementation details.</p>
     </div>
   </section>
   <section class="section">
@@ -107,6 +115,13 @@ import Skull from '../components/Skull.astro';
   .lean-grid span{font-size:.92rem;color:var(--ink-soft);line-height:1.55}
   @media(max-width:54rem){.lean-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
   @media(max-width:36rem){.lean-grid{grid-template-columns:1fr}}
+  .hero-proof{margin-top:var(--space-3);font-size:.88rem;font-weight:650;color:var(--ink-soft);display:flex;flex-wrap:wrap;gap:.35rem .6rem}
+  .workflow-section{padding-block:var(--space-5)}
+  .workflow-section h2{font-size:clamp(1.75rem,3vw,2.4rem)}
+  .workflow-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem;margin-top:var(--space-3)}
+  .workflow-grid h3{font-size:1.12rem;margin-bottom:.5rem}
+  .workflow-grid p{color:var(--ink-soft);font-size:.94rem}
+  @media(max-width:44rem){.workflow-grid{grid-template-columns:1fr;gap:1.4rem}}
   .comparison-heading{max-width:44rem;margin-bottom:var(--space-3)}
   .comparison-heading h2,.comparison-conclusion h2{font-size:clamp(1.8rem,3.2vw,2.55rem)}
   .comparison-heading p,.comparison-conclusion p{margin-top:var(--space-2);color:var(--ink-soft)}
@@ -122,8 +137,6 @@ import Skull from '../components/Skull.astro';
   .compare-table .barebones{background:#304760;color:var(--ink);font-weight:650}
   .compare-table thead .barebones{background:#3b5674}
   .compare-table tr:last-child th,.compare-table tr:last-child td{border-bottom:0}
-  .compare-table .footprint th,.compare-table .footprint td{font-weight:700}
-  .table-note{font-size:.82rem;color:var(--ink-soft);margin-top:var(--space-2);max-width:57rem}
   .extra-features{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:var(--space-4);padding:1rem 0}
   .extra-features summary{cursor:pointer;font-size:1.13rem;font-weight:650}
   .extra-features[open] summary{margin-bottom:var(--space-3)}
