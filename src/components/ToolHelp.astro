@@ -3,9 +3,9 @@ const { tool } = Astro.props;
 const wordpress = tool === 'wordpress';
 const questions = wordpress
   ? [
-      {q:'Is this an SEO optimization or content-scoring plugin?',a:'No. Bare Bones SEO manages technical settings such as titles, descriptions, indexation, schema, redirects, and 404 logs. It does not score content, research keywords, or track rankings.'},
+      {q:'Do I need another SEO plugin for optimization?',a:'No. Bare Bones SEO handles the technical SEO controls you need inside WordPress: titles, descriptions, indexation, schema, redirects, and 404 logging. Keyword research, content planning, rank tracking, analytics, and link-building are better handled with dedicated tools and workflows outside WordPress—not by loading another SEO plugin into your site.'},
       {q:'Is it free? Are any features locked behind a subscription?',a:'It is free and open source. The plugin does not have a paid upgrade tier.'},
-      {q:'Can I use it alongside another SEO plugin?',a:'Avoid running two plugins that output the same titles, meta descriptions, canonical URLs, or indexing directives. Review existing settings before switching so you do not create duplicate or conflicting output.'},
+      {q:'Can I use it alongside another SEO plugin?',a:'We recommend using one plugin to manage your technical SEO output. Running multiple SEO plugins can produce duplicate titles, descriptions, canonical URLs, or indexing directives. If you switch, review and migrate your existing settings first. Use separate, off-site tools for research, reporting, and optimization work.'},
       {q:'How do I report a problem?',a:'For WordPress support, use the plugin support forum. Developers can also open a GitHub issue. Include your WordPress and plugin versions, steps to reproduce, and any relevant errors—but never share passwords or private data.'}
     ]
   : [
