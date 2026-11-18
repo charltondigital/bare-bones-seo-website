@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site.js';
+---
+<Base title="Our Philosophy | Bare Bones SEO" description="Bare Bones SEO is an open-source effort to give SEO practitioners and site owners more visibility, control, and consistency with less busywork.">
+  <section class="wrap philosophy-page">
+    <h1>Better tools. More control for SEOs.</h1>
+    <p class="lede">Bare Bones SEO exists to make technical SEO easier to manage—not to replace the judgment of the people doing the work.</p>
+    <p>SEO practitioners and site owners should be able to see a website's settings, change them confidently, and trust that those decisions remain consistent. They shouldn't need a costly, heavyweight suite just to manage the essentials.</p>
+    <h2>What we're working toward</h2>
+    <ul>
+      <li><strong>Visibility.</strong> Make technical SEO settings and actual published output easy to inspect.</li>
+      <li><strong>Control.</strong> Keep decisions with the site owner and SEO practitioner, rather than inside opaque defaults.</li>
+      <li><strong>Consistency.</strong> Provide a clear source of truth and checks that help catch conflicting settings.</li>
+      <li><strong>Minimal overhead.</strong> Work with the platform's native capabilities instead of adding unnecessary scripts, services, or processing.</li>
+    </ul>
+    <h2>Standards in service of useful tools</h2>
+    <p>We're developing open conventions for technical SEO settings, starting with a <a href={site.github}>free WordPress plugin</a> and an <a href={site.staticGithub}>open specification for AI-built static sites</a>. These are practical starting points for a broader standards effort—not a claim of industry adoption.</p>
+    <p>Content strategy, keyword selection, and optimization remain separate. Our job is to save time and hassle while giving SEOs better control over the technical settings that put their decisions into practice.</p>
+  </section>
+</Base>
+<style>
+  .philosophy-page{max-width:52rem;padding-block:var(--space-5) var(--space-6)}
+  h1{font-size:clamp(2.1rem,4.4vw,3.4rem);line-height:1.14;letter-spacing:-.035em}
+  h2{font-size:clamp(1.5rem,2.7vw,2rem);margin-top:var(--space-4);margin-bottom:var(--space-2)}
+  p{margin-top:var(--space-2);color:var(--ink-soft)}
+  .lede{font-size:1.18rem;color:var(--ink);margin-top:var(--space-3)}
+  ul{padding-left:1.25rem;display:grid;gap:.9rem;margin-top:var(--space-3)}
+  li{color:var(--ink-soft)}
+  strong{color:var(--ink)}
+</style>
