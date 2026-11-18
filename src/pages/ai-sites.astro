@@ -11,6 +11,7 @@ import Skull from '../components/Skull.astro';
     <p class="intro">Bare Bones SEO gives your AI agent instructions to open that black box: show you what the site actually outputs, give you control over its SEO settings, and preserve your decisions as the site changes. You make the SEO decisions—not the tool.</p>
     <div class="product-actions">
       <a class="product-button" href="#install-title">Get the copy-and-paste instructions ↓</a>
+      <a class="product-button product-button-secondary" href={site.staticGithub} target="_blank" rel="noopener noreferrer">View on GitHub ↗</a>
     </div>
     <p class="note">Free and open source. Not a plugin or a one-click installer.</p>
   </section>
@@ -101,9 +102,11 @@ Create or update AGENTS.md so future AI coding agents know to follow these stand
   h1{font-size:clamp(2.15rem,4.4vw,3.6rem);max-width:24ch;font-weight:650;line-height:1.13;letter-spacing:-.035em}
   .lede{margin-top:var(--space-3);font-size:1.25rem;font-weight:600}
   .intro{margin-top:var(--space-2);max-width:38rem;color:var(--ink-soft)}
-  .product-actions{margin-top:var(--space-4)}
+  .product-actions{margin-top:var(--space-4);display:flex;flex-wrap:wrap;align-items:center;gap:.75rem}
   .product-button{display:inline-block;padding:.85rem 1.2rem;background:var(--plate);color:var(--action-ink);text-decoration:none;border-radius:7px;font-weight:700;font-size:.95rem}
   .product-button:hover{color:var(--action-ink);background:#ffe29b}
+  .product-button-secondary{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .product-button-secondary:hover{background:var(--surface-strong);color:var(--ink)}
   .note{font-size:.92rem;color:var(--ink-soft);margin-top:var(--space-2)}
   .install-intro{color:var(--ink-soft);max-width:42rem;margin-top:var(--space-2);margin-bottom:var(--space-3)}
   .prompt-box{border:1px solid var(--line);max-width:52rem;border-radius:10px;overflow:hidden;background:var(--surface)}
