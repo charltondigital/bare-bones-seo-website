@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import { site } from '../data/site.js';
 import Skull from '../components/Skull.astro';
 import AiSeoDemo from '../components/AiSeoDemo.astro';
+import ToolHelp from '../components/ToolHelp.astro';
 ---
 <Base title="Take Control of SEO on AI-Built Websites | Bare Bones SEO" description="Free, open-source SEO standards for AI-built static websites. Use your AI agent as a conversational SEO dashboard with visible settings, consistent output, and owner control.">
   <section class="product-hero wrap">
@@ -100,6 +101,7 @@ Create or update AGENTS.md so future AI coding agents know to follow these stand
       <a href={site.staticGithub}>Read Bare Bones SEO for Static Sites ↗</a>
     </div>
   </section>
+  <ToolHelp tool="ai" />
 </Base>
 <script>
   const button = document.querySelector<HTMLButtonElement>('[data-copy-prompt]');
