@@ -1,0 +1,58 @@
+---
+const { tool } = Astro.props;
+const wordpress = tool === 'wordpress';
+const questions = wordpress
+  ? [
+      {q:'Is this an SEO optimization or content-scoring plugin?',a:'No. Bare Bones SEO manages technical settings such as titles, descriptions, indexation, schema, redirects, and 404 logs. It does not score content, research keywords, or track rankings.'},
+      {q:'Is it free? Are any features locked behind a subscription?',a:'It is free and open source. The plugin does not have a paid upgrade tier.'},
+      {q:'Can I use it alongside another SEO plugin?',a:'Avoid running two plugins that output the same titles, meta descriptions, canonical URLs, or indexing directives. Review existing settings before switching so you do not create duplicate or conflicting output.'},
+      {q:'How do I report a problem?',a:'For WordPress support, use the plugin support forum. Developers can also open a GitHub issue. Include your WordPress and plugin versions, steps to reproduce, and any relevant errors—but never share passwords or private data.'}
+    ]
+  : [
+      {q:'Does Bare Bones SEO include an AI agent or dashboard?',a:'No. It is an open set of instructions and standards for your existing AI coding agent. It does not provide a separate agent, hosted dashboard, or SEO service.'},
+      {q:'Does it automatically optimize content or improve rankings?',a:'No. It helps you inspect, set, and verify technical SEO behavior. Keyword research, content strategy, and optimization decisions remain yours.'},
+      {q:'Which websites can use it?',a:'It is designed for AI-built static websites. Your coding agent needs access to the site files and build output so it can apply and verify the standards in your existing stack.'},
+      {q:'How do I report an issue or suggest an improvement?',a:'Open a GitHub issue in the static-site standards repository, including the framework, the relevant standard, expected behavior, and actual behavior. You can also email the developer.'}
+    ];
+const forum = 'https://wordpress.org/support/plugin/bare-bones-seo/';
+const issues = wordpress
+  ? 'https://github.com/charltondigital/bare-bones-seo/issues'
+  : 'https://github.com/charltondigital/bare-bones-seo-static-sites/issues';
+---
+<section class="section tool-help" aria-labelledby="tool-help-title">
+  <div class="wrap help-layout">
+    <div>
+      <h2 id="tool-help-title">Questions &amp; support</h2>
+      <p class="help-intro">A few common questions about {wordpress ? 'the WordPress plugin' : 'the AI-built website standards'}.</p>
+      <div class="questions">
+        {questions.map(({q,a}) => (
+          <details>
+            <summary>{q}</summary>
+            <p>{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+    <aside class="support">
+      <h3>Report an issue</h3>
+      <p>Found a bug or have a suggestion? Choose the channel that works for you.</p>
+      {wordpress && <a href={forum} target="_blank" rel="noopener noreferrer">WordPress.org support forum ↗</a>}
+      <a href={issues} target="_blank" rel="noopener noreferrer">GitHub issues ↗</a>
+      <a href="mailto:hello@barebonesseo.com">Email the developer ↗</a>
+    </aside>
+  </div>
+</section>
+<style>
+  .help-layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(14rem,.8fr);gap:clamp(2rem,6vw,5rem)}
+  h2{font-size:clamp(1.7rem,3vw,2.35rem)}
+  .help-intro{margin:.7rem 0 1.4rem;color:var(--ink-soft)}
+  .questions{border-top:1px solid var(--line)}
+  details{border-bottom:1px solid var(--line);padding:.85rem 0}
+  summary{font-weight:650;cursor:pointer;line-height:1.45;padding:.2rem 0}
+  details p{margin-top:.8rem;max-width:43rem;color:var(--ink-soft);font-size:.94rem}
+  .support{align-self:start;border-left:3px solid var(--plate);padding-left:1.3rem}
+  .support h3{font-size:1.15rem}
+  .support p{font-size:.91rem;color:var(--ink-soft);margin:.7rem 0 1.1rem}
+  .support a{display:block;font-weight:600;font-size:.92rem;margin-top:.7rem}
+  @media(max-width:44rem){.help-layout{grid-template-columns:1fr}.support{margin-top:.3rem}}
+</style>
