@@ -33,7 +33,7 @@ a:hover { color: var(--plate); }
 :focus-visible { outline: 2px solid var(--plate); outline-offset: 3px; border-radius: 3px; }
 button, input, textarea { font-family: inherit; }
 .wrap { width: min(100% - 2.5rem, var(--wide)); margin-inline: auto; }
-.section { padding-block: var(--space-5); border-top: 1px solid var(--line); }
+.section { padding-block: clamp(4.5rem, 7vw, 6rem); border-top: 1px solid var(--line); }
 .section-head { max-width: var(--measure); margin-bottom: var(--space-4); }
 .section-head h2 { font-size: clamp(1.75rem, 3.2vw, 2.45rem); }
 .section-head p { margin-top: var(--space-2); color: var(--ink-soft); }
