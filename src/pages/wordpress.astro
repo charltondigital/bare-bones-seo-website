@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import { site } from '../data/site.js';
 import Skull from '../components/Skull.astro';
 import WordPressGallery from '../components/WordPressGallery.astro';
+import ToolHelp from '../components/ToolHelp.astro';
 import { existsSync } from 'node:fs';
 const screenshotPaths = ['wp-overview.png', 'wp-indexation.png', 'wp-page-meta.png', 'wp-redirects.png', 'wp-editor.png'];
 const hasScreenshots = screenshotPaths.every(name => existsSync(new URL(`../../public/screenshots/${name}`, import.meta.url)));
@@ -104,6 +105,7 @@ const hasScreenshots = screenshotPaths.every(name => existsSync(new URL(`../../p
       <a href={site.wporg}>Get Bare Bones SEO for WordPress ↗</a>
     </div>
   </section>
+  <ToolHelp tool="wordpress" />
 </Base>
 <style>
   .heading-mark{display:inline-flex;vertical-align:-.035em;margin-right:.2em;line-height:1}
