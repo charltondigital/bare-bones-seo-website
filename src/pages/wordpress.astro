@@ -116,19 +116,19 @@ const hasScreenshots = screenshotPaths.every(name => existsSync(new URL(`../../p
   .product-actions{display:flex;flex-wrap:wrap;gap:1.25rem;align-items:center;margin-top:var(--space-4);font-weight:600}
   .product-button{display:inline-block;padding:.85rem 1.2rem;background:var(--plate);color:var(--action-ink);text-decoration:none;border-radius:7px;font-size:.95rem}
   .product-button:hover{background:#ffe29b;color:var(--action-ink)}
-  .lean-section{padding-block:var(--space-4);background:var(--surface);border-block:1px solid var(--line)}
+  .lean-section{background:var(--surface);border-block:1px solid var(--line)}
   .lean-section h2{font-size:clamp(1.75rem,3vw,2.4rem)}
   .lean-intro{margin-top:var(--space-2);color:var(--ink-soft);max-width:42rem}
-  .lean-grid{list-style:none;margin:var(--space-4) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.6rem 2rem}
+  .lean-grid{list-style:none;margin:var(--space-4) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2.5rem 2rem}
   .lean-grid li{display:grid;align-content:start;gap:.45rem;padding-left:1rem;border-left:3px solid var(--plate)}
   .lean-grid strong{font-size:1.04rem;line-height:1.3}
   .lean-grid span{font-size:.92rem;color:var(--ink-soft);line-height:1.55}
   @media(max-width:54rem){.lean-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
   @media(max-width:36rem){.lean-grid{grid-template-columns:1fr}}
   .hero-proof{margin-top:var(--space-3);font-size:.88rem;font-weight:650;color:var(--ink-soft);display:flex;flex-wrap:wrap;gap:.35rem .6rem}
-  .workflow-section{padding-block:var(--space-5)}
+  
   .workflow-section h2{font-size:clamp(1.75rem,3vw,2.4rem)}
-  .workflow-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem;margin-top:var(--space-3)}
+  .workflow-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem;margin-top:var(--space-4)}
   .workflow-grid h3{font-size:1.12rem;margin-bottom:.5rem}
   .workflow-grid p{color:var(--ink-soft);font-size:.94rem}
   @media(max-width:44rem){.workflow-grid{grid-template-columns:1fr;gap:1.4rem}}
