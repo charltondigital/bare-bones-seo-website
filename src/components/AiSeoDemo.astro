@@ -6,32 +6,27 @@ const prompts = [
   'Check the site for conflicting canonical URLs.',
   'Verify that my SEO settings match the generated HTML.'
 ];
-const scrollingPrompts = [...prompts, ...prompts.slice(0, 3)];
+const scrollingPrompts = [...prompts, ...prompts.slice(0, 2)];
 ---
-<div class="seo-requests" aria-label="Examples of requests for your existing AI coding agent">
-  <p class="requests-heading">Things you can ask your AI</p>
+<div class="seo-requests" aria-label="Example requests for your existing AI coding agent">
+  <p class="requests-heading">Ask your AI</p>
   <div class="requests-viewport">
-    <ol class="requests-track">
+    <ul class="requests-track">
       {scrollingPrompts.map((prompt, i) => (
         <li class="request" aria-hidden={i >= prompts.length ? 'true' : undefined}>
-          <span class="request-number" aria-hidden="true">{String(i % prompts.length + 1).padStart(2, '0')}</span>
-          <span class="request-text">“{prompt}”</span>
+          “{prompt}”
         </li>
       ))}
-    </ol>
+    </ul>
   </div>
-  <p class="requests-note">Use your existing AI coding agent. No additional agent or dashboard.</p>
 </div>
 <style>
-  .seo-requests{min-width:0;max-width:100%;padding:1rem 0}
-  .requests-heading{font-size:.84rem;font-weight:700;color:var(--plate);letter-spacing:.015em;margin-bottom:.8rem}
-  .requests-viewport{--row-height:6.25rem;height:calc(var(--row-height)*3);overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 17%,#000 83%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0%,#000 17%,#000 83%,transparent 100%)}
-  .requests-track{list-style:none;margin:0;padding:0;animation:requests-rise 27s linear infinite;will-change:transform}
-  .request{min-height:var(--row-height);height:var(--row-height);display:grid;grid-template-columns:2.25rem minmax(0,1fr);align-items:center;gap:.8rem;border-bottom:1px solid var(--line);padding:.75rem .35rem .75rem 0}
-  .request-number{font:500 .76rem var(--mono);color:var(--plate)}
-  .request-text{font-size:clamp(.99rem,1.7vw,1.2rem);line-height:1.45;font-weight:560;letter-spacing:-.015em;color:var(--ink)}
-  .requests-note{font-size:.82rem;line-height:1.6;color:var(--ink-soft);margin-top:1.1rem}
-  .seo-requests:hover .requests-track,.seo-requests:focus-within .requests-track{animation-play-state:paused}
+  .seo-requests{min-width:0;padding-block:1.5rem}
+  .requests-heading{color:var(--plate);font-size:.9rem;font-weight:650;margin-bottom:1.25rem}
+  .requests-viewport{--row-height:9rem;height:calc(var(--row-height)*2);overflow:hidden;mask-image:linear-gradient(to bottom,transparent,#000 16%,#000 84%,transparent);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 16%,#000 84%,transparent)}
+  .requests-track{list-style:none;padding:0;margin:0;animation:requests-rise 32s linear infinite;will-change:transform}
+  .request{height:var(--row-height);display:flex;align-items:center;padding:1.2rem .65rem 1.2rem 0;color:var(--ink);font-size:clamp(1.15rem,2vw,1.45rem);font-weight:550;line-height:1.5;letter-spacing:-.025em}
+  .seo-requests:hover .requests-track{animation-play-state:paused}
   @keyframes requests-rise{
     0%,15%{transform:translateY(0)}
     20%,35%{transform:translateY(calc(var(--row-height)*-1))}
@@ -40,11 +35,11 @@ const scrollingPrompts = [...prompts, ...prompts.slice(0, 3)];
     80%,95%{transform:translateY(calc(var(--row-height)*-4))}
     100%{transform:translateY(calc(var(--row-height)*-5))}
   }
-  @media(max-width:36rem){.requests-viewport{--row-height:7.25rem}.request-text{font-size:1rem}}
+  @media(max-width:36rem){.requests-viewport{--row-height:8.5rem}.request{font-size:1.1rem}}
   @media(prefers-reduced-motion:reduce){
-    .requests-viewport{height:auto;overflow:visible;-webkit-mask-image:none;mask-image:none}
+    .requests-viewport{height:auto;overflow:visible;mask-image:none;-webkit-mask-image:none}
     .requests-track{animation:none;will-change:auto}
-    .request{height:auto;min-height:4.5rem}
+    .request{height:auto;min-height:5rem;padding-block:.7rem}
     .request[aria-hidden="true"]{display:none}
   }
 </style>
