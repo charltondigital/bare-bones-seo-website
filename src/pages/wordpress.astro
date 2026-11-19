@@ -107,7 +107,7 @@ const hasScreenshots = screenshotPaths.every(name => existsSync(new URL(`../../p
 </Base>
 <style>
 
-  .product-hero{padding-block:var(--space-5) var(--space-6)}
+  .product-hero{padding-block:clamp(5.5rem, 8vw, 6rem) var(--space-6)}
   .product-hero-layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center;gap:clamp(1.75rem,4vw,3.5rem)}
   .product-hero-copy{min-width:0}
   @media(max-width:52rem){.product-hero-layout.has-gallery{grid-template-columns:1fr}.product-hero-layout :global(.wp-gallery){max-width:42rem}}
