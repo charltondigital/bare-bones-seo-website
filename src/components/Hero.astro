@@ -1,12 +1,17 @@
 ---
-const settings = [
+const pageSettings = [
   { label: 'Page title', value: 'Services', updated: 'Sleep Medicine Services', kind: 'typing' },
   { label: 'Description', value: 'Learn more about our services', updated: 'Sleep testing and treatment in Arizona', kind: 'typing' },
   { label: 'Indexation', options: ['Yes', 'No', 'Sitemap only'], kind: 'options' },
   { label: 'Canonical URL', value: 'Not set', updated: '/sleep-medicine/', kind: 'typing' },
   { label: 'Schema markup', value: '{"@context":"https://schema.org","@type":"Organization","name":"Example Medical Practice","url":"https://example.com"}', updated: '{"@context":"https://schema.org","@type":"MedicalClinic","name":"Example Medical Practice"}', code: true, kind: 'typing' },
+];
+const siteSettings = [
+  { label: 'Posts indexing', options: ['Yes', 'No', 'Sitemap only'], kind: 'options' },
+  { label: 'Pages indexing', options: ['Yes', 'No', 'Sitemap only'], kind: 'options' },
+  { label: 'Sitemap', value: 'Enabled', updated: 'Enabled', kind: 'static' },
   { label: '301 redirects', value: '/old-services/ → /services/', updated: '/sleep-clinic/ → /sleep-medicine/', kind: 'typing' },
-  { label: '404 monitor', value: 'View missing URLs', kind: '404' },
+  { label: '404 monitor', value: 'Recent missing URLs', kind: '404' },
 ];
 const missingUrls = [
   { url: '/sleep-clinic/', hits: 42, last: 'Nov 18, 2026' },
@@ -32,31 +37,45 @@ const missingUrls = [
         <p class="example-heading">What Bare Bones SEO helps you manage</p>
         <span class="demo-tag">EXAMPLE</span>
       </div>
-      <dl class="settings-list">
-        {settings.map(({label,value,updated,code,options,kind}) => (
-          <div class="setting" data-setting-row data-kind={kind}>
-            <dt>{label}</dt>
-            <dd>
-              {options ? (
-                <span class="index-options" aria-label="Example indexation modes">
-                  {options.map((option, i) => <span class:list={['index-option', { selected: i === 0 }]} data-index-option>{option}</span>)}
-                </span>
-              ) : (
-                <span class:list={['setting-value', { 'schema-preview': code }]} data-setting-value data-initial={value} data-updated={updated} title={code ? value : undefined}>{value}</span>
-              )}
-            </dd>
-          </div>
-        ))}
-      </dl>
-      <div class="missing-report" data-missing-report aria-hidden="true">
-        <div class="report-heading"><span>Recent 404 requests</span><span>Last seen</span></div>
-        {missingUrls.map(({url,hits,last}) => (
-          <div class="missing-entry" data-missing-entry>
-            <div class="missing-path"><code>{url}</code><small>{hits} hits</small></div>
-            <time>{last}</time>
-          </div>
-        ))}
+      <div class="demo-tabs" role="tablist" aria-label="SEO setting scope">
+        <button type="button" class="demo-tab is-selected" role="tab" id="page-tab" data-demo-tab="page" aria-controls="page-panel" aria-selected="true">Page settings</button>
+        <button type="button" class="demo-tab" role="tab" id="site-tab" data-demo-tab="site" aria-controls="site-panel" aria-selected="false">Site settings</button>
       </div>
+      {[
+        { id: 'page', items: pageSettings, title: '/sleep-medicine/' },
+        { id: 'site', items: siteSettings, title: 'Sitewide SEO controls' }
+      ].map(({id,items,title}) => (
+        <div class="demo-panel" id={`${id}-panel`} role="tabpanel" aria-labelledby={`${id}-tab`} data-demo-panel={id} hidden={id !== 'page'}>
+          <p class="panel-context">{title}</p>
+          <dl class="settings-list">
+            {items.map(({label,value,updated,code,options,kind}) => (
+              <div class="setting" data-setting-row data-kind={kind}>
+                <dt>{label}</dt>
+                <dd>
+                  {options ? (
+                    <span class="index-options" aria-label="Example indexation choices">
+                      {options.map((option, i) => <span class:list={['index-option', { selected: i === 0 }]} data-index-option>{option}</span>)}
+                    </span>
+                  ) : (
+                    <span class:list={['setting-value', { 'schema-preview': code }]} data-setting-value data-initial={value} data-updated={updated} title={code ? value : undefined}>{value}</span>
+                  )}
+                </dd>
+              </div>
+            ))}
+          </dl>
+          {id === 'site' && (
+            <div class="missing-report" data-missing-report aria-hidden="true">
+              <div class="report-heading"><span>Recent 404 requests</span><span>Last seen</span></div>
+              {missingUrls.map(({url,hits,last}) => (
+                <div class="missing-entry" data-missing-entry>
+                  <div class="missing-path"><code>{url}</code><small>{hits} hits</small></div>
+                  <time>{last}</time>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
       <p class="example-note">Sample settings and fictitious request logs—not live site data.</p>
     </div>
   </div>
@@ -64,95 +83,116 @@ const missingUrls = [
 
 <script>
   const demo = document.querySelector<HTMLElement>('[data-settings-demo]');
-  if (demo && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const rows = Array.from(demo.querySelectorAll<HTMLElement>('[data-setting-row]'));
-    const report = demo.querySelector<HTMLElement>('[data-missing-report]');
-    const entries = Array.from(demo.querySelectorAll<HTMLElement>('[data-missing-entry]'));
-    let cycle = 0;
-    let timeout: number | undefined;
-    let paused = false;
-    const sleep = (ms: number, token: number) => new Promise<boolean>((resolve) => {
-      timeout = window.setTimeout(() => { timeout = undefined; resolve(token === cycle && !paused); }, ms);
-    });
-    const reset = () => {
-      rows.forEach((row) => {
-        row.classList.remove('is-editing', 'is-updated');
-        const value = row.querySelector<HTMLElement>('[data-setting-value]');
-        if (value) value.textContent = value.dataset.initial || '';
-        row.querySelectorAll<HTMLElement>('[data-index-option]').forEach((option, i) => option.classList.toggle('selected', i === 0));
+  if (demo) {
+    const tabs = Array.from(demo.querySelectorAll<HTMLButtonElement>('[data-demo-tab]'));
+    const panels = Array.from(demo.querySelectorAll<HTMLElement>('[data-demo-panel]'));
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let current: 'page' | 'site' = 'page';
+    let generation = 0;
+    let nextTimer: number | undefined;
+
+    const delay = (ms: number) => new Promise<void>(resolve => { nextTimer = window.setTimeout(resolve, ms); });
+    const stillCurrent = (token: number) => token === generation && !document.hidden;
+    const activate = (scope: 'page' | 'site') => {
+      current = scope;
+      generation++;
+      panels.forEach(panel => {
+        const visible = panel.dataset.demoPanel === scope;
+        panel.hidden = !visible;
+        panel.querySelectorAll<HTMLElement>('[data-setting-row]').forEach(row => {
+          row.classList.remove('is-editing', 'is-updated');
+          const value = row.querySelector<HTMLElement>('[data-setting-value]');
+          if (value) { value.textContent = value.dataset.initial || ''; value.classList.remove('is-typing'); }
+          row.querySelectorAll<HTMLElement>('[data-index-option]').forEach((option, i) => option.classList.toggle('selected', i === 0));
+        });
+        const log = panel.querySelector<HTMLElement>('[data-missing-report]');
+        log?.classList.remove('is-visible');
+        log?.setAttribute('aria-hidden', 'true');
+        panel.querySelectorAll<HTMLElement>('[data-missing-entry]').forEach(entry => entry.classList.remove('is-visible'));
       });
-      report?.classList.remove('is-visible');
-      report?.setAttribute('aria-hidden', 'true');
-      entries.forEach(entry => entry.classList.remove('is-visible'));
+      tabs.forEach(tab => {
+        const selected = tab.dataset.demoTab === scope;
+        tab.classList.toggle('is-selected', selected);
+        tab.setAttribute('aria-selected', String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+      });
     };
-    const typeValue = async (value: HTMLElement, token: number) => {
-      const before = value.dataset.initial || '';
-      const after = value.dataset.updated || '';
-      // Show a real edit rather than instantly swapping all of the text.
-      value.classList.add('is-typing');
-      for (let i = before.length; i >= 0; i -= 3) {
-        value.textContent = before.slice(0, i);
-        if (!(await sleep(22, token))) return false;
-      }
-      for (let i = 1; i <= after.length; i += 2) {
-        value.textContent = after.slice(0, i);
-        if (!(await sleep(30, token))) return false;
-      }
-      value.textContent = after;
-      value.classList.remove('is-typing');
-      return true;
+    const select = (scope: 'page' | 'site') => {
+      activate(scope);
+      if (!reduceMotion) void play(generation);
     };
-    const play = async (token: number) => {
-      reset();
-      if (!(await sleep(350, token))) return;
+    async function play(token: number) {
+      const panel = demo!.querySelector<HTMLElement>(`[data-demo-panel="${current}"]`);
+      if (!panel || !stillCurrent(token)) return;
+      const rows = Array.from(panel.querySelectorAll<HTMLElement>('[data-setting-row]'));
+      await delay(350);
       for (const row of rows) {
-        if (token !== cycle || paused) return;
-        rows.forEach(item => item.classList.remove('is-editing'));
+        if (!stillCurrent(token)) return;
+        rows.forEach(r => r.classList.remove('is-editing'));
         row.classList.add('is-editing');
         const kind = row.dataset.kind;
         if (kind === 'options') {
-          const options = Array.from(row.querySelectorAll<HTMLElement>('[data-index-option]'));
+          const choices = Array.from(row.querySelectorAll<HTMLElement>('[data-index-option]'));
           for (const choice of [1, 2, 0]) {
-            options.forEach((option, i) => option.classList.toggle('selected', i === choice));
-            if (!(await sleep(490, token))) return;
+            choices.forEach((opt, i) => opt.classList.toggle('selected', i === choice));
+            await delay(430);
+            if (!stillCurrent(token)) return;
           }
         } else if (kind === '404') {
-          report?.classList.add('is-visible');
-          report?.setAttribute('aria-hidden', 'false');
-          for (const entry of entries) {
+          const log = panel.querySelector<HTMLElement>('[data-missing-report]');
+          log?.classList.add('is-visible');
+          log?.setAttribute('aria-hidden', 'false');
+          for (const entry of Array.from(panel.querySelectorAll<HTMLElement>('[data-missing-entry]'))) {
             entry.classList.add('is-visible');
-            if (!(await sleep(500, token))) return;
+            await delay(420);
+            if (!stillCurrent(token)) return;
           }
-          if (!(await sleep(1500, token))) return;
-        } else {
+          await delay(1100);
+        } else if (kind === 'typing') {
           const value = row.querySelector<HTMLElement>('[data-setting-value]');
-          if (value && !(await typeValue(value, token))) return;
-          if (!(await sleep(420, token))) return;
+          if (value) {
+            const before = value.dataset.initial || '';
+            const after = value.dataset.updated || '';
+            value.classList.add('is-typing');
+            for (let i = before.length; i >= 0; i -= 4) {
+              value.textContent = before.slice(0, i);
+              await delay(22);
+              if (!stillCurrent(token)) return;
+            }
+            for (let i = 2; i <= after.length; i += 2) {
+              value.textContent = after.slice(0, i);
+              await delay(29);
+              if (!stillCurrent(token)) return;
+            }
+            value.textContent = after;
+            value.classList.remove('is-typing');
+          }
+        } else {
+          await delay(650);
         }
+        if (!stillCurrent(token)) return;
         row.classList.add('is-updated');
+        await delay(380);
       }
       rows.forEach(row => row.classList.remove('is-editing'));
-      if (!(await sleep(2600, token))) return;
-      if (token === cycle && !paused) { cycle++; void play(cycle); }
-    };
-    const stop = () => {
-      paused = true;
-      cycle++;
-      if (timeout !== undefined) window.clearTimeout(timeout);
-      timeout = undefined;
-      demo.querySelectorAll('.is-typing').forEach(el => el.classList.remove('is-typing'));
-    };
-    const resume = () => {
-      if (!document.hidden && !demo.matches(':hover') && paused) {
-        paused = false;
-        cycle++;
-        void play(cycle);
-      }
-    };
-    demo.addEventListener('mouseenter', stop);
-    demo.addEventListener('mouseleave', resume);
-    document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else resume(); });
-    void play(cycle);
+      await delay(1800);
+      if (stillCurrent(token)) select(current === 'page' ? 'site' : 'page');
+    }
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => select(tab.dataset.demoTab as 'page' | 'site'));
+      tab.addEventListener('keydown', (event) => {
+        if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
+        event.preventDefault();
+        const other = tabs.find(candidate => candidate !== tab);
+        other?.focus();
+        if (other) select(other.dataset.demoTab as 'page' | 'site');
+      });
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) generation++;
+      else if (!reduceMotion) select(current);
+    });
+    if (!reduceMotion) void play(generation);
   }
 </script>
 
@@ -170,6 +210,11 @@ const missingUrls = [
   .example-header{display:flex;align-items:center;justify-content:space-between;gap:.7rem;margin-bottom:.85rem}
   .example-heading{font-size:.92rem;font-weight:700;color:var(--ink);line-height:1.45}
   .demo-tag{font-size:.65rem;letter-spacing:.08em;color:var(--plate);font-weight:750}
+  .demo-tabs{display:grid;grid-template-columns:1fr 1fr;gap:.35rem;padding:.2rem;background:#142032;border-radius:8px;margin-bottom:.9rem}
+  .demo-tab{border:0;border-radius:6px;color:var(--ink-soft);background:transparent;padding:.58rem .35rem;font-size:.78rem;font-weight:700;cursor:pointer}
+  .demo-tab.is-selected{background:#394d65;color:var(--plate);box-shadow:0 1px 3px #0003}
+  .demo-panel[hidden]{display:none}
+  .panel-context{font:.75rem/1.5 var(--mono);color:#b9c8db;margin-bottom:.45rem}
   .settings-list{margin:0;padding:0}
   .setting{display:grid;grid-template-columns:minmax(6.6rem,.7fr) minmax(0,1.3fr);gap:.6rem;align-items:baseline;padding:.55rem .45rem;margin-inline:-.45rem;border-bottom:1px solid var(--line);border-radius:5px;transition:background-color .25s ease,box-shadow .25s ease}
   .setting:last-child{border-bottom:0}
