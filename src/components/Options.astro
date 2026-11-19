@@ -1,4 +1,5 @@
 ---
+import Skull from './Skull.astro';
 ---
 <section class="section products-section" aria-labelledby="products-heading">
   <div class="wrap">
@@ -8,7 +9,7 @@
     </div>
     <div class="products">
       <article class="product">
-        <div class="product-top"><span class="product-icon ai-icon" aria-hidden="true">⌘</span><span class="product-tag">AI &amp; STATIC SITES</span></div>
+        <div class="product-top"><span class="product-icon" aria-hidden="true"><Skull size={43} /></span><span class="product-tag">AI &amp; STATIC SITES</span></div>
         <h3>Bare Bones SEO for AI Sites</h3>
         <p class="product-subtitle">SEO control for AI-built websites</p>
         <p class="description">Your coding agent becomes your SEO dashboard. Inspect published metadata, manage indexing and schema, and verify that changes actually reach the site.</p>
@@ -16,7 +17,7 @@
         <div class="product-footer"><span>Free · Open source</span><a class="product-button" href="/ai-sites/">Explore AI Sites <span aria-hidden="true">→</span></a></div>
       </article>
       <article class="product">
-        <div class="product-top"><span class="product-icon wp-icon" aria-hidden="true">W</span><span class="product-tag">WORDPRESS</span></div>
+        <div class="product-top"><span class="product-icon" aria-hidden="true"><Skull size={43} /></span><span class="product-tag">WORDPRESS</span></div>
         <h3>Bare Bones SEO for WordPress</h3>
         <p class="product-subtitle">A lightweight WordPress SEO plugin</p>
         <p class="description">Manage the technical essentials without bloat, subscriptions, or front-end assets. Edit metadata in bulk, handle redirects, and monitor 404s.</p>
@@ -33,9 +34,8 @@
   .products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem}
   .product{display:flex;flex-direction:column;align-items:stretch;min-width:0;padding:clamp(1.5rem,3vw,2.25rem);background:var(--surface);border:1px solid var(--line);border-radius:14px}
   .product-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.6rem}
-  .product-icon{display:grid;place-items:center;width:3.6rem;height:3.6rem;border-radius:12px;font-weight:800;font-size:1.65rem}
-  .ai-icon{background:#354b65;color:var(--plate)}
-  .wp-icon{background:#20496a;color:#fff;font-family:Georgia,serif;border:2px solid #719ebd;border-radius:50%}
+  .product-icon{display:grid;place-items:center;width:3.6rem;height:3.6rem;border-radius:50%;background:#e8edf3;color:#172233;flex:none}
+  .product-icon :global(svg){width:2rem;height:2.4rem}
   .product-tag{font-size:.69rem;letter-spacing:.11em;font-weight:800;color:#e5c77d}
   h3{font-size:clamp(1.45rem,2.3vw,1.9rem);max-width:23ch}
   .product-subtitle{margin-top:.65rem;font-weight:700;color:var(--ink)}
