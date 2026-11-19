@@ -9,7 +9,7 @@ const prompts = [
 const scrollingPrompts = [...prompts, ...prompts.slice(0, 2)];
 ---
 <div class="seo-requests" aria-label="Example requests for your existing AI coding agent">
-  <div class="demo-header"><span class="demo-indicator" aria-hidden="true"></span><span class="requests-heading">AI conversation · Example prompts</span><span class="demo-label">DEMO</span></div>
+  <div class="demo-header"><span class="requests-heading">Things you can ask your AI agent</span><span class="demo-label">EXAMPLES</span></div>
   <div class="requests-viewport">
     <ul class="requests-track">
       {scrollingPrompts.map((prompt, i) => (
@@ -19,16 +19,17 @@ const scrollingPrompts = [...prompts, ...prompts.slice(0, 2)];
       ))}
     </ul>
   </div>
+  <p class="demo-note">Use these with your existing coding agent after setup. Bare Bones SEO is not an AI chat service.</p>
 </div>
 <style>
-  .seo-requests{min-width:0;padding:1.1rem 1.3rem 1.35rem;background:#101b2b;border:1px solid #485b73;border-radius:12px;box-shadow:0 14px 35px #0002}
-  .demo-header{display:flex;align-items:center;gap:.6rem;padding-bottom:.85rem;border-bottom:1px solid #34475d}
-  .demo-indicator{height:.5rem;width:.5rem;flex:none;background:var(--plate);border-radius:50%}
-  .demo-label{margin-left:auto;font:.65rem/1 var(--mono);letter-spacing:.08em;color:#aebed3;border:1px solid #4b6079;border-radius:4px;padding:.3rem .4rem}
-  .requests-heading{color:#c4d1e3;font:.76rem/1.45 var(--mono);font-weight:600}
+  .seo-requests{min-width:0;padding:1.25rem 1.4rem;background:#1b2a3c;border:1px solid #485b73;border-radius:12px}
+  .demo-header{display:flex;align-items:center;gap:.6rem;padding-bottom:.85rem;border-bottom:1px solid #455a72}
+  .demo-label{margin-left:auto;font:700 .65rem/1 var(--sans);letter-spacing:.08em;color:var(--plate)}
+  .requests-heading{color:var(--ink);font:700 .9rem/1.45 var(--sans)}
   .requests-viewport{--row-height:7.5rem;height:calc(var(--row-height)*2);overflow:hidden;mask-image:linear-gradient(to bottom,transparent,#000 12%,#000 88%,transparent);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 12%,#000 88%,transparent)}
   .requests-track{list-style:none;padding:0;margin:0;animation:requests-rise 22s linear infinite;will-change:transform}
-  .request{height:var(--row-height);display:flex;align-items:center;padding:1.2rem .65rem 1.2rem 0;color:var(--ink);font:500 clamp(.94rem,1.55vw,1.1rem)/1.6 var(--mono);letter-spacing:-.015em}
+  .request{height:var(--row-height);display:flex;align-items:center;padding:1.2rem .65rem 1.2rem 0;color:var(--ink);font:500 clamp(.98rem,1.6vw,1.16rem)/1.55 var(--sans);letter-spacing:-.01em}
+  .demo-note{border-top:1px solid #455a72;padding-top:.85rem;color:#bac9da;font-size:.76rem;line-height:1.5}
   .seo-requests:hover .requests-track{animation-play-state:paused}
   @keyframes requests-rise{
     0%,5%{transform:translateY(0)}
