@@ -6,17 +6,12 @@ const pageSettings = [
   { label: 'Canonical URL', value: 'Not set', updated: '/sleep-medicine/', kind: 'typing' },
   { label: 'Schema markup', value: '{"@context":"https://schema.org","@type":"Organization","name":"Example Medical Practice","url":"https://example.com"}', updated: '{"@context":"https://schema.org","@type":"MedicalClinic","name":"Example Medical Practice"}', code: true, kind: 'typing' },
 ];
-const siteSettings = [
-  { label: 'Posts indexing', options: ['Yes', 'No', 'Sitemap only'], kind: 'options' },
-  { label: 'Pages indexing', options: ['Yes', 'No', 'Sitemap only'], kind: 'options' },
-  { label: 'Sitemap', value: 'Enabled', updated: 'Enabled', kind: 'static' },
-  { label: '301 redirects', value: '/old-services/ → /services/', updated: '/sleep-clinic/ → /sleep-medicine/', kind: 'typing' },
-  { label: '404 monitor', value: 'Recent missing URLs', kind: '404' },
-];
-const missingUrls = [
-  { url: '/sleep-clinic/', hits: 42, last: 'Nov 18, 2026' },
-  { url: '/old-contact/', hits: 17, last: 'Nov 17, 2026' },
-  { url: '/sleep-test/', hits: 8, last: 'Nov 16, 2026' },
+const siteCapabilities = [
+  'Sitewide indexation controls',
+  'XML sitemap management',
+  '301 redirects',
+  '404 monitoring and reports',
+  'SEO configuration checks',
 ];
 ---
 <section class="hero wrap">
@@ -32,7 +27,7 @@ const missingUrls = [
         <a class="button" href="/wordpress/">For WordPress</a>
       </div>
     </div>
-    <div class="settings-example" data-settings-demo aria-label="Illustrative animation of SEO settings being edited and a sample 404 report">
+    <div class="settings-example" data-settings-demo aria-label="Illustrative page-level SEO editing demo and sitewide capabilities checklist">
       <div class="example-header">
         <p class="example-heading">What Bare Bones SEO helps you manage</p>
         <span class="demo-tag">EXAMPLE</span>
@@ -41,42 +36,34 @@ const missingUrls = [
         <button type="button" class="demo-tab is-selected" role="tab" id="page-tab" data-demo-tab="page" aria-controls="page-panel" aria-selected="true">Page settings</button>
         <button type="button" class="demo-tab" role="tab" id="site-tab" data-demo-tab="site" aria-controls="site-panel" aria-selected="false">Site settings</button>
       </div>
-      {[
-        { id: 'page', items: pageSettings, title: '/sleep-medicine/' },
-        { id: 'site', items: siteSettings, title: 'Sitewide SEO controls' }
-      ].map(({id,items,title}) => (
-        <div class="demo-panel" id={`${id}-panel`} role="tabpanel" aria-labelledby={`${id}-tab`} data-demo-panel={id} hidden={id !== 'page'}>
-          <p class="panel-context">{title}</p>
-          <dl class="settings-list">
-            {items.map(({label,value,updated,code,options,kind}) => (
-              <div class="setting" data-setting-row data-kind={kind}>
-                <dt>{label}</dt>
-                <dd>
-                  {options ? (
-                    <span class="index-options" aria-label="Example indexation choices">
-                      {options.map((option, i) => <span class:list={['index-option', { selected: i === 0 }]} data-index-option>{option}</span>)}
-                    </span>
-                  ) : (
-                    <span class:list={['setting-value', { 'schema-preview': code }]} data-setting-value data-initial={value} data-updated={updated} title={code ? value : undefined}>{value}</span>
-                  )}
-                </dd>
-              </div>
-            ))}
-          </dl>
-          {id === 'site' && (
-            <div class="missing-report" data-missing-report aria-hidden="true">
-              <div class="report-heading"><span>Recent 404 requests</span><span>Last seen</span></div>
-              {missingUrls.map(({url,hits,last}) => (
-                <div class="missing-entry" data-missing-entry>
-                  <div class="missing-path"><code>{url}</code><small>{hits} hits</small></div>
-                  <time>{last}</time>
-                </div>
-              ))}
+      <div class="demo-panel" id="page-panel" role="tabpanel" aria-labelledby="page-tab" data-demo-panel="page">
+        <p class="panel-context">/sleep-medicine/</p>
+        <dl class="settings-list">
+          {pageSettings.map(({label,value,updated,code,options,kind}) => (
+            <div class:list={['setting', {'schema-setting': code}]} data-setting-row data-kind={kind}>
+              <dt>{label}</dt>
+              <dd>
+                {options ? (
+                  <span class="index-options" aria-label="Example indexation choices">
+                    {options.map((option, i) => <span class:list={['index-option', { selected: i === 0 }]} data-index-option>{option}</span>)}
+                  </span>
+                ) : (
+                  <span class:list={['setting-value', { 'schema-preview': code }]} data-setting-value data-initial={value} data-updated={updated} title={code ? value : undefined}>{value}</span>
+                )}
+              </dd>
             </div>
-          )}
-        </div>
-      ))}
-      <p class="example-note">Sample settings and fictitious request logs—not live site data.</p>
+          ))}
+        </dl>
+      </div>
+      <div class="demo-panel" id="site-panel" role="tabpanel" aria-labelledby="site-tab" data-demo-panel="site" hidden>
+        <p class="panel-context">Sitewide SEO capabilities</p>
+        <ul class="site-capabilities">
+          {siteCapabilities.map(item => (
+            <li><span class="capability-check" aria-hidden="true">✓</span><span>{item}</span></li>
+          ))}
+        </ul>
+      </div>
+      <p class="example-note">Illustrative settings—not a live site report.</p>
     </div>
   </div>
 </section>
@@ -105,10 +92,6 @@ const missingUrls = [
           if (value) { value.textContent = value.dataset.initial || ''; value.classList.remove('is-typing'); }
           row.querySelectorAll<HTMLElement>('[data-index-option]').forEach((option, i) => option.classList.toggle('selected', i === 0));
         });
-        const log = panel.querySelector<HTMLElement>('[data-missing-report]');
-        log?.classList.remove('is-visible');
-        log?.setAttribute('aria-hidden', 'true');
-        panel.querySelectorAll<HTMLElement>('[data-missing-entry]').forEach(entry => entry.classList.remove('is-visible'));
       });
       tabs.forEach(tab => {
         const selected = tab.dataset.demoTab === scope;
@@ -124,8 +107,13 @@ const missingUrls = [
     async function play(token: number) {
       const panel = demo!.querySelector<HTMLElement>(`[data-demo-panel="${current}"]`);
       if (!panel || !stillCurrent(token)) return;
+      if (current === 'site') {
+        await delay(4800);
+        if (stillCurrent(token)) select('page');
+        return;
+      }
       const rows = Array.from(panel.querySelectorAll<HTMLElement>('[data-setting-row]'));
-      await delay(350);
+      await delay(600);
       for (const row of rows) {
         if (!stillCurrent(token)) return;
         rows.forEach(r => r.classList.remove('is-editing'));
@@ -135,19 +123,9 @@ const missingUrls = [
           const choices = Array.from(row.querySelectorAll<HTMLElement>('[data-index-option]'));
           for (const choice of [1, 2, 0]) {
             choices.forEach((opt, i) => opt.classList.toggle('selected', i === choice));
-            await delay(430);
+            await delay(650);
             if (!stillCurrent(token)) return;
           }
-        } else if (kind === '404') {
-          const log = panel.querySelector<HTMLElement>('[data-missing-report]');
-          log?.classList.add('is-visible');
-          log?.setAttribute('aria-hidden', 'false');
-          for (const entry of Array.from(panel.querySelectorAll<HTMLElement>('[data-missing-entry]'))) {
-            entry.classList.add('is-visible');
-            await delay(420);
-            if (!stillCurrent(token)) return;
-          }
-          await delay(1100);
         } else if (kind === 'typing') {
           const value = row.querySelector<HTMLElement>('[data-setting-value]');
           if (value) {
@@ -156,12 +134,12 @@ const missingUrls = [
             value.classList.add('is-typing');
             for (let i = before.length; i >= 0; i -= 4) {
               value.textContent = before.slice(0, i);
-              await delay(22);
+              await delay(38);
               if (!stillCurrent(token)) return;
             }
             for (let i = 2; i <= after.length; i += 2) {
               value.textContent = after.slice(0, i);
-              await delay(29);
+              await delay(52);
               if (!stillCurrent(token)) return;
             }
             value.textContent = after;
@@ -172,10 +150,10 @@ const missingUrls = [
         }
         if (!stillCurrent(token)) return;
         row.classList.add('is-updated');
-        await delay(380);
+        await delay(620);
       }
       rows.forEach(row => row.classList.remove('is-editing'));
-      await delay(1800);
+      await delay(2400);
       if (stillCurrent(token)) select(current === 'page' ? 'site' : 'page');
     }
     tabs.forEach(tab => {
@@ -216,6 +194,13 @@ const missingUrls = [
   .demo-panel[hidden]{display:none}
   .panel-context{font:.75rem/1.5 var(--mono);color:#b9c8db;margin-bottom:.45rem}
   .settings-list{margin:0;padding:0}
+  .site-capabilities{list-style:none;padding:.3rem 0;margin:0;display:grid;gap:.25rem}
+  .site-capabilities li{display:flex;align-items:center;gap:.8rem;padding:.8rem .35rem;border-bottom:1px solid var(--line);font-size:.9rem;color:var(--ink-soft)}
+  .site-capabilities li:last-child{border:0}
+  .capability-check{flex:none;display:grid;place-items:center;background:#354b65;color:var(--plate);border-radius:50%;width:1.4rem;height:1.4rem;font-weight:800}
+  .schema-setting{grid-template-columns:minmax(0,1fr);gap:.4rem;padding-block:1rem}
+  .schema-setting dd{padding:.65rem .75rem;background:#142032;border:1px solid #43576e;border-radius:6px;min-height:4.2rem}
+  .schema-preview{display:block;width:100%;white-space:normal;overflow-wrap:anywhere;font:400 .73rem/1.6 var(--mono);max-height:6.5rem;overflow:hidden}
   .setting{display:grid;grid-template-columns:minmax(6.6rem,.7fr) minmax(0,1.3fr);gap:.6rem;align-items:baseline;padding:.55rem .45rem;margin-inline:-.45rem;border-bottom:1px solid var(--line);border-radius:5px;transition:background-color .25s ease,box-shadow .25s ease}
   .setting:last-child{border-bottom:0}
   .setting.is-editing{background:#33445b;box-shadow:inset 3px 0 var(--plate)}
@@ -223,23 +208,11 @@ const missingUrls = [
   .setting dt{color:var(--ink-soft);font-size:.82rem}
   .setting dd{margin:0;min-width:0;color:var(--ink);font-size:.85rem;font-weight:600;overflow-wrap:anywhere}
   .setting-value.is-typing::after{content:' ';display:inline-block;height:1em;border-right:2px solid var(--plate);margin-left:2px;vertical-align:-.15em}
-  .schema-preview{display:block;width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font:inherit;font-family:var(--mono);font-size:.76rem}
   .index-options{display:flex;flex-wrap:nowrap;gap:.25rem;white-space:nowrap}
   .index-option{border:1px solid #64758a;border-radius:4px;padding:.13rem .32rem;font-size:.68rem;color:var(--ink-soft);font-weight:550;transition:background-color .2s,border-color .2s,color .2s}
   .index-option.selected{background:var(--plate);color:#111827;border-color:var(--plate);font-weight:750}
-  .missing-report{max-height:0;overflow:hidden;opacity:0;transition:max-height .35s ease,opacity .3s ease;border-top:0 solid var(--line)}
-  .missing-report.is-visible{max-height:16rem;opacity:1;border-top-width:1px;margin-top:.8rem;padding-top:.75rem}
-  .report-heading,.missing-entry{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:.7rem;align-items:center}
-  .report-heading{font-size:.7rem;color:#b6c4d8;margin-bottom:.35rem;font-weight:700}
-  .missing-entry{padding:.43rem .5rem;border-radius:5px;opacity:0;transform:translateY(5px);transition:opacity .25s,transform .25s;font-size:.75rem}
-  .missing-entry.is-visible{opacity:1;transform:translateY(0)}
-  .missing-entry:nth-of-type(even){background:#2a3d52}
-  .missing-path{display:flex;flex-direction:column;min-width:0}
-  .missing-path code{font:.77rem/1.3 var(--mono);overflow:hidden;text-overflow:ellipsis}
-  .missing-path small{font-size:.7rem;color:var(--plate)}
-  .missing-entry time{font-size:.7rem;color:var(--ink-soft)}
   .example-note{margin-top:1rem;color:var(--ink-soft);font-size:.75rem;line-height:1.5}
   @media(max-width:53rem){.hero-layout{grid-template-columns:1fr;gap:2.5rem}.settings-example{max-width:38rem}}
-  @media(max-width:31rem){.index-options{gap:.15rem}.index-option{font-size:.62rem;padding:.12rem .2rem}.setting{grid-template-columns:minmax(6.1rem,.85fr) minmax(0,1.15fr);gap:.4rem}}
-  @media(prefers-reduced-motion:reduce){.setting,.missing-report,.missing-entry,.index-option{transition:none}.missing-report{max-height:none;opacity:1;margin-top:.8rem;padding-top:.75rem;border-top:1px solid var(--line)}.missing-entry{opacity:1;transform:none}}
+  @media(max-width:31rem){.index-options{gap:.15rem}.index-option{font-size:.62rem;padding:.12rem .2rem}.setting:not(.schema-setting){grid-template-columns:minmax(6.1rem,.85fr) minmax(0,1.15fr);gap:.4rem}}
+  @media(prefers-reduced-motion:reduce){.setting,.index-option{transition:none}}
 </style>
