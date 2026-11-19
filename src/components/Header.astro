@@ -1,32 +1,56 @@
 ---
 import Skull from './Skull.astro';
 import { site } from '../data/site.js';
+const path = Astro.url.pathname;
+const active = (url) => url === '/' ? path === '/' : path.startsWith(url);
 ---
-<header class="wrap">
+<input class="sidebar-toggle" type="checkbox" id="sidebar-toggle" aria-label="Toggle navigation" />
+<label class="mobile-toggle" for="sidebar-toggle" aria-controls="site-sidebar"><span aria-hidden="true">☰</span><span>Menu</span></label>
+<label class="sidebar-backdrop" for="sidebar-toggle" aria-label="Close navigation"></label>
+<aside class="site-sidebar" id="site-sidebar" aria-label="Site navigation">
   <a class="mark" href="/" aria-label={`${site.name} home`}>
     <span class="brand-skull"><Skull size={26} /></span>
     <span>{site.name}</span>
   </a>
-  <nav aria-label="Main">
-    <a href="/">Home</a>
-    <a href="/wordpress/">WordPress</a>
-    <a href="/ai-sites/">AI sites</a>
+  <nav class="side-nav" aria-label="Main">
+    <span class="nav-caption">Workspace</span>
+    <a class:list={['side-link', { active: active('/') }]} href="/" aria-current={active('/') ? 'page' : undefined}><span class="nav-icon" aria-hidden="true">⌂</span> Overview</a>
+    <span class="nav-caption product-caption">Products</span>
+    <a class:list={['side-link', { active: active('/ai-sites/') }]} href="/ai-sites/" aria-current={active('/ai-sites/') ? 'page' : undefined}><span class="nav-icon" aria-hidden="true">⌘</span><span>SEO for AI Sites<small>AI &amp; static websites</small></span></a>
+    <a class:list={['side-link', { active: active('/wordpress/') }]} href="/wordpress/" aria-current={active('/wordpress/') ? 'page' : undefined}><span class="nav-icon" aria-hidden="true">W</span><span>SEO for WordPress<small>WordPress plugin</small></span></a>
+    <span class="nav-caption product-caption">Project</span>
+    <a class:list={['side-link', { active: active('/philosophy/') }]} href="/philosophy/" aria-current={active('/philosophy/') ? 'page' : undefined}>Philosophy</a>
+    <a class:list={['side-link', { active: active('/about/') }]} href="/about/" aria-current={active('/about/') ? 'page' : undefined}>About</a>
   </nav>
-</header>
-
+  <div class="sidebar-bottom"><span class="free-dot" aria-hidden="true"></span> Free &amp; open source</div>
+</aside>
 <style>
-  header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1.25rem; margin-bottom: clamp(1.25rem, 2.5vw, 2rem); border-bottom: 1px solid var(--line); }
-  .mark { display: inline-flex; align-items: center; gap: .65rem; text-decoration: none; font-family: var(--sans); font-weight: 800; font-size: 1.05rem; letter-spacing: -.035em; transition: color .15s; }
-  .mark:hover, .mark:focus-visible { color: var(--plate); }
-  .brand-skull{display:inline-grid;place-items:center;width:2.1rem;height:2.1rem;flex:none;background:#e8edf3;color:#172233;border-radius:50%;transition:background-color .15s, color .15s; }
-  .mark:hover .brand-skull, .mark:focus-visible .brand-skull { background: var(--plate); color: #172233; }
+  .site-sidebar{position:fixed;z-index:50;inset:0 auto 0 0;width:var(--sidebar-width);padding:1.65rem 1rem 1.25rem;background:#111a27;border-right:1px solid #344457;display:flex;flex-direction:column;overflow-y:auto}
+  .mark{display:flex;gap:.65rem;align-items:center;padding:.2rem .5rem 1.8rem;text-decoration:none;font-weight:800;font-size:1.05rem;letter-spacing:-.035em;line-height:1.25}
+  .mark:hover,.mark:focus-visible{color:var(--plate)}
+  .brand-skull{display:grid;place-items:center;width:2.35rem;height:2.35rem;flex:none;background:#e8edf3;color:#172233;border-radius:50%;transition:background .15s}
+  .mark:hover .brand-skull,.mark:focus-visible .brand-skull{background:var(--plate)}
   .brand-skull :global(svg){width:1.18rem;height:1.42rem}
-  nav { display: flex; flex-wrap: nowrap; gap: clamp(.6rem, 1.8vw, 1.25rem); align-items: center; }
-  nav a { display: inline-block; font-size: .85rem; line-height: 1.4; white-space: nowrap; text-decoration: none; font-weight: 650; color: var(--ink-soft); padding: .4rem 0; transition: color .15s; }
-  nav a:hover, nav a:focus-visible { color: var(--plate); }
-  @media(max-width: 35rem) {
-    header { flex-wrap: wrap; row-gap: .65rem; }
-    nav { width: 100%; gap: 1.2rem; }
-    .mark { font-size: 1rem; }
+  .side-nav{display:flex;flex-direction:column;gap:.3rem}
+  .nav-caption{padding:.5rem .85rem;color:#9daec4;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;font-weight:750}
+  .product-caption{margin-top:1.4rem}
+  .side-link{display:flex;align-items:center;gap:.75rem;min-height:2.75rem;border:1px solid transparent;border-radius:8px;padding:.6rem .8rem;color:var(--ink-soft);font-size:.91rem;font-weight:620;text-decoration:none;line-height:1.35;transition:background .15s,color .15s}
+  .side-link small{display:block;color:#adbbce;font-size:.75rem;font-weight:450;margin-top:.18rem}
+  .side-link:hover{background:#243347;color:var(--ink)}
+  .side-link.active{background:#293a50;color:var(--plate);border-color:#53647a}
+  .side-link.active small{color:#dce4ee}
+  .nav-icon{display:grid;place-items:center;width:1.5rem;height:1.5rem;flex:none;font-size:1.1rem;font-weight:750}
+  .sidebar-bottom{margin-top:auto;border-top:1px solid #344457;padding:1.3rem .8rem .2rem;color:#bdcadb;font-size:.8rem}
+  .free-dot{display:inline-block;width:.5rem;height:.5rem;margin-right:.45rem;border-radius:50%;background:var(--plate)}
+  .mobile-toggle,.sidebar-toggle,.sidebar-backdrop{display:none}
+  @media(max-width:61.99rem){
+    .mobile-toggle{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:.55rem;width:100%;padding:.85rem 1.25rem;background:#111a27;border-bottom:1px solid #344457;cursor:pointer;font-weight:700}
+    .mobile-toggle span:first-child{font-size:1.25rem;line-height:1}
+    .site-sidebar{width:min(18rem,85vw);transform:translateX(-102%);transition:transform .2s ease;box-shadow:0 0 2rem #0004}
+    .sidebar-toggle:checked~.site-sidebar{transform:translateX(0)}
+    .sidebar-toggle:checked~.sidebar-backdrop{display:block;position:fixed;inset:0;z-index:45;background:#0009}
+    .sidebar-toggle{position:absolute;opacity:0;width:1px;height:1px}
+    .sidebar-toggle:focus-visible~.mobile-toggle{outline:3px solid var(--plate);outline-offset:-3px}
   }
+  @media(prefers-reduced-motion:reduce){.site-sidebar{transition:none}}
 </style>
