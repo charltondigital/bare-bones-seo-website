@@ -1,13 +1,13 @@
 ---
 const settings = [
-  { label: 'Page title', value: 'Sleep Medicine Services' },
-  { label: 'Description', value: 'Sleep testing and treatment' },
-  { label: 'Search indexing', value: 'Allowed', good: true },
-  { label: 'Sitemap', value: 'Included', good: true },
-  { label: 'Canonical URL', value: '/sleep-medicine/' },
-  { label: 'Schema markup', value: '{"@context":"https://schema.org","@type":"Organization","name":"Example Medical Practice","url":"https://example.com"}', code: true },
-  { label: '301 redirects', value: '/sleep-clinic/ → /sleep-medicine/' },
-  { label: '404 logging', value: 'Broken URLs tracked' },
+  { label: 'Page title', value: 'Services', updated: 'Sleep Medicine Services' },
+  { label: 'Description', value: 'Learn more about our services', updated: 'Sleep testing and treatment' },
+  { label: 'Search indexing', value: 'Review', updated: 'Allowed', good: true },
+  { label: 'Sitemap', value: 'Review', updated: 'Included', good: true },
+  { label: 'Canonical URL', value: 'Not set', updated: '/sleep-medicine/' },
+  { label: 'Schema markup', value: 'Not set', updated: '{"@context":"https://schema.org","@type":"Organization","name":"Example Medical Practice","url":"https://example.com"}', code: true },
+  { label: '301 redirects', value: 'None', updated: '/sleep-clinic/ → /sleep-medicine/' },
+  { label: '404 logging', value: 'Off', updated: 'Broken URLs tracked' },
 ];
 ---
 <section class="hero wrap">
@@ -23,20 +23,63 @@ const settings = [
         <a class="button" href="/wordpress/">For WordPress</a>
       </div>
     </div>
-    <div class="settings-example" aria-label="Illustration of technical SEO settings and tools">
+    <div class="settings-example" data-settings-demo aria-label="Animated illustration of example technical SEO settings being reviewed and updated">
       <p class="example-heading">What Bare Bones SEO helps you manage</p>
       <dl class="settings-list">
-        {settings.map(({label,value,good,code}) => (
-          <div class="setting">
+        {settings.map(({label,value,updated,good,code}) => (
+          <div class="setting" data-setting-row>
             <dt>{label}</dt>
-            <dd>{code ? <code class="schema-preview" title={value}>{value}</code> : value}{good && <span class="check" aria-label="Enabled">✓</span>}</dd>
+            <dd><span class:list={[{ "schema-preview": code }]} data-setting-value data-initial={value} data-updated={updated} title={code ? updated : undefined}>{value}</span>{good && <span class="check" aria-hidden="true" hidden>✓</span>}</dd>
           </div>
         ))}
       </dl>
-      <p class="example-note">Example settings—not a live site report.</p>
+      <p class="example-note">Illustrative walkthrough—not a live site report.</p>
     </div>
   </div>
 </section>
+
+<script>
+  const demo = document.querySelector<HTMLElement>('[data-settings-demo]');
+  if (demo && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const rows = Array.from(demo.querySelectorAll<HTMLElement>('[data-setting-row]'));
+    let index = 0;
+    let timer: number | undefined;
+    const reset = () => {
+      rows.forEach((row) => {
+        row.classList.remove('is-editing', 'is-updated');
+        const value = row.querySelector<HTMLElement>('[data-setting-value]');
+        if (value) value.textContent = value.dataset.initial || '';
+        const check = row.querySelector<HTMLElement>('.check');
+        if (check) check.hidden = true;
+      });
+      index = 0;
+    };
+    const advance = () => {
+      rows.forEach((row) => row.classList.remove('is-editing'));
+      if (index >= rows.length) {
+        timer = window.setTimeout(() => { reset(); schedule(); }, 2200);
+        return;
+      }
+      const row = rows[index++];
+      row.classList.add('is-editing');
+      timer = window.setTimeout(() => {
+        const value = row.querySelector<HTMLElement>('[data-setting-value]');
+        if (value) value.textContent = value.dataset.updated || '';
+        const check = row.querySelector<HTMLElement>('.check');
+        if (check) check.hidden = false;
+        row.classList.add('is-updated');
+        timer = window.setTimeout(advance, 650);
+      }, 800);
+    };
+    const schedule = () => { timer = window.setTimeout(advance, 850); };
+    const stop = () => { if (timer !== undefined) window.clearTimeout(timer); timer = undefined; };
+    const resume = () => { if (!document.hidden && !demo.matches(':hover') && timer === undefined) schedule(); };
+    demo.addEventListener('mouseenter', stop);
+    demo.addEventListener('mouseleave', resume);
+    document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else resume(); });
+    schedule();
+  }
+</script>
 
 <style>
   .hero{padding-block:clamp(4.5rem,7vw,6rem)}
@@ -53,6 +96,11 @@ const settings = [
   .settings-list{margin:0;padding:0}
   .setting{display:grid;grid-template-columns:minmax(7.5rem,.85fr) minmax(0,1.15fr);gap:1rem;align-items:baseline;padding:.55rem 0;border-bottom:1px solid var(--line)}
   .setting:last-child{border-bottom:0}
+  .setting{position:relative;transition:background-color .25s ease,box-shadow .25s ease;padding-inline:.45rem;margin-inline:-.45rem;border-radius:5px}
+  .setting.is-editing{background:#33445b;box-shadow:inset 3px 0 var(--plate)}
+  .setting.is-updated dt{color:#f2d68e}
+  .check[hidden]{display:none}
+  @media(prefers-reduced-motion:reduce){.setting{transition:none}}
   .setting dt{color:var(--ink-soft);font-size:.82rem}
   .setting dd{margin:0;color:var(--ink);font-size:.85rem;font-weight:600;overflow-wrap:anywhere}
   .schema-preview{display:block;width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font:inherit;font-family:var(--mono);font-size:.76rem}
