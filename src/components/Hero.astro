@@ -2,9 +2,9 @@
 const pageSettings = [
   { label: 'Page title', value: 'Services', updated: 'Sleep Medicine Services', kind: 'typing' },
   { label: 'Description', value: 'Learn more about our services', updated: 'Sleep testing and treatment in Arizona', kind: 'typing' },
-  { label: 'Indexation', options: ['Yes', 'No', 'Sitemap only'], kind: 'options' },
-  { label: 'Canonical URL', value: 'Not set', updated: '/sleep-medicine/', kind: 'typing' },
-  { label: 'Schema markup', value: '{"@context":"https://schema.org","@type":"Organization","name":"Example Medical Practice","url":"https://example.com"}', updated: '{"@context":"https://schema.org","@type":"MedicalClinic","name":"Example Medical Practice"}', code: true, kind: 'typing' },
+  { label: 'Indexation', options: ['Yes', 'No', 'Sitemap only'], kind: 'static' },
+  { label: 'Canonical URL', value: '/sleep-medicine/', updated: '/sleep-medicine/', kind: 'static' },
+  { label: 'Schema markup', value: '{"@context":"https://schema.org","@type":"MedicalClinic","name":"Example Medical Practice"}', updated: '{"@context":"https://schema.org","@type":"MedicalClinic","name":"Example Medical Practice"}', code: true, kind: 'static' },
 ];
 const siteCapabilities = [
   'Sitewide indexation controls',
@@ -73,24 +73,28 @@ const siteCapabilities = [
   if (demo) {
     const tabs = Array.from(demo.querySelectorAll<HTMLButtonElement>('[data-demo-tab]'));
     const panels = Array.from(demo.querySelectorAll<HTMLElement>('[data-demo-panel]'));
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let current: 'page' | 'site' = 'page';
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let generation = 0;
-    let nextTimer: number | undefined;
+    let pending: number | undefined;
+    let current: 'page' | 'site' = 'page';
 
-    const delay = (ms: number) => new Promise<void>(resolve => { nextTimer = window.setTimeout(resolve, ms); });
-    const stillCurrent = (token: number) => token === generation && !document.hidden;
-    const activate = (scope: 'page' | 'site') => {
+    const pause = (ms: number) => new Promise<void>(resolve => {
+      pending = window.setTimeout(() => { pending = undefined; resolve(); }, ms);
+    });
+    const currentRun = (token: number) => token === generation && !document.hidden;
+
+    const select = (scope: 'page' | 'site') => {
       current = scope;
       generation++;
       panels.forEach(panel => {
-        const visible = panel.dataset.demoPanel === scope;
-        panel.hidden = !visible;
+        panel.hidden = panel.dataset.demoPanel !== scope;
         panel.querySelectorAll<HTMLElement>('[data-setting-row]').forEach(row => {
-          row.classList.remove('is-editing', 'is-updated');
+          row.classList.remove('is-editing');
           const value = row.querySelector<HTMLElement>('[data-setting-value]');
-          if (value) { value.textContent = value.dataset.initial || ''; value.classList.remove('is-typing'); }
-          row.querySelectorAll<HTMLElement>('[data-index-option]').forEach((option, i) => option.classList.toggle('selected', i === 0));
+          if (value) {
+            value.textContent = value.dataset.initial || '';
+            value.classList.remove('is-typing');
+          }
         });
       });
       tabs.forEach(tab => {
@@ -99,78 +103,57 @@ const siteCapabilities = [
         tab.setAttribute('aria-selected', String(selected));
         tab.tabIndex = selected ? 0 : -1;
       });
+      // Only the two metadata fields animate. Site settings remain a static checklist.
+      if (scope === 'page' && !reducedMotion && !document.hidden) void play(generation);
     };
-    const select = (scope: 'page' | 'site') => {
-      activate(scope);
-      if (!reduceMotion) void play(generation);
-    };
+
     async function play(token: number) {
-      const panel = demo!.querySelector<HTMLElement>(`[data-demo-panel="${current}"]`);
-      if (!panel || !stillCurrent(token)) return;
-      if (current === 'site') {
-        await delay(4800);
-        if (stillCurrent(token)) select('page');
-        return;
-      }
-      const rows = Array.from(panel.querySelectorAll<HTMLElement>('[data-setting-row]'));
-      await delay(600);
-      for (const row of rows) {
-        if (!stillCurrent(token)) return;
-        rows.forEach(r => r.classList.remove('is-editing'));
+      const panel = demo!.querySelector<HTMLElement>('[data-demo-panel="page"]');
+      const fields = Array.from(panel?.querySelectorAll<HTMLElement>('[data-kind="typing"]') || []);
+      await pause(1600);
+      if (!currentRun(token) || current !== 'page') return;
+      for (const row of fields) {
+        if (!currentRun(token) || current !== 'page') return;
+        const value = row.querySelector<HTMLElement>('[data-setting-value]');
+        if (!value) continue;
         row.classList.add('is-editing');
-        const kind = row.dataset.kind;
-        if (kind === 'options') {
-          const choices = Array.from(row.querySelectorAll<HTMLElement>('[data-index-option]'));
-          for (const choice of [1, 2, 0]) {
-            choices.forEach((opt, i) => opt.classList.toggle('selected', i === choice));
-            await delay(650);
-            if (!stillCurrent(token)) return;
-          }
-        } else if (kind === 'typing') {
-          const value = row.querySelector<HTMLElement>('[data-setting-value]');
-          if (value) {
-            const before = value.dataset.initial || '';
-            const after = value.dataset.updated || '';
-            value.classList.add('is-typing');
-            for (let i = before.length; i >= 0; i -= 4) {
-              value.textContent = before.slice(0, i);
-              await delay(38);
-              if (!stillCurrent(token)) return;
-            }
-            for (let i = 2; i <= after.length; i += 2) {
-              value.textContent = after.slice(0, i);
-              await delay(52);
-              if (!stillCurrent(token)) return;
-            }
-            value.textContent = after;
-            value.classList.remove('is-typing');
-          }
-        } else {
-          await delay(650);
+        await pause(600);
+        if (!currentRun(token)) return;
+        value.classList.add('is-typing');
+        const updated = value.dataset.updated || '';
+        value.textContent = '';
+        for (let i = 1; i <= updated.length; i++) {
+          value.textContent = updated.slice(0, i);
+          await pause(95);
+          if (!currentRun(token)) return;
         }
-        if (!stillCurrent(token)) return;
-        row.classList.add('is-updated');
-        await delay(620);
+        value.classList.remove('is-typing');
+        await pause(1800);
+        if (!currentRun(token)) return;
+        row.classList.remove('is-editing');
+        await pause(900);
       }
-      rows.forEach(row => row.classList.remove('is-editing'));
-      await delay(2400);
-      if (stillCurrent(token)) select(current === 'page' ? 'site' : 'page');
+      await pause(6500);
+      if (currentRun(token) && current === 'page') select('page');
     }
+
     tabs.forEach(tab => {
       tab.addEventListener('click', () => select(tab.dataset.demoTab as 'page' | 'site'));
-      tab.addEventListener('keydown', (event) => {
-        if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
+      tab.addEventListener('keydown', event => {
+        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
         event.preventDefault();
         const other = tabs.find(candidate => candidate !== tab);
-        other?.focus();
-        if (other) select(other.dataset.demoTab as 'page' | 'site');
+        if (other) {
+          other.focus();
+          select(other.dataset.demoTab as 'page' | 'site');
+        }
       });
     });
     document.addEventListener('visibilitychange', () => {
-      if (document.hidden) generation++;
-      else if (!reduceMotion) select(current);
+      generation++;
+      if (!document.hidden && current === 'page' && !reducedMotion) select('page');
     });
-    if (!reduceMotion) void play(generation);
+    if (!reducedMotion) void play(generation);
   }
 </script>
 
@@ -198,13 +181,12 @@ const siteCapabilities = [
   .site-capabilities li{display:flex;align-items:center;gap:.8rem;padding:.8rem .35rem;border-bottom:1px solid var(--line);font-size:.9rem;color:var(--ink-soft)}
   .site-capabilities li:last-child{border:0}
   .capability-check{flex:none;display:grid;place-items:center;background:#354b65;color:var(--plate);border-radius:50%;width:1.4rem;height:1.4rem;font-weight:800}
-  .schema-setting{grid-template-columns:minmax(0,1fr);gap:.4rem;padding-block:1rem}
   .schema-setting dd{padding:.65rem .75rem;background:#142032;border:1px solid #43576e;border-radius:6px;min-height:4.2rem}
   .schema-preview{display:block;width:100%;white-space:normal;overflow-wrap:anywhere;font:400 .73rem/1.6 var(--mono);max-height:6.5rem;overflow:hidden}
-  .setting{display:grid;grid-template-columns:minmax(6.6rem,.7fr) minmax(0,1.3fr);gap:.6rem;align-items:baseline;padding:.55rem .45rem;margin-inline:-.45rem;border-bottom:1px solid var(--line);border-radius:5px;transition:background-color .25s ease,box-shadow .25s ease}
+  .setting{display:grid;grid-template-columns:minmax(6.6rem,.7fr) minmax(0,1.3fr);gap:.6rem;align-items:baseline;padding:.65rem .45rem;margin-inline:-.45rem;border-bottom:1px solid var(--line);border-radius:5px;transition:background-color .4s ease,box-shadow .4s ease}
   .setting:last-child{border-bottom:0}
-  .setting.is-editing{background:#33445b;box-shadow:inset 3px 0 var(--plate)}
-  .setting.is-updated dt{color:#f2d68e}
+  .setting.schema-setting{grid-template-columns:minmax(0,1fr);gap:.5rem;padding-block:1rem}
+  .setting.is-editing{background:#2b3b50;box-shadow:inset 2px 0 var(--plate)}
   .setting dt{color:var(--ink-soft);font-size:.82rem}
   .setting dd{margin:0;min-width:0;color:var(--ink);font-size:.85rem;font-weight:600;overflow-wrap:anywhere}
   .setting-value.is-typing::after{content:' ';display:inline-block;height:1em;border-right:2px solid var(--plate);margin-left:2px;vertical-align:-.15em}
