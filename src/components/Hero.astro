@@ -5,7 +5,7 @@ const settings = [
   { label: 'Search indexing', value: 'Allowed', good: true },
   { label: 'Sitemap', value: 'Included', good: true },
   { label: 'Canonical URL', value: '/sleep-medicine/' },
-  { label: 'Schema markup', value: 'Organization JSON-LD' },
+  { label: 'Schema markup', value: '{"@context":"https://schema.org","@type":"Organization","name":"Example Medical Practice","url":"https://example.com"}', code: true },
   { label: '301 redirects', value: '/old-page/ → /new-page/' },
   { label: '404 logging', value: 'Broken URLs tracked' },
 ];
@@ -26,10 +26,10 @@ const settings = [
     <div class="settings-example" aria-label="Illustration of technical SEO settings and tools">
       <p class="example-heading">What Bare Bones SEO helps you manage</p>
       <dl class="settings-list">
-        {settings.map(({label,value,good}) => (
+        {settings.map(({label,value,good,code}) => (
           <div class="setting">
             <dt>{label}</dt>
-            <dd>{value}{good && <span class="check" aria-label="Enabled">✓</span>}</dd>
+            <dd>{code ? <code class="schema-preview" title={value}>{value}</code> : value}{good && <span class="check" aria-label="Enabled">✓</span>}</dd>
           </div>
         ))}
       </dl>
@@ -55,6 +55,7 @@ const settings = [
   .setting:last-child{border-bottom:0}
   .setting dt{color:var(--ink-soft);font-size:.82rem}
   .setting dd{margin:0;color:var(--ink);font-size:.85rem;font-weight:600;overflow-wrap:anywhere}
+  .schema-preview{display:block;width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font:inherit;font-family:var(--mono);font-size:.76rem}
   .check{display:inline-block;margin-left:.5rem;color:var(--plate);font-size:.95rem}
   .example-note{margin-top:1rem;color:var(--ink-soft);font-size:.75rem;line-height:1.5}
   @media(max-width:53rem){.hero-layout{grid-template-columns:1fr;gap:2.5rem}.settings-example{max-width:38rem}}
