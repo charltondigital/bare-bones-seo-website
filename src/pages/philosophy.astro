@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import { site } from '../data/site.js';
 ---
 <Base title="Our Philosophy | Bare Bones SEO" description="Bare Bones SEO is an open-source effort to give SEO practitioners and site owners more visibility, control, and consistency with less busywork.">
-  <section class="wrap philosophy-page">
+  <section class="wrap philosophy-page page-intro">
     <h1>Better tools. More control for SEOs.</h1>
     <p class="lede">Bare Bones SEO exists to make technical SEO easier to manage—not to replace the judgment of the people doing the work.</p>
     <p>SEO practitioners and site owners should be able to see a website's settings, change them confidently, and trust that those decisions remain consistent. They shouldn't need a costly, heavyweight suite just to manage the essentials.</p>
@@ -20,7 +20,7 @@ import { site } from '../data/site.js';
   </section>
 </Base>
 <style>
-  .philosophy-page{max-width:52rem;padding-block:var(--space-5) var(--space-6)}
+  .philosophy-page{max-width:52rem;padding-bottom:var(--space-6)}
   h1{font-size:clamp(2.1rem,4.4vw,3.4rem);line-height:1.14;letter-spacing:-.035em}
   h2{font-size:clamp(1.5rem,2.7vw,2rem);margin-top:var(--space-4);margin-bottom:var(--space-2)}
   p{margin-top:var(--space-2);color:var(--ink-soft)}
