@@ -21,8 +21,12 @@ import { site } from '../data/site.js';
   .brand-skull{display:inline-grid;place-items:center;width:2.1rem;height:2.1rem;flex:none;background:#e8edf3;color:#172233;border-radius:50%;transition:color .15s; }
   .mark:hover .brand-skull, .mark:focus-visible .brand-skull { color: var(--plate); }
   .brand-skull :global(svg){width:1.18rem;height:1.42rem}
-  nav { display: flex; flex-wrap: wrap; gap: .5rem .75rem; align-items: center; }
-  nav a { font-size: .85rem; white-space: nowrap; text-decoration: none; font-weight: 650; color: var(--ink-soft); padding: .5rem .8rem; border-radius: 6px; transition: background-color .15s, color .15s; }
-  nav a:hover { background: var(--surface-strong); color: var(--ink); }
-  @media(max-width: 27rem) { .mark { font-size: 1rem; } nav { gap: .5rem; } nav a { font-size: .83rem; } }
+  nav { display: flex; flex-wrap: nowrap; gap: clamp(.6rem, 1.8vw, 1.25rem); align-items: center; }
+  nav a { display: inline-block; font-size: .85rem; line-height: 1.4; white-space: nowrap; text-decoration: none; font-weight: 650; color: var(--ink-soft); padding: .4rem 0; transition: color .15s; }
+  nav a:hover, nav a:focus-visible { color: var(--plate); }
+  @media(max-width: 35rem) {
+    header { flex-wrap: wrap; row-gap: .65rem; }
+    nav { width: 100%; gap: 1.2rem; }
+    .mark { font-size: 1rem; }
+  }
 </style>
