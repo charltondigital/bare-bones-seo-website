@@ -13,16 +13,14 @@ const active = (url) => url === '/' ? path === '/' : path.startsWith(url);
     <span>{site.name}</span>
   </a>
   <nav class="side-nav" aria-label="Main">
-    <span class="nav-caption">Workspace</span>
-    <a class:list={['side-link simple-link', { active: active('/') }]} href="/" aria-current={active('/') ? 'page' : undefined}><span class="nav-icon" aria-hidden="true">⌂</span> Overview</a>
-    <span class="nav-caption product-caption">Products</span>
     <a class:list={['side-link', { active: active('/ai-sites/') }]} href="/ai-sites/" aria-current={active('/ai-sites/') ? 'page' : undefined}><span class="nav-icon product-skull" aria-hidden="true"><Skull size={20} /></span><span>SEO for AI Sites<small>AI &amp; static websites</small></span></a>
     <a class:list={['side-link', { active: active('/wordpress/') }]} href="/wordpress/" aria-current={active('/wordpress/') ? 'page' : undefined}><span class="nav-icon product-skull" aria-hidden="true"><Skull size={20} /></span><span>SEO for WordPress<small>WordPress plugin</small></span></a>
-    <span class="nav-caption product-caption">Project</span>
-    <a class:list={['side-link simple-link', { active: active('/philosophy/') }]} href="/philosophy/" aria-current={active('/philosophy/') ? 'page' : undefined}>Philosophy</a>
-    <a class:list={['side-link simple-link', { active: active('/about/') }]} href="/about/" aria-current={active('/about/') ? 'page' : undefined}>About</a>
-  </nav>
-  <div class="sidebar-bottom"><span class="free-dot" aria-hidden="true"></span> Free &amp; open source</div>
+    <div class="site-links">
+      <a class:list={['plain-link', { active: active('/') }]} href="/" aria-current={active('/') ? 'page' : undefined}>Overview</a>
+      <a class:list={['plain-link', { active: active('/philosophy/') }]} href="/philosophy/" aria-current={active('/philosophy/') ? 'page' : undefined}>Our philosophy</a>
+      <a class:list={['plain-link', { active: active('/about/') }]} href="/about/" aria-current={active('/about/') ? 'page' : undefined}>About the developer</a>
+    </div>
+  </nav> <div class="sidebar-bottom"><span class="free-dot" aria-hidden="true"></span> Free &amp; open source</div>
 </aside>
 <style>
   .site-sidebar{position:fixed;z-index:50;inset:0 auto 0 0;width:var(--sidebar-width);padding:1.65rem 1rem 1.25rem;background:#111a27;border-right:1px solid #344457;display:flex;flex-direction:column;overflow-y:auto}
@@ -32,8 +30,6 @@ const active = (url) => url === '/' ? path === '/' : path.startsWith(url);
   .mark:hover .brand-skull,.mark:focus-visible .brand-skull{background:var(--plate)}
   .brand-skull :global(svg){width:1.18rem;height:1.42rem}
   .side-nav{display:flex;flex-direction:column;gap:.3rem}
-  .nav-caption{padding:.5rem .85rem;color:#9daec4;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;font-weight:750}
-  .product-caption{margin-top:1.4rem}
   .side-link{display:flex;align-items:center;gap:.75rem;min-height:2.75rem;border:1px solid transparent;border-radius:8px;padding:.6rem .8rem;color:var(--ink-soft);font-size:.91rem;font-weight:620;text-decoration:none;line-height:1.35;transition:background .15s,color .15s}
   .side-link small{display:block;color:#adbbce;font-size:.75rem;font-weight:450;margin-top:.18rem}
   .side-link:hover{background:#243347;color:var(--ink)}
@@ -41,9 +37,10 @@ const active = (url) => url === '/' ? path === '/' : path.startsWith(url);
   .side-link.active small{color:#dce4ee}
   .product-skull{width:2rem;height:2rem;border-radius:50%;background:#e8edf3;color:#172233}
   .product-skull :global(svg){width:1rem;height:1.25rem}
-  .simple-link{border:0;border-radius:0;background:transparent;padding-block:.4rem;min-height:2.3rem}
-  .simple-link:hover,.simple-link.active{background:transparent;border:0;color:var(--plate)}
-  .simple-link.active{font-weight:750}
+  .site-links{display:flex;flex-direction:column;align-items:flex-start;gap:.7rem;margin-top:1.65rem;padding:1.35rem .8rem 0;border-top:1px solid #344457}
+  .plain-link{color:var(--ink-soft);text-decoration:none;font-size:.89rem;line-height:1.6}
+  .plain-link:hover,.plain-link.active{color:var(--plate)}
+  .plain-link.active{font-weight:750}
   .nav-icon{display:grid;place-items:center;width:1.5rem;height:1.5rem;flex:none;font-size:1.1rem;font-weight:750}
   .sidebar-bottom{margin-top:auto;border-top:1px solid #344457;padding:1.3rem .8rem .2rem;color:#bdcadb;font-size:.8rem}
   .free-dot{display:inline-block;width:.5rem;height:.5rem;margin-right:.45rem;border-radius:50%;background:var(--plate)}
