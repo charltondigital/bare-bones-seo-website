@@ -9,7 +9,7 @@ const prompts = [
 const scrollingPrompts = [...prompts, ...prompts.slice(0, 2)];
 ---
 <div class="seo-requests" aria-label="Example requests for your existing AI coding agent">
-  <p class="requests-heading">Ask your AI</p>
+  <div class="demo-header"><span class="demo-indicator" aria-hidden="true"></span><span class="requests-heading">AI conversation · Example prompts</span><span class="demo-label">DEMO</span></div>
   <div class="requests-viewport">
     <ul class="requests-track">
       {scrollingPrompts.map((prompt, i) => (
@@ -21,21 +21,24 @@ const scrollingPrompts = [...prompts, ...prompts.slice(0, 2)];
   </div>
 </div>
 <style>
-  .seo-requests{min-width:0;padding-block:1.5rem}
-  .requests-heading{color:var(--plate);font-size:.9rem;font-weight:650;margin-bottom:1.25rem}
-  .requests-viewport{--row-height:9rem;height:calc(var(--row-height)*2);overflow:hidden;mask-image:linear-gradient(to bottom,transparent,#000 16%,#000 84%,transparent);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 16%,#000 84%,transparent)}
-  .requests-track{list-style:none;padding:0;margin:0;animation:requests-rise 32s linear infinite;will-change:transform}
-  .request{height:var(--row-height);display:flex;align-items:center;padding:1.2rem .65rem 1.2rem 0;color:var(--ink);font-size:clamp(1.15rem,2vw,1.45rem);font-weight:550;line-height:1.5;letter-spacing:-.025em}
+  .seo-requests{min-width:0;padding:1.1rem 1.3rem 1.35rem;background:#101b2b;border:1px solid #485b73;border-radius:12px;box-shadow:0 14px 35px #0002}
+  .demo-header{display:flex;align-items:center;gap:.6rem;padding-bottom:.85rem;border-bottom:1px solid #34475d}
+  .demo-indicator{height:.5rem;width:.5rem;flex:none;background:var(--plate);border-radius:50%}
+  .demo-label{margin-left:auto;font:.65rem/1 var(--mono);letter-spacing:.08em;color:#aebed3;border:1px solid #4b6079;border-radius:4px;padding:.3rem .4rem}
+  .requests-heading{color:#c4d1e3;font:.76rem/1.45 var(--mono);font-weight:600}
+  .requests-viewport{--row-height:7.5rem;height:calc(var(--row-height)*2);overflow:hidden;mask-image:linear-gradient(to bottom,transparent,#000 12%,#000 88%,transparent);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 12%,#000 88%,transparent)}
+  .requests-track{list-style:none;padding:0;margin:0;animation:requests-rise 22s linear infinite;will-change:transform}
+  .request{height:var(--row-height);display:flex;align-items:center;padding:1.2rem .65rem 1.2rem 0;color:var(--ink);font:500 clamp(.94rem,1.55vw,1.1rem)/1.6 var(--mono);letter-spacing:-.015em}
   .seo-requests:hover .requests-track{animation-play-state:paused}
   @keyframes requests-rise{
-    0%,15%{transform:translateY(0)}
-    20%,35%{transform:translateY(calc(var(--row-height)*-1))}
-    40%,55%{transform:translateY(calc(var(--row-height)*-2))}
-    60%,75%{transform:translateY(calc(var(--row-height)*-3))}
-    80%,95%{transform:translateY(calc(var(--row-height)*-4))}
+    0%,5%{transform:translateY(0)}
+    10%,25%{transform:translateY(calc(var(--row-height)*-1))}
+    30%,45%{transform:translateY(calc(var(--row-height)*-2))}
+    50%,65%{transform:translateY(calc(var(--row-height)*-3))}
+    70%,85%{transform:translateY(calc(var(--row-height)*-4))}
     100%{transform:translateY(calc(var(--row-height)*-5))}
   }
-  @media(max-width:36rem){.requests-viewport{--row-height:8.5rem}.request{font-size:1.1rem}}
+  @media(max-width:36rem){.requests-viewport{--row-height:8rem}.request{font-size:.92rem}.seo-requests{padding:1rem}}
   @media(prefers-reduced-motion:reduce){
     .requests-viewport{height:auto;overflow:visible;mask-image:none;-webkit-mask-image:none}
     .requests-track{animation:none;will-change:auto}
