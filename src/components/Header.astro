@@ -14,13 +14,13 @@ const active = (url) => url === '/' ? path === '/' : path.startsWith(url);
   </a>
   <nav class="side-nav" aria-label="Main">
     <span class="nav-caption">Workspace</span>
-    <a class:list={['side-link', { active: active('/') }]} href="/" aria-current={active('/') ? 'page' : undefined}><span class="nav-icon" aria-hidden="true">⌂</span> Overview</a>
+    <a class:list={['side-link simple-link', { active: active('/') }]} href="/" aria-current={active('/') ? 'page' : undefined}><span class="nav-icon" aria-hidden="true">⌂</span> Overview</a>
     <span class="nav-caption product-caption">Products</span>
-    <a class:list={['side-link', { active: active('/ai-sites/') }]} href="/ai-sites/" aria-current={active('/ai-sites/') ? 'page' : undefined}><span class="nav-icon" aria-hidden="true">⌘</span><span>SEO for AI Sites<small>AI &amp; static websites</small></span></a>
-    <a class:list={['side-link', { active: active('/wordpress/') }]} href="/wordpress/" aria-current={active('/wordpress/') ? 'page' : undefined}><span class="nav-icon" aria-hidden="true">W</span><span>SEO for WordPress<small>WordPress plugin</small></span></a>
+    <a class:list={['side-link', { active: active('/ai-sites/') }]} href="/ai-sites/" aria-current={active('/ai-sites/') ? 'page' : undefined}><span class="nav-icon product-skull" aria-hidden="true"><Skull size={20} /></span><span>SEO for AI Sites<small>AI &amp; static websites</small></span></a>
+    <a class:list={['side-link', { active: active('/wordpress/') }]} href="/wordpress/" aria-current={active('/wordpress/') ? 'page' : undefined}><span class="nav-icon product-skull" aria-hidden="true"><Skull size={20} /></span><span>SEO for WordPress<small>WordPress plugin</small></span></a>
     <span class="nav-caption product-caption">Project</span>
-    <a class:list={['side-link', { active: active('/philosophy/') }]} href="/philosophy/" aria-current={active('/philosophy/') ? 'page' : undefined}>Philosophy</a>
-    <a class:list={['side-link', { active: active('/about/') }]} href="/about/" aria-current={active('/about/') ? 'page' : undefined}>About</a>
+    <a class:list={['side-link simple-link', { active: active('/philosophy/') }]} href="/philosophy/" aria-current={active('/philosophy/') ? 'page' : undefined}>Philosophy</a>
+    <a class:list={['side-link simple-link', { active: active('/about/') }]} href="/about/" aria-current={active('/about/') ? 'page' : undefined}>About</a>
   </nav>
   <div class="sidebar-bottom"><span class="free-dot" aria-hidden="true"></span> Free &amp; open source</div>
 </aside>
@@ -39,6 +39,11 @@ const active = (url) => url === '/' ? path === '/' : path.startsWith(url);
   .side-link:hover{background:#243347;color:var(--ink)}
   .side-link.active{background:#293a50;color:var(--plate);border-color:#53647a}
   .side-link.active small{color:#dce4ee}
+  .product-skull{width:2rem;height:2rem;border-radius:50%;background:#e8edf3;color:#172233}
+  .product-skull :global(svg){width:1rem;height:1.25rem}
+  .simple-link{border:0;border-radius:0;background:transparent;padding-block:.4rem;min-height:2.3rem}
+  .simple-link:hover,.simple-link.active{background:transparent;border:0;color:var(--plate)}
+  .simple-link.active{font-weight:750}
   .nav-icon{display:grid;place-items:center;width:1.5rem;height:1.5rem;flex:none;font-size:1.1rem;font-weight:750}
   .sidebar-bottom{margin-top:auto;border-top:1px solid #344457;padding:1.3rem .8rem .2rem;color:#bdcadb;font-size:.8rem}
   .free-dot{display:inline-block;width:.5rem;height:.5rem;margin-right:.45rem;border-radius:50%;background:var(--plate)}
